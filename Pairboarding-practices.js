@@ -1,4 +1,4 @@
-//! digitalRoot
+//! 1-digitalRoot
 
 /*
 Write a method, digitalRoot(num). It should sum the digits of a positive integer.
@@ -43,7 +43,7 @@ function digitalRoot(num) {
   function digitalRoot(num) {
     return num < 10 ? num : digitalRoot(digitalRoot(Math.floor(num / 10)) + (num % 10));
   }
- //! caesarCipher
+ //! 2-caesarCipher
 
  /*Write a function that takes a message and an increment amount and outputs the
   same letters shifted by that amount in the alphabet. Assume lowercase and no punctuation.
@@ -66,7 +66,7 @@ function digitalRoot(num) {
     return encoded;
   }
 
-  //! fibsSum
+  //! 3-fibsSum
 
   /*
 Write a function, fibsSum(n), that finds the sum of the first n fibonacci numbers
@@ -121,8 +121,3 @@ function fibSum(n) {
 console.log(fibSum(5));
 
 
-//! **`fibsSum`**
-
-/*Write a function, `fibsSum(n)`, that finds the sum of the first n
-fibonacci numbers recursively. Assume n > 0. Note that for this problem,
-the fibonacci sequence starts with `[1, 1]`.*/
