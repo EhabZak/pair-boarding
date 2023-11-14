@@ -73,6 +73,10 @@ Write a function, fibsSum(n), that finds the sum of the first n fibonacci number
  recursively. Assume n > 0. Note that for this problem, the fibonacci sequence starts
  with [1, 1].
   */
+
+ /*
+ Calculating the sum of the first n Fibonacci numbers means adding
+ up the values of the Fibonacci sequence from the first number to the nth number.*/
  function fibsSum(n) {
   if (n === 1) return 1;
   if (n === 2) return 2;
@@ -96,6 +100,26 @@ function fibsSum(n) {
 
   return fibsSum(n - 1) + fibsSum(n - 2) + 1;
 }
+
+//also
+function fib(n) {
+  if (n === 1 || n === 2) {
+      return 1;
+  } else {
+      return fib(n - 1) + fib(n - 2);
+  }
+}
+
+function fibSum(n) {
+  let sum = 0;
+  for (let i = 1; i <= n; i++) {
+      sum += fib(i);
+  }
+  return sum;
+}
+
+console.log(fibSum(5));
+
 
 //! **`fibsSum`**
 
