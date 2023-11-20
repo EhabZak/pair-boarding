@@ -32,7 +32,7 @@ def dfs (n):
         visited[n] = 1 # this means if node is not visited then mark it as visited
         num = 0 #! num is initiated here it means start at index zero in the ad_max[n]
         for relation in ad_max[n]: # for the numbers in the array of node 0 = [0,1,1,1,0,0]
-            
+
             if relation != 0:
                 dfs(num) # recursively calls the dfs function for each adjacent node that is connected.
             num = num + 1 # this will be used to iterate over the adjacent nodes of the current node n
@@ -44,3 +44,5 @@ def dfs (n):
 # src_node = int(input('Enter the source node: '))
 # dfs(src_node)
 print (dfs(0))
+
+# you can also do it like in mode 6
