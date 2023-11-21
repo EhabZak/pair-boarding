@@ -45,4 +45,4 @@ def dfs (n):
 # dfs(src_node)
 print (dfs(0))
 
-# you can also do it like in mode 6
+# you can also do it like in mode 6 for bot dfs and bfs
