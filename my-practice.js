@@ -1,35 +1,25 @@
-function fibsSum(n) { //This function is used to find the sum of the first n Fibonacci numbers.
-    if (n ===1 ) return 1 // is this the base case ???
-    if (n === 2) return 2 // or is it this one? both
-    return fibsSum(n -1) + fib(n)
-}
+const items = [
+    { name: "Edward", value: 21 },
+    { name: "Sharpe", value: 37 },
+    { name: "And", value: 45 },
+    { name: "The", value: -12 },
+    { name: "Magnetic", value: 13 },
+    { name: "Zeros", value: 37 },
+  ];
 
+  // sort by value
+//   console.log (items.sort((a, b) => a.value - b.value))
 
-function fib(n) { //This is a helper function to calculate the nth Fibonacci number.
-    if ( n===1 ) return 1
-    if ( n=== 2) return 1
-
-    return fib(n - 1) + fib( n - 2)
-}
-
-console.log(fib(9)) //output 34
-console.log(fibsSum(9)) //output 88
-
-
-function fibs(n) {
-    if (n === 1 || n === 2) {
-        return 1;
-    } else {
-        return fibs(n - 1) + fibs(n - 2);
+ console.log( items.sort((a, b) => {
+    const nameA = a.name.toUpperCase(); // ignore upper and lowercase
+    const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+    if (nameA < nameB) {
+      return -1;
     }
-}
-
-function fibSum(n) {
-    let sum = 0;
-    for (let i = 1; i <= n; i++) {
-        sum += fib(i);
+    if (nameA > nameB) {
+      return 1;
     }
-    return sum;
-}
 
-console.log(fibSum(5));
+    // names must be equal
+    return 0;
+  }));

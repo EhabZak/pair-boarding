@@ -1,49 +1,1301 @@
+from typing import List
+from typing import Optional, List
+from collections import defaultdict, Counter
 
+#! 1- DFS problem
+# '''   0
+#     /  |  \
+#    1   2   3
+# /   \  /
+# 4     5
+#   '''
+# ad_max = [
+#   # these columns represent the relationship
+#    #0 1 2 3 4 5          # print ad-max[n]
+#    [0,1,1,1,0,0],#0    # 0 line 2 times  # 5 line 5 times # this line represents the node 0
+#    [1,0,0,0,1,1],#1    # 1 line 5 times  # 3 line 6 times
+#    [1,0,0,0,0,1],#2    # 4 line 6 time   # 0 line 2 times
+#    [1,0,0,0,0,0],#3    # 2 line 1  time
+#    [0,1,0,0,0,0],#4    # 5 line 3  time
+#    [0,1,1,0,0,0] #5    # 2 line 6  time
+# ]
+# visited= [0,0,0,0,0,0] #indicates if a node has been visited or not
+# # n = means a node
+# #what are the numbers in the matrix? relationships to the node
+# #what are the numbers in visited? tracking the status of the node if visited or not
+# #where is the relation? in the matrix columns the rows represent the nodes
+# # why is relation different when we put it in the for loop and outside the for loop?
+# #where is the visited?
+# #where is the n? n = node the rows are the nodes or the n
+# # what is num? why do we have it? it represent the index of the numbers (which represent the relationship) in the ad_max[n] so the arrays in the ad_max array
+# def dfs (n):
+#     if visited[n] != 0: #! this is the base case
+#         return
+#     else:
+#         visited[n] = 1 # this means if node is not visited then mark it as visited
+#         num = 0 #! num is initiated here it means start at index zero in the ad_max[n]
+#         for relation in ad_max[n]: # for the numbers in the array of node 0 = [0,1,1,1,0,0]
 
-'''   0
-    /  |  \
-   1   2   3
-/   \  /
-4     5
-  '''
-ad_max = [
-  # these columns represent the relationship
-   #0 1 2 3 4 5          # print ad-max[n]
-   [0,1,1,1,0,0],#0    # 0 line 2 times  # 5 line 5 times # this line represents the node 0
-   [1,0,0,0,1,1],#1    # 1 line 5 times  # 3 line 6 times
-   [1,0,0,0,0,1],#2    # 4 line 6 time   # 0 line 2 times
-   [1,0,0,0,0,0],#3    # 2 line 1  time
-   [0,1,0,0,0,0],#4    # 5 line 3  time
-   [0,1,1,0,0,0] #5    # 2 line 6  time
-]
-visited= [0,0,0,0,0,0] #indicates if a node has been visited or not
-# n = means a node
-#what are the numbers in the matrix? relationships to the node
-#what are the numbers in visited? tracking the status of the node if visited or not
-#where is the relation? in the matrix columns the rows represent the nodes
-# why is relation different when we put it in the for loop and outside the for loop?
-#where is the visited?
-#where is the n? n = node the rows are the nodes or the n
-# what is num? why do we have it? it represent the index of the numbers (which represent the relationship) in the ad_max[n] so the arrays in the ad_max array
-def dfs (n):
-    if visited[n] != 0: #! this is the base case
-        return
-    else:
-        visited[n] = 1 # this means if node is not visited then mark it as visited
-        num = 0 #! num is initiated here it means start at index zero in the ad_max[n]
-        for relation in ad_max[n]: # for the numbers in the array of node 0 = [0,1,1,1,0,0]
+#             if relation != 0:
+#                 dfs(num) # recursively calls the dfs function for each adjacent node that is connected.
+#             num = num + 1 # this will be used to iterate over the adjacent nodes of the current node n
 
-            if relation != 0:
-                dfs(num) # recursively calls the dfs function for each adjacent node that is connected.
-            num = num + 1 # this will be used to iterate over the adjacent nodes of the current node n
-
-        print (n)
-
+#         print (n)
 
 
 # src_node = int(input('Enter the source node: '))
 # dfs(src_node)
-print (dfs(0))
+# print (dfs(0))
 
 # you can also do it like in mode 6 for both dfs and bfs and then solve the problems
-#don't forget that there are also sort methods
+# don't forget that there are also sort methods
+#! 2-problem 22 leet code - Generate Parentheses
+# class Solution:
+#     def isValid(self, s: str) -> bool:
+#         stack = []
+#         close_to_open = {
+#             ')': '(',
+#             ']': '[',
+#             '}': '{'
+#             }
+#         for char in s:
+#             # if char in close_to_open:
+#             #     print(char)
+#             if char not in close_to_open:
+#                 # print(char)
+#                 stack.append(char)
+#             elif not stack or stack[-1] != close_to_open[char]:
+#                 return False
+#             else:
+#                 stack.pop()
+#         return len(stack) == 0
+
+# # Create an instance of the Solution class
+# solution_instance = Solution()
+
+# # Call the isValid method with the given string
+# result = solution_instance.isValid("()[]{}")
+
+# # Print the result
+# print(result)
+
+#! 3-problem 1535 leet code (alex weekly lecture) - Find the Winner of an Array Game
+'''
+1535. Find the Winner of an Array Game
+#!Medium
+
+Given an integer array arr of distinct integers and an integer k.
+
+A game will be played between the first two elements of the array (i.e. arr[0] and arr[1]).
+In each round of the game, we compare arr[0] with arr[1], the larger integer wins and remains
+at position 0, and the smaller integer moves to the end of the array. The game ends when an integer
+wins k consecutive rounds.
+
+Return the integer which will win the game.
+
+It is guaranteed that there will be a winner of the game.
+
+
+Example 1:
+
+Input: arr = [2,1,3,5,4,6,7], k = 2
+Output: 5
+Explanation: Let's see the rounds of the game:
+Round |       arr       | winner | win_count
+  1   | [2,1,3,5,4,6,7] | 2      | 1
+  2   | [2,3,5,4,6,7,1] | 3      | 1
+  3   | [3,5,4,6,7,1,2] | 5      | 1
+  4   | [5,4,6,7,1,2,3] | 5      | 2
+So we can see that 4 rounds will be played and 5 is the winner because it wins 2 consecutive games.
+Example 2:
+
+Input: arr = [3,2,1], k = 10
+Output: 3
+Explanation: 3 will win the first 10 rounds consecutively.
+
+
+Constraints:
+
+2 <= arr.length <= 105
+1 <= arr[i] <= 106
+arr contains distinct integers.
+1 <= k <= 109
+
+
+'''
+# from collections import deque
+# from typing import List # it should be already there if ver is 3.7 and higher I also installed it using pip install typing but still not defined
+# class Solution:
+#     def getWinner(self, arr: List[int], k: int) -> int:
+#     # def getWinner(self, arr, k):
+#         if k>= len(arr):
+#             return max(arr)
+#         wins = 0
+#         curr_winner = arr[0]
+#         queue = deque(arr[1::])
+#         # print('queue =====>>>', queue)
+#         while wins < k :
+#             opponent = queue.popleft()
+#             print('queue =====>>>', queue)
+#             if curr_winner > opponent:
+#                 queue.append(opponent)
+#                 wins += 1
+#             else:
+#                 queue.append(curr_winner)
+#                 curr_winner = opponent
+#                 wins = 1
+#         return curr_winner
+
+# arr = [2, 1, 3, 5, 4, 6, 7]
+# k = 2
+# # arr = [3,2,1]
+# # k = 10
+
+# solution_instance = Solution()
+# result = solution_instance.getWinner(arr, k)
+# print(result)
+
+
+#! 4-problem 501 leet code (alex weekly lecture) -Find Mode in Binary Search Tree (Tech: DFS)
+
+'''
+501. Find Mode in Binary Search Tree
+#!Easy
+
+Given the root of a binary search tree (BST) with duplicates, return all the mode(s)
+(i.e., the most frequently occurred element) in it.
+
+If the tree has more than one mode, return them in any order.
+
+Assume a BST is defined as follows:
+
+The left subtree of a node contains only nodes with keys less than or equal to the node's key.
+The right subtree of a node contains only nodes with keys greater than or equal to the node's key.
+Both the left and right subtrees must also be binary search trees.
+
+
+Example 1:
+Input: root = [1,null,2,2]
+Output: [2]
+
+Example 2:
+Input: root = [0]
+Output: [0]
+
+
+Constraints:
+
+The number of nodes in the tree is in the range [1, 104].
+-105 <= Node.val <= 105
+'''
+
+from typing import Optional, List
+from collections import defaultdict
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+class Solution:
+    def findMode(self, root: Optional[TreeNode]) -> List[int]:
+        frequencies = defaultdict(int)
+        # print ("frequencies ===", frequencies) # don't put it here it will not give you the correct dictionary
+        def _dfs(node):
+            # base case
+            if not node:
+                return
+            # do the thing # increase the count in the dictionary
+            frequencies[node.val] += 1
+            _dfs(node.left)
+            _dfs(node.right)   # this is a boiler plate for DFS
+
+        _dfs(root)
+        # print ("frequencies ===>", frequencies)
+        # print ("frequencies ===>", dict(frequencies))
+        max_freq = max(frequencies.values())
+        res = []
+
+        for node in frequencies:
+            if frequencies[node] == max_freq:
+                res.append(node)
+        return res
+'''
+    1
+     \
+      2
+     /
+    2
+'''
+
+root = TreeNode(1, None, TreeNode(2, TreeNode(2), None))
+
+# Create a bigger binary tree
+# root = TreeNode(5,
+                # left=TreeNode(3, TreeNode(1), TreeNode(5)),
+                # right=TreeNode(8, TreeNode(7), TreeNode(9)))
+'''
+        5
+       / \
+      3   8
+     /|   |\
+    1 5   7 9
+
+'''
+# Create an instance of the Solution class
+solution = Solution()
+
+# Call the findMode method and print the result
+output = solution.findMode(root)
+print(output)
+
+#! 5-problem 56 leet code (App Academy course) - Merge Intervals
+
+'''
+56. Merge Intervals
+Medium
+21.2K
+727
+Companies
+Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
+
+
+
+Example 1:
+
+Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+Output: [[1,6],[8,10],[15,18]]
+Explanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].
+Example 2:
+
+Input: intervals = [[1,4],[4,5]]
+Output: [[1,5]]
+Explanation: Intervals [1,4] and [4,5] are considered overlapping.
+
+
+Constraints:
+
+1 <= intervals.length <= 104
+intervals[i].length == 2
+0 <= starti <= endi <= 104
+
+'''
+# from typing import List
+# class Solution:
+#     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+#         print (intervals)
+#         intervals.sort()
+#         print (intervals)
+#         stack = [intervals[0]]
+
+#         for i in range(1, len(intervals)):
+#             curr_int ={
+#                 'start': intervals[i][0],
+#                 'end': intervals[i][1]
+#             }
+#             last_int_index = len(stack)-1
+
+#             last_int ={
+#                 'start': stack[last_int_index][0],
+#                 'end': stack[last_int_index][1]
+#             }
+
+#             if curr_int['start'] <= last_int['end'] and curr_int['end'] > last_int['end']:
+#                 stack[last_int_index][1] = curr_int['end']
+#             elif curr_int['start'] > last_int['end']:
+#                 stack.append(intervals[i])
+
+#         return stack
+
+# # intervals = [[1,3],[2,6],[8,10],[15,18]]
+# # intervals = [[1,3],[2,6],[11,16],[15,18]] # output [[1, 6], [11, 18]
+# # intervals = [[1,3],[2,6],[11,16],[10,18]] # output [[1, 6], [10, 18]] this one does not work correctly
+# intervals = [[1,3],[11,16],[10,18],[2,6]] # output [[1, 6], [10, 18]]
+
+# solution = Solution()
+# output = solution.merge(intervals)
+# print(output)
+
+#! 6- problem 1. Two Sum
+
+'''
+companies Amazon Apple Adobe
+Given an array of integers nums and an integer target, return indices of the two numbers such that they
+add up to target.
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+You can return the answer in any order.
+
+Example 1:
+
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+Example 2:
+
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
+Example 3:
+
+Input: nums = [3,3], target = 6
+Output: [0,1]
+
+
+Constraints:
+
+2 <= nums.length <= 104
+-109 <= nums[i] <= 109
+-109 <= target <= 109
+Only one valid answer exists.
+
+'''
+# class Solution(object):
+#     def twoSum(self, nums, target):
+#         """
+#         :type nums: List[int]
+#         :type target: int
+#         :rtype: List[int]
+#                     """
+#         hash={}
+
+#         for i, num in enumerate(nums): # [(0, 2), (1, 7), (2, 11), (3, 15)]
+#             complement = target - num
+#             if complement in hash:
+#                 return [i,hash[complement]]
+#             hash[num] = i
+
+# nums = [2,7,11,15] #  [1, 0]
+# target = 9
+# solution = Solution()
+# output = solution.twoSum(nums, target)
+# print(output)
+
+
+# numss = [2,7,11,15]
+# numbers = list(enumerate(numss))
+# # print (List(numbers))
+# print (numbers)
+
+
+
+
+#! 7-  2482. Difference Between Ones and Zeros in Row and Column
+'''
+You are given a 0-indexed m x n binary matrix grid.
+
+A 0-indexed m x n difference matrix diff is created with the following procedure:
+
+Let the number of ones in the ith row be onesRowi.
+Let the number of ones in the jth column be onesColj.
+Let the number of zeros in the ith row be zerosRowi.
+Let the number of zeros in the jth column be zerosColj.
+diff[i][j] = onesRowi + onesColj - zerosRowi - zerosColj
+Return the difference matrix diff.
+
+
+
+Example 1:
+
+Input: grid = [[0,1,1],[1,0,1],[0,0,1]]
+Output: [[0,0,4],[0,0,4],[-2,-2,2]]
+
+Example 2:
+Input: grid = [[1,1,1],[1,1,1]]
+Output: [[5,5,5],[5,5,5]]
+Constraints:
+
+m == grid.length
+n == grid[i].length
+1 <= m, n <= 105
+1 <= m * n <= 105
+grid[i][j] is either 0 or 1.
+'''
+
+#keep track of number of zeros and ones for each row and col
+# can use arrays to keep track of these since they're 0-index
+
+
+# class Solution(object):
+#     def onesMinusZeros(self, grid):
+#         """
+#         :type grid: List[List[int]]
+#         :rtype: List[List[int]]
+#         """
+
+#         ROWS = len (grid)
+#         COLS = len(grid[0])
+
+#         difference =[[0 for _ in range (COLS)] for _ in range (ROWS)] # this is to create a 2D array
+#         print( 'difference' ,difference)
+
+#         row_ones = [0]*ROWS
+#         col_ones = [0]*COLS
+
+#         for r in range (ROWS):
+#            for c in range (COLS):
+#             if grid[r][c] == 1:
+#               row_ones[r] += 1
+#               col_ones [c] += 1
+#         print (row_ones, col_ones)
+
+#         for r in range (ROWS):
+#            for c in range (COLS):
+#               difference[r][c] = row_ones[r] + col_ones [c] - (ROWS - row_ones[r]) - (COLS- col_ones[c])
+
+#         return difference
+
+# grid = [[0,1,1],[1,0,1],[0,0,1],[1,0,1]]
+# solution = Solution()
+# output = solution.onesMinusZeros(grid)
+# print(output)
+
+#! 8- Problem 73. Set Matrix Zeroes (Algo Academy)(medium) (Tech: Hash map)
+'''
+companies: Microsoft Bloomberg Amazon
+Given an m x n integer matrix matrix, if an element is 0,
+ set its entire row and column to 0's.
+
+You must do it in place.
+
+Input: matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
+Output: [[0,0,0,0],[0,4,5,0],[0,3,1,0]]
+
+
+Constraints:
+
+m == matrix.length
+n == matrix[0].length
+1 <= m, n <= 200
+-231 <= matrix[i][j] <= 231 - 1
+
+'''
+# class Solution(object):
+#     def setZeroes(self, matrix):
+#         """
+#         :type matrix: List[List[int]]
+#         :rtype: None Do not return anything, modify matrix in-place instead.
+#         """
+#         rows = set()
+#         cols = set()
+#         print (rows)
+
+#         for r in range(len(matrix)):
+#            for c in range(len(matrix[0])):
+#               if matrix[r][c] == 0:
+#                  rows.add(r)
+#                  cols.add(c)
+#         for r in range(len(matrix)):
+#            for c in range(len(matrix[0])):
+#               if r in rows or c in cols :
+#                  matrix [r][c] = 0
+#         print (rows)
+
+# matrix = [[1,1,1],[1,0,1],[1,1,1]] # [[1, 0, 1], [0, 0, 0], [1, 0, 1]]
+# # matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]] #  [[0, 0, 0, 0], [0, 4, 5, 0], [0, 3, 1, 0]]
+# solution = Solution()
+# solution.setZeroes(matrix)
+# print(matrix)
+
+'''
+The setZeroes method in your Solution class doesn't have a return statement, and it modifies
+ the matrix in-place. Therefore, when you call solution.setZeroes(matrix), it doesn't return
+   anything (None is implicitly returned since there's no explicit return statement),
+   and the value of output2 becomes None
+'''
+
+#! 9-1160. Find Words That Can Be Formed by Characters -(Lecture) -(Easy)
+
+'''
+1160. Find Words That Can Be Formed by Characters
+#! Easy
+
+You are given an array of strings words and a string chars.
+
+A string is good if it can be formed by characters from chars (each character can only be used once).
+
+Return the sum of lengths of all good strings in words.
+
+
+
+Example 1:
+
+Input: words = ["cat","bt","hat","tree"], chars = "atach"
+Output: 6
+Explanation: The strings that can be formed are "cat" and "hat" so the answer is 3 + 3 = 6.
+Example 2:
+
+Input: words = ["hello","world","leetcode"], chars = "welldonehoneyr"
+Output: 10
+Explanation: The strings that can be formed are "hello" and "world" so the answer is 5 + 5 = 10.
+
+
+Constraints:
+
+1 <= words.length <= 1000
+1 <= words[i].length, chars.length <= 100
+words[i] and chars consist of lowercase English letters.
+
+
+
+
+'''
+# class Solution(object):
+#     def countCharacters(self, words, chars):
+#         """
+#         :type words: List[str]
+#         :type chars: str
+#         :rtype: int
+#         """
+#         total = 0
+#         count = Counter(chars)
+#       #   print(count)
+
+#         for word in words:
+#             word_count = Counter(word)
+#             # print(word_count)
+
+#             valid = True
+
+#             for key in word_count:
+
+#                #  print( key , ":" , word_count[key])
+
+#                 if key not in count or count[key] < word_count[key]:
+#                     valid = False
+#                     break
+#             if valid:
+#                 total += len(word)
+#         return total
+
+
+
+
+# # words = ["cat","bt","hat","tree"]
+# # chars = "atach"
+# words = ["hello","world","leetcode"]
+# chars = "welldonehoneyr"
+
+# solution = Solution()
+# output = solution.countCharacters(words, chars)
+# print(output)
+
+#! 10- 682. Baseball Game (Algo-Academy)-(Easy)
+
+'''
+
+Easy
+
+Companies UBER, Amazon
+You are keeping the scores for a baseball game with strange rules. At the beginning of the game, you start with an empty record.
+
+You are given a list of strings operations, where operations[i] is the ith operation you must apply to the record and is one of the following:
+
+An integer x.
+Record a new score of x.
+'+'.
+Record a new score that is the sum of the previous two scores.
+'D'.
+Record a new score that is the double of the previous score.
+'C'.
+Invalidate the previous score, removing it from the record.
+Return the sum of all the scores on the record after applying all the operations.
+
+The test cases are generated such that the answer and all intermediate calculations fit in a 32-bit integer and that all operations are valid.
+
+
+
+Example 1:
+
+Input: ops = ["5","2","C","D","+"]
+Output: 30
+Explanation:
+"5" - Add 5 to the record, record is now [5].
+"2" - Add 2 to the record, record is now [5, 2].
+"C" - Invalidate and remove the previous score, record is now [5].
+"D" - Add 2 * 5 = 10 to the record, record is now [5, 10].
+"+" - Add 5 + 10 = 15 to the record, record is now [5, 10, 15].
+The total sum is 5 + 10 + 15 = 30.
+Example 2:
+
+Input: ops = ["5","-2","4","C","D","9","+","+"]
+Output: 27
+Explanation:
+"5" - Add 5 to the record, record is now [5].
+"-2" - Add -2 to the record, record is now [5, -2].
+"4" - Add 4 to the record, record is now [5, -2, 4].
+"C" - Invalidate and remove the previous score, record is now [5, -2].
+"D" - Add 2 * -2 = -4 to the record, record is now [5, -2, -4].
+"9" - Add 9 to the record, record is now [5, -2, -4, 9].
+"+" - Add -4 + 9 = 5 to the record, record is now [5, -2, -4, 9, 5].
+"+" - Add 9 + 5 = 14 to the record, record is now [5, -2, -4, 9, 5, 14].
+The total sum is 5 + -2 + -4 + 9 + 5 + 14 = 27.
+
+'''
+# class Solution(object):
+#     def calPoints(self, operations):
+#         """
+#         :type operations: List[str]
+#         :rtype: int
+#         """
+#         stack = []
+
+#         for op in operations:
+#             if op == '+':
+#                 stack.append(stack[-1]+stack[-2])
+#             elif op == 'C':
+#                 stack.pop()
+#             elif op =='D':
+#                 stack.append(2*stack[-1])
+#             else:
+#                 stack.append(int(op))
+
+#         return sum(stack)
+
+# # ops = ["5","2","C","D","+"] #30
+# ops = ["5","-2","4","C","D","9","+","+"] #27
+# solution = Solution()
+# output = solution.calPoints(ops)
+# print(output)
+
+#! 11- 217. Contains Duplicate-(Lecture)-(Easy)
+
+'''
+Given an integer array nums, return true if any value appears at least twice in the array,
+and return false if every element is distinct.
+
+Example 1:
+
+Input: nums = [1,2,3,1]
+Output: true
+Example 2:
+
+Input: nums = [1,2,3,4]
+Output: false
+Example 3:
+
+Input: nums = [1,1,1,3,3,4,3,2,4,2]
+Output: true
+
+
+Constraints:
+
+1 <= nums.length <= 105
+-109 <= nums[i] <= 109
+
+'''
+
+
+# class Solution:
+#     def containsDuplicate(self, nums: List[int]) -> bool:
+        #! good time but bad space complexity
+        # setArray = set()
+        # for i in nums:
+        # # checks if the element is already present in the set, if yes returns true
+        #     if i in setArray:
+        #         return True
+        # # if the element is not present then it gets added into the set
+        #     else:
+        #         setArray.add(i)
+
+        # return False
+    #! bad time but good space complexity
+        # nums.sort()
+        # for index in range(len(nums)-1):
+        #       if nums[index] == nums[index + 1]:
+        #            return True
+        # return False
+
+#! bad time but good space complexity
+#      num_counts = Counter(nums)
+
+#      for count in num_counts.values():
+#         if count > 1:
+#             return True
+
+#      return False
+
+# # nums = [1,1,1,3,3,4,3,2,4,2] # True
+# # nums = [1,2,3,4] # False
+# solution = Solution()
+# output = solution.containsDuplicate(nums)
+# print(output)
+
+#! 12- 219. Contains Duplicate II (Algo Academy) (Easy) (Tech: static sliding window)
+
+'''
+219. Contains Duplicate II
+Easy
+
+Companies ( Amazon, Facebook, Adobe)
+Given an integer array nums and an integer k,
+return true if there are two distinct indices i and j in the array
+such that nums[i] == nums[j] and abs(i - j) <= k.
+
+'''
+
+# class Solution(object):
+#     def containsNearbyDuplicate(self, nums, k):
+#         """
+#         :type nums: List[int]
+#         :type k: int
+#         :rtype: bool
+#         """
+#         window = set()
+#         left = 0
+
+#         for right in range(len(nums)):
+#             print('window', window)
+#             print('right', nums[right])
+#             print('left' , nums[left])
+#             if right-left > k:
+#                 window.discard(nums[left])
+#                 left += 1
+
+#             if nums[right] in window:
+#                 return True
+
+#             window.add(nums[right])
+
+
+#         return False
+
+# nums = [1,2,3,1] # True
+# k = 3
+
+# # nums = [11,0,11,11] # True
+# # k = 1
+
+# # nums = [1,2,3,1,2,3] # False
+# # k = 2
+
+# solution = Solution()
+# output = solution.containsNearbyDuplicate(nums, k)
+# print(output)
+
+#! 13- 3. Longest Substring Without Repeating Characters (Algo Academy) (medium) (Tech: variable sliding window)
+'''
+3. Longest Substring Without Repeating Characters
+Medium
+38.4K
+1.8K
+Companies
+Given a string s, find the length of the longest
+substring
+ without repeating characters.
+
+
+
+Example 1:
+
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+Example 2:
+
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+Example 3:
+
+Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+
+
+Constraints:
+
+0 <= s.length <= 5 * 104
+s consists of English letters, digits, symbols and spaces.
+
+'''
+
+
+
+# class Solution(object):
+#     def lengthOfLongestSubstring(self, s):
+#         """
+#         :type s: str
+#         :rtype: int
+#         """
+#         left, right = 0 , 0
+#         max_length = 0
+#         window = set()
+
+#         while right < len(s):
+#             # print('window', window)
+#             # print('left' , s[left])
+#             # print('right', s[right])
+#             while s[right] in window:
+#                 window.discard(s[left])
+#                 left += 1
+
+#             max_length = max(max_length, right-left+1)
+#             window.add(s[right])
+#             right +=1
+
+#         return max_length
+# '''
+# in this question we used a while loop in the 2nd loop and not if
+#  because The while loop continues to execute as long as the condition s[right] in window is true
+#  The if statement is executed only once per outer loop iteration.
+# '''
+
+# s = "abcabcbb"
+# solution = Solution()
+# output = solution.lengthOfLongestSubstring(s)
+# print(output)
+
+#! 14- 167. Two Sum II - Input Array Is Sorted (Algo Academy) (medium) (Tech: two points)
+
+'''
+167. Two Sum II - Input Array Is Sorted
+Medium
+Topics
+Companies Bloomberg Adobe Amazon
+Given a 1-indexed array of integers numbers that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number. Let these two numbers be numbers[index1] and numbers[index2] where 1 <= index1 < index2 <= numbers.length.
+
+Return the indices of the two numbers, index1 and index2, added by one as an integer array [index1, index2] of length 2.
+
+The tests are generated such that there is exactly one solution. You may not use the same element twice.
+
+Your solution must use only constant extra space.
+
+
+
+Example 1:
+
+Input: numbers = [2,7,11,15], target = 9
+Output: [1,2]
+Explanation: The sum of 2 and 7 is 9. Therefore, index1 = 1, index2 = 2. We return [1, 2].
+Example 2:
+
+Input: numbers = [2,3,4], target = 6
+Output: [1,3]
+Explanation: The sum of 2 and 4 is 6. Therefore index1 = 1, index2 = 3. We return [1, 3].
+Example 3:
+
+Input: numbers = [-1,0], target = -1
+Output: [1,2]
+Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We return [1, 2].
+
+
+Constraints:
+
+2 <= numbers.length <= 3 * 104
+-1000 <= numbers[i] <= 1000
+numbers is sorted in non-decreasing order.
+-1000 <= target <= 1000
+The tests are generated such that there is exactly one solution.
+
+'''
+
+# class Solution:
+#     def twoSum(self, numbers: List[int], target: int) -> List[int]:
+#         left, right = 0, len(numbers)-1
+
+#         while left< right:
+#             sum = numbers[left]+ numbers[right]
+#             print ("L", left)
+#             print ("R", right)
+#             print ('sum' , sum)
+
+
+#             if sum > target:
+#                 right -= 1
+#             elif sum < target:
+#                 left += 1
+#             else:
+#                 return [left+1, right+1]
+
+# # numbers = [2,7,11,15] # [1,2]
+# # target = 9
+# # numbers = [2,3,4] # [1,3]
+# # target = 6
+# numbers = [5,25,75] # [2,3]
+# target = 100
+# solution = Solution()
+# output = solution.twoSum(numbers, target)
+# print(output)
+
+
+#! 15- 11. Container With Most Water (Algo Academy) (medium) (Tech: two points)
+
+'''
+11. Container With Most Water
+Medium
+Topics
+Companies Apple, Adobe, Amazon
+Hint
+You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+
+Find two lines that together with the x-axis form a container, such that the container contains the most water.
+
+Return the maximum amount of water a container can store.
+
+Notice that you may not slant the container.
+
+
+
+Example 1:
+
+
+Input: height = [1,8,6,2,5,4,8,3,7]
+Output: 49
+Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.
+Example 2:
+
+Input: height = [1,1]
+Output: 1
+
+
+Constraints:
+
+n == height.length
+2 <= n <= 105
+0 <= height[i] <= 104
+
+'''
+# class Solution:
+#     def maxArea(self, height: List[int]) -> int:
+#         max_water,left,right = 0, 0, len(height)-1
+
+#         while left < right:
+#             shorter = min(height[right], height[left])
+
+#             area = (right-left) * shorter
+
+#             max_water = max(max_water, area)
+
+
+#             if height[left] >= height[right]:
+#                 right -= 1
+#             else:
+#                 left += 1
+
+#         return max_water
+
+# height = [1,8,6,2,5,4,8,3,7]
+# solution = Solution()
+# output = solution.maxArea(height)
+# print(output)
+
+#! 16- 209. Minimum Size Sub-array Sum (Algo Academy) (medium) (Tech: variable sliding window)
+
+'''
+
+Medium
+
+Companies Microsoft Amazon google
+Given an array of positive integers nums and a positive integer target, return the minimal length of a
+subarray
+ whose sum is greater than or equal to target. If there is no such subarray, return 0 instead.
+
+Example 1:
+
+Input: target = 7, nums = [2,3,1,2,4,3]
+Output: 2
+Explanation: The subarray [4,3] has the minimal length under the problem constraint.
+Example 2:
+
+Input: target = 4, nums = [1,4,4]
+Output: 1
+Example 3:
+
+Input: target = 11, nums = [1,1,1,1,1,1,1,1]
+Output: 0
+
+
+Constraints:
+
+1 <= target <= 109
+1 <= nums.length <= 105
+1 <= nums[i] <= 104
+
+Follow up: If you have figured out the O(n) solution, try coding another
+solution of which the time complexity is O(n log(n)).
+
+'''
+
+# class Solution:
+#     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+#         left,total, min_sub = 0,0, float('inf')
+
+#         for right in range (len(nums)):
+#             total += nums[right]
+
+#             while total >= target:
+#                 min_sub = min(min_sub, right-left+1 )
+#                 total -= nums[left]
+#                 left += 1
+#         return 0 if min_sub == float('inf') else min_sub
+
+
+# target = 7
+# nums = [2,3,1,2,4,3]
+# solution = Solution()
+# output = solution.minSubArrayLen(target, nums)
+# print(output)
+
+#! 17-49. Group Anagrams (Algo Academy) (medium) (Tech: Hash map)
+#(time complexity: O(n.s logs)) n is s in the loop and s is the sorted(s)
+# space complexity is On
+
+'''
+49. Group Anagrams
+Medium
+Topics
+Companies Amazon Adobe Yandex
+Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically
+using all the original letters exactly once.
+
+
+
+Example 1:
+
+Input: strs = ["eat","tea","tan","ate","nat","bat"]
+Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+Example 2:
+
+Input: strs = [""]
+Output: [[""]]
+Example 3:
+
+Input: strs = ["a"]
+Output: [["a"]]
+
+
+Constraints:
+
+1 <= strs.length <= 104
+0 <= strs[i].length <= 100
+strs[i] consists of lowercase English letters.
+
+'''
+
+# class Solution:
+#     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+#         groups = defaultdict(list)
+
+#         for s in strs:
+#             key = "".join(sorted(s))
+#             # print("s===>", s)
+#             # print ("KEY+++>",key)
+#             # print("groups", groups)
+#             groups[key].append(s)
+
+#         return groups.values()
+
+
+# strs = ["eat","tea","tan","ate","nat","bat"]
+# solution = Solution()
+# output = solution.groupAnagrams(strs)
+# print(output)
+
+#! 18-36. Valid Sudoku (Algo Academy) (medium) (Tech: defaultdict and set)
+
+'''
+36. Valid Sudoku
+Medium
+Topics
+Companies Amazon Apple Karat
+Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+
+Each row must contain the digits 1-9 without repetition.
+Each column must contain the digits 1-9 without repetition.
+Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+Note:
+
+A Sudoku board (partially filled) could be valid but is not necessarily solvable.
+Only the filled cells need to be validated according to the mentioned rules.
+
+
+Example 1:
+
+
+Input: board =
+[["5","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]
+Output: true
+Example 2:
+
+Input: board =
+[["8","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]
+Output: false
+Explanation: Same as Example 1, except with the 5 in the top left corner being modified to 8. Since there are two 8's in the top left 3x3 sub-box, it is invalid.
+
+
+Constraints:
+
+board.length == 9
+board[i].length == 9
+board[i][j] is a digit 1-9 or '.'.
+
+
+'''
+# class Solution:
+#     def isValidSudoku(self, board: List[List[str]]) -> bool:
+
+#         row = defaultdict(set)
+#         col = defaultdict(set)
+#         box = defaultdict(set)
+
+#         for r in range(len(board)):
+#             for c in range(len(board[0])):
+#                 curr_val = board[r][c]
+
+#                 if curr_val != '.':
+#                     box_coord =f'{r//3}, {c//3}'
+
+#                     if curr_val in row[r] or curr_val in col[c] or curr_val in box[box_coord]:
+#                         return False
+
+#                     row[r].add(curr_val)
+#                     col[c].add(curr_val)
+#                     box[box_coord].add(curr_val)
+#                     # print('box===>', box)
+#         return True
+
+
+# # board = [["5","3",".",".","7",".",".",".","."]
+# #         ,["6",".",".","1","9","5",".",".","."]
+# #         ,[".","9","8",".",".",".",".","6","."]
+# #         ,["8",".",".",".","6",".",".",".","3"]
+# #         ,["4",".",".","8",".","3",".",".","1"]
+# #         ,["7",".",".",".","2",".",".",".","6"]
+# #         ,[".","6",".",".",".",".","2","8","."]
+# #         ,[".",".",".","4","1","9",".",".","5"]
+# #         ,[".",".",".",".","8",".",".","7","9"]]
+# # board = [["8","3",".",".","7",".",".",".","."]
+# #         ,["6",".",".","1","9","5",".",".","."]
+# #         ,[".","9","8",".",".",".",".","6","."]
+# #         ,["8",".",".",".","6",".",".",".","3"]
+# #         ,["4",".",".","8",".","3",".",".","1"]
+# #         ,["7",".",".",".","2",".",".",".","6"]
+# #         ,[".","6",".",".",".",".","2","8","."]
+# #         ,[".",".",".","4","1","9",".",".","5"]
+# #         ,[".",".",".",".","8",".",".","7","9"]]
+# board = [[".","8","7","6","5","4","3","2","1"]
+#          ,["2",".",".",".",".",".",".",".","."]
+#          ,["3",".",".",".",".",".",".",".","."]
+#          ,["4",".",".",".",".",".",".",".","."]
+#          ,["5",".",".",".",".",".",".",".","."]
+#          ,["6",".",".",".",".",".",".",".","."]
+#          ,["7",".",".",".",".",".",".",".","."]
+#          ,["8",".",".",".",".",".",".",".","."]
+#          ,["9",".",".",".",".",".",".",".","."]]
+
+# solution = Solution()
+# output = solution.isValidSudoku(board)
+# print(output)
+
+#! 19-128. Longest Consecutive Sequence (Algo Academy) (medium) (Tech: ? )
+'''
+128. Longest Consecutive Sequence
+Medium
+Topics
+Companies Amazon google Apple
+Given an unsorted array of integers nums, return the length of
+the longest consecutive elements sequence.
+
+You must write an algorithm that runs in O(n) time.
+
+
+
+Example 1:
+
+Input: nums = [100,4,200,1,3,2]
+Output: 4
+Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
+Example 2:
+
+Input: nums = [0,3,7,2,5,8,4,6,0,1]
+Output: 9
+
+
+Constraints:
+
+0 <= nums.length <= 105
+-109 <= nums[i] <= 109
+
+'''
+# class Solution:
+#     def longestConsecutive(self, nums: List[int]) -> int:
+#         num_set = set(nums)
+#         # print(num_set) # {1, 2, 3, 100, 4, 200}
+#         longest = 0
+
+#         for n in num_set:
+#             # print ('n', n)
+#             if (n-1) not in num_set:
+#                 length = 0
+#                 while (n+length) in num_set:
+#                 # print('n+length===>', n+length)
+#                     length += 1
+#                 # print("length is++++++++++++++++++++ ", length)
+#                 longest = max(length, longest)
+
+#         return longest
+
+
+# nums = [100,4,200,1,3,2]
+# # nums = [100,101,102,103,1,3,2]
+# nums = [0,-1]
+# solution = Solution()
+# output = solution.longestConsecutive(nums)
+# print(output)
+
+#! 20- 75. Sort Colors (Algo Academy) (medium) (Tech:  )
+'''
+75. Sort Colors
+Medium
+Topics
+Companies
+Hint
+Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue.
+
+We will use the integers 0, 1, and 2 to represent the color red, white, and blue, respectively.
+
+You must solve this problem without using the library's sort function.
+
+
+
+Example 1:
+
+Input: nums = [2,0,2,1,1,0]
+Output: [0,0,1,1,2,2]
+Example 2:
+
+Input: nums = [2,0,1]
+Output: [0,1,2]
+
+
+Constraints:
+
+n == nums.length
+1 <= n <= 300
+nums[i] is either 0, 1, or 2.
+
+'''
+
+#! 10-1376. Time Needed to Inform All Employees -(Lecture) - (Medium)
+#! 11-752. Open the Lock -(Lecture) - (Medium)
+#! 12-554. Brick Wall -(Lecture) - (Medium)
+#! 13-51. N-Queens -(Lecture)- (Hard)
