@@ -1295,6 +1295,11 @@ nums[i] is either 0, 1, or 2.
 
 '''
 
+
+#! 19-128. Longest Consecutive Sequence (Algo Academy) (medium) (Tech: ? )
+
+
+
 #! 10-1376. Time Needed to Inform All Employees -(Lecture) - (Medium)
 #! 11-752. Open the Lock -(Lecture) - (Medium)
 #! 12-554. Brick Wall -(Lecture) - (Medium)
