@@ -189,66 +189,67 @@ The number of nodes in the tree is in the range [1, 104].
 -105 <= Node.val <= 105
 '''
 
-from typing import Optional, List
-from collections import defaultdict
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+# from typing import Optional, List
+# from collections import defaultdict
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 
 
-class Solution:
-    def findMode(self, root: Optional[TreeNode]) -> List[int]:
-        frequencies = defaultdict(int)
-        # print ("frequencies ===", frequencies) # don't put it here it will not give you the correct dictionary
-        def _dfs(node):
-            # base case
-            if not node:
-                return
-            # do the thing # increase the count in the dictionary
-            frequencies[node.val] += 1
-            _dfs(node.left)
-            _dfs(node.right)   # this is a boiler plate for DFS
+# class Solution:
+#     def findMode(self, root: Optional[TreeNode]) -> List[int]:
+#         frequencies = defaultdict(int)
+#         # print ("frequencies ===", frequencies) # don't put it here it will not give you the correct dictionary
+#         def _dfs(node):
+#             # base case
+#             if not node:
+#                 return
+#             # do the thing (what ever you are required to do for the problem)
+#             # so here we increase the count in the dictionary
+#             frequencies[node.val] += 1
+#             _dfs(node.left)
+#             _dfs(node.right)   # this is a boiler plate for DFS (a helper function to traverse the tree)
 
-        _dfs(root)
-        # print ("frequencies ===>", frequencies)
-        # print ("frequencies ===>", dict(frequencies))
-        max_freq = max(frequencies.values())
-        res = []
+#         _dfs(root)  # the root does not change only the node changes in the traversing
+#         # print ("frequencies ===>", frequencies)
+#         # print ("frequencies ===>", dict(frequencies))
+#         max_freq = max(frequencies.values())
+#         res = []
 
-        for node in frequencies:
-            if frequencies[node] == max_freq:
-                res.append(node)
-        return res
-'''
-    1
-     \
-      2
-     /
-    2
-'''
+#         for node in frequencies:
+#             if frequencies[node] == max_freq:
+#                 res.append(node)
+#         return res
+# '''
+#     1
+#      \
+#       2
+#      /
+#     2
+# '''
 
-root = TreeNode(1, None, TreeNode(2, TreeNode(2), None))
+# root = TreeNode(1, None, TreeNode(2, TreeNode(2), None))
 
-# Create a bigger binary tree
-# root = TreeNode(5,
-                # left=TreeNode(3, TreeNode(1), TreeNode(5)),
-                # right=TreeNode(8, TreeNode(7), TreeNode(9)))
-'''
-        5
-       / \
-      3   8
-     /|   |\
-    1 5   7 9
+# # Create a bigger binary tree
+# # root = TreeNode(5,
+#                 # left=TreeNode(3, TreeNode(1), TreeNode(5)),
+#                 # right=TreeNode(8, TreeNode(7), TreeNode(9)))
+# '''
+#         5
+#        / \
+#       3   8
+#      /|   |\
+#     1 5   7 9
 
-'''
-# Create an instance of the Solution class
-solution = Solution()
+# '''
+# # Create an instance of the Solution class
+# solution = Solution()
 
-# Call the findMode method and print the result
-output = solution.findMode(root)
-print(output)
+# # Call the findMode method and print the result
+# output = solution.findMode(root)
+# print(output)
 
 #! 5-problem 56 leet code (App Academy course) - Merge Intervals
 
@@ -258,7 +259,9 @@ Medium
 21.2K
 727
 Companies
-Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
+Given an array of intervals where intervals[i] = [starti, endi],
+ merge all overlapping intervals, and return an array of the
+ non-overlapping intervals that cover all the intervals in the input.
 
 
 

@@ -3,57 +3,40 @@ from typing import Optional, List
 from collections import defaultdict, Counter
 
 
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+from typing import List
+
 class Solution:
-    def findMode(self, root: Optional[TreeNode]) -> List[int]:
-        frequencies = defaultdict(int)
+    def sortArray(self, nums: List[int]) -> List[int]:
+        if len(nums) < 2:
+            return nums
 
-        def _dfs(node):
-            if not node:
-                return
+        mid = len(nums) // 2
+        left = self.sortArray(nums[:mid])
+        right = self.sortArray(nums[mid:])
 
-            frequencies[node.val] += 1
-            _dfs(node.left)
-            _dfs(node.right)
+        return self.merge(left, right)
 
-        _dfs(root)
+    def merge(self, left: List[int], right: List[int]) -> List[int]:
+        merged = []
+        i = j = 0
 
-        max_freq = max(frequencies.values())
-        res = []
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                merged.append(left[i])
+                i += 1
+            else:
+                merged.append(right[j])
+                j += 1
 
-        for node in frequencies:
-            if frequencies[node] == max_freq:
-                res.append(node)
-        return res
-'''
-    1
-     \
-      2
-     /
-    2
-'''
+        merged.extend(left[i:])
+        merged.extend(right[j:])
 
-root = TreeNode(1, None, TreeNode(2, TreeNode(2), None))
+        return merged
 
-# Create a bigger binary tree
-# root = TreeNode(5,
-                # left=TreeNode(3, TreeNode(1), TreeNode(5)),
-                # right=TreeNode(8, TreeNode(7), TreeNode(9)))
-'''
-        5
-       / \
-      3   8
-     /|   |\
-    1 5   7 9
 
-'''
-# Create an instance of the Solution class
+# Example usage
+nums = [5, 1, 1, 2, 0, 0]
 solution = Solution()
-
-# Call the findMode method and print the result
-output = solution.findMode(root)
+output = solution.sortArray(nums)
 print(output)
+
