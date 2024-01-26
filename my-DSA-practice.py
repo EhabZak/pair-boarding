@@ -7,31 +7,25 @@ from typing import List
 
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
-        if len(nums) < 2:
-            return nums
+       if len(nums) < 2: return nums
 
-        mid = len(nums) // 2
-        left = self.sortArray(nums[:mid])
-        right = self.sortArray(nums[mid:])
 
-        return self.merge(left, right)
+       mid = len(nums)//2
+       left = self.sortArray(nums[:mid])
+       right = self.sortArray(nums [mid:])
 
-    def merge(self, left: List[int], right: List[int]) -> List[int]:
-        merged = []
-        i = j = 0
+       return self.merge(left,right)
 
-        while i < len(left) and j < len(right):
-            if left[i] < right[j]:
-                merged.append(left[i])
-                i += 1
+    def merge(self,left,right):
+        merged =[]
+
+        while len(left) and len(right):
+            if left[0]<right[0]:
+                merged.append(left.pop(0))
             else:
-                merged.append(right[j])
-                j += 1
+                merged.append(right.pop(0))
+        return merged+left+right
 
-        merged.extend(left[i:])
-        merged.extend(right[j:])
-
-        return merged
 
 
 # Example usage
@@ -39,4 +33,3 @@ nums = [5, 1, 1, 2, 0, 0]
 solution = Solution()
 output = solution.sortArray(nums)
 print(output)
-
