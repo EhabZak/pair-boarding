@@ -290,59 +290,137 @@ Constraints:
 -5 * 104 <= nums[i] <= 5 * 104
 
 '''
+# class Solution:
+#     def sortArray(self, nums: List[int]) -> List[int]:
+#         if len(nums) < 2: return nums
+
+#         mid = len(nums)//2
+#         left = self.sortArray(nums [0:mid])
+#         right = self.sortArray(nums[mid::])
+
+#         return self.merge(left,right)
+
+
+#     def merge(self,left,right):
+#         merged = []
+#         while len(left) and len(right):
+#             if left[0] < right[0]:
+#                 merged.append(left.pop(0))
+#             else:
+#                 merged.append(right.pop(0))
+
+#         return merged + left + right
+
+# #another GPT solution
+
+#     # class Solution:
+#     # def sortArray(self, nums: List[int]) -> List[int]:
+#     #     if len(nums) < 2:
+#     #         return nums
+
+#     #     mid = len(nums) // 2
+#     #     left = self.sortArray(nums[:mid])
+#     #     right = self.sortArray(nums[mid:])
+
+#     #     return self.merge(left, right)
+
+#     # def merge(self, left: List[int], right: List[int]) -> List[int]:
+#     #     merged = []
+#     #     i = j = 0
+
+#     #     while i < len(left) and j < len(right):
+#     #         if left[i] < right[j]:
+#     #             merged.append(left[i])
+#     #             i += 1
+#     #         else:
+#     #             merged.append(right[j])
+#     #             j += 1
+
+#     #     merged.extend(left[i:])
+#     #     merged.extend(right[j:])
+
+#     #     return merged
+
+# nums = [5,1,1,2,0,0]
+
+# # output = Solution.sortArray(nums)
+# output = Solution().sortArray(nums)
+# print(output)
+
+
+#! 6- 912. Sort Characters By Frequency (Algo Academy) (medium) (algorithm/Tech: bucket sort) (time complexity O(n) n is length of string)
+
+'''
+451. Sort Characters By Frequency
+Medium
+Topics
+Companies
+Given a string s, sort it in decreasing order based on the frequency of the characters. The frequency of a character is the number of times it appears in the string.
+
+Return the sorted string. If there are multiple answers, return any of them.
+
+
+
+Example 1:
+
+Input: s = "tree"
+Output: "eert"
+Explanation: 'e' appears twice while 'r' and 't' both appear once.
+So 'e' must appear before both 'r' and 't'. Therefore "eetr" is also a valid answer.
+Example 2:
+
+Input: s = "cccaaa"
+Output: "aaaccc"
+Explanation: Both 'c' and 'a' appear three times, so both "cccaaa" and "aaaccc" are valid answers.
+Note that "cacaca" is incorrect, as the same characters must be together.
+Example 3:
+
+Input: s = "Aabb"
+Output: "bbAa"
+Explanation: "bbaA" is also a valid answer, but "Aabb" is incorrect.
+Note that 'A' and 'a' are treated as two different characters.
+
+
+Constraints:
+
+1 <= s.length <= 5 * 105
+s consists of uppercase and lowercase English letters and digits.
+
+
+'''
 class Solution:
-    def sortArray(self, nums: List[int]) -> List[int]:
-        if len(nums) < 2: return nums
+    def frequencySort(self, s: str) -> str:
 
-        mid = len(nums)//2
-        left = self.sortArray(nums [0:mid])
-        right = self.sortArray(nums[mid::])
+        n = len(s)
+        # print('n' , n)
+        c = Counter(s)
+        # print('c-items', c.items())
 
-        return self.merge(left,right)
+        bucket = [[] for _ in range(n+1)] #! b/c below the reverse range starts from n which is = 4
+        # print ('bucket', bucket )
+
+        for char, freq in c.items(): # we must items to iterate otherwise it will only iterate over keys if just used (c)
+            bucket[freq].append(char) # we go to the list in the list with bucker[freq]
+            # print ("bucket", bucket)
+
+            # print ("bucket[1]", bucket[1])
+                # print ("teezzzzi", teezi)
+            # print('bucket keys+++++++++++++',bucket.keys())
 
 
-    def merge(self,left,right):
-        merged = []
-        while len(left) and len(right):
-            if left[0] < right[0]:
-                merged.append(left.pop(0))
-            else:
-                merged.append(right.pop(0))
+        res = ''
 
-        return merged + left + right
+        for freq in range(n,0,-1):
+            print ('freq' , freq)
+            for char in bucket[freq]:
+                # print('CHAR', char)
+                # print( 'bucket[freq]================'  ,bucket[freq])
+                res += freq*char
+                # print ('freq*char',freq*char)
+        return res
 
-#another GPT solution
-
-    # class Solution:
-    # def sortArray(self, nums: List[int]) -> List[int]:
-    #     if len(nums) < 2:
-    #         return nums
-
-    #     mid = len(nums) // 2
-    #     left = self.sortArray(nums[:mid])
-    #     right = self.sortArray(nums[mid:])
-
-    #     return self.merge(left, right)
-
-    # def merge(self, left: List[int], right: List[int]) -> List[int]:
-    #     merged = []
-    #     i = j = 0
-
-    #     while i < len(left) and j < len(right):
-    #         if left[i] < right[j]:
-    #             merged.append(left[i])
-    #             i += 1
-    #         else:
-    #             merged.append(right[j])
-    #             j += 1
-
-    #     merged.extend(left[i:])
-    #     merged.extend(right[j:])
-
-    #     return merged
-
-nums = [5,1,1,2,0,0]
-
-# output = Solution.sortArray(nums)
-output = Solution().sortArray(nums)
+# s ="Abcddeee" # eeeddAbc
+# s = "Aabb" # bbAa
+s = "tree" # eetr
+output = Solution().frequencySort(s)
 print(output)

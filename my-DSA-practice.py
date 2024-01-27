@@ -2,34 +2,29 @@ from typing import List
 from typing import Optional, List
 from collections import defaultdict, Counter
 
-
-from typing import List
-
 class Solution:
-    def sortArray(self, nums: List[int]) -> List[int]:
-       if len(nums) < 2: return nums
+    def frequencySort(self, s: str) -> str:
+        n = len(s)
+        c = Counter(s)
+        bucket = [[] for _ in range(n+1)]
+        print(bucket)
 
 
-       mid = len(nums)//2
-       left = self.sortArray(nums[:mid])
-       right = self.sortArray(nums [mid:])
+        for char,freq in c.items():
+            print(char)
+            bucket[freq].append(char)
+            print(bucket)
 
-       return self.merge(left,right)
-
-    def merge(self,left,right):
-        merged =[]
-
-        while len(left) and len(right):
-            if left[0]<right[0]:
-                merged.append(left.pop(0))
-            else:
-                merged.append(right.pop(0))
-        return merged+left+right
+        res = ''
+        for freq in range(n,0,-1):
+            print('======',freq)
+            for char in bucket[freq]:
+                res += char*freq
+        return res
 
 
-
-# Example usage
-nums = [5, 1, 1, 2, 0, 0]
-solution = Solution()
-output = solution.sortArray(nums)
+s ="Abcddeeeee"
+# s = "Aabb"
+# s = "tree"
+output = Solution().frequencySort(s)
 print(output)
