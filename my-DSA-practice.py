@@ -3,27 +3,28 @@ from typing import Optional, List
 from collections import defaultdict, Counter
 
 class Solution:
-    def frequencySort(self, s: str) -> str:
-        n = len(s)
-        count = Counter(s)
+    def search(self, nums: List[int], target: int) -> int:
+        left , right = 0, len(nums)-1
+
+        while left <= right:
+            mid = left+ (right-left)// 2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid]> target:
+                right = mid-1
+            else:
+                left = mid + 1
+
+        return -1
 
 
-        bucket = [[] for _ in range(n+1)]
 
-        for char, freq in count.items():
-            bucket[freq].append(char)
 
-        res = ''
 
-        for index in range (n,0,-1):
-            for char in bucket[index]:
-                # print(char)
-                res += char*index
+nums = [-1,0,3,5,9,12]
 
-        return res
+# target = 9
+target = 12
 
-# s ="Abcddeeeee"
-# s = "Aabb"
-s = "tree"
-output = Solution().frequencySort(s)
+output = Solution().search(nums,target)
 print(output)

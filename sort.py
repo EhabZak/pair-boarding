@@ -50,7 +50,7 @@ from collections import defaultdict, Counter
 # print("Sorted array:", my_list)
 
 
-#! 3-binary search
+#! 3-binary search # don't use this use the one in 704
 
 # def binary_search(arr, l, r, x):
 #     if r >= l:
@@ -97,25 +97,18 @@ from collections import defaultdict, Counter
 #! 4-binary search another approach
 # def binary_search2(nums, l, r, target):
 #     if r >= l:
-#         mid = l + (r - l) // 2
-#         '''
-#         you can also use mid = (l + r) // 2 but the first one is preferred
-#         helps prevent integer overflow because it reduces the risk of exceeding
-#           the maximum representable integer value. If l and r are very large,
-#             their sum might exceed the maximum integer value that the programming
-#               language can handle, potentially leading to unexpected behavior.
-#         '''
+
 #         l, r = 0, len(nums) - 1
 #         while l <= r:
-#             m = (l + r) // 2
-#             if target < nums[m]:
-#                 r = m - 1
-#             elif target > nums[m]:
-#                 l = m + 1
+#             mid = (l + r) // 2
+#             if target < nums[mid]:
+#                 r = mid - 1
+#             elif target > nums[mid]:
+#                 l = mid + 1
 #             else:
-#                 print(m)
+#                 print(mid)
 #                 break
-#     return m
+#     return mid
 
 # # Example array (must be sorted for binary search)
 # sorted_array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -388,39 +381,127 @@ s consists of uppercase and lowercase English letters and digits.
 
 
 '''
+# class Solution:
+#     def frequencySort(self, s: str) -> str:
+
+#         n = len(s)
+#         # print('n' , n)
+#         c = Counter(s)
+#         # print('c-items', c.items())
+
+#         bucket = [[] for _ in range(n+1)] #! b/c below the reverse range starts from n which is = 4
+#         # print ('bucket', bucket )
+
+#         for char, freq in c.items(): # we must items to iterate otherwise it will only iterate over keys if just used (c)
+#             bucket[freq].append(char) # we go to the list in the list with bucker[freq]
+#             # print ("bucket", bucket)
+
+#             # print ("bucket[1]", bucket[1])
+#                 # print ("teezzzzi", teezi)
+#             # print('bucket keys+++++++++++++',bucket.keys())
+
+
+#         res = ''
+
+#         for freq in range(n,0,-1):
+#             print ('freq' , freq)
+#             for char in bucket[freq]:
+#                 # print('CHAR', char)
+#                 # print( 'bucket[freq]================'  ,bucket[freq])
+#                 res += freq*char
+#                 # print ('freq*char',freq*char)
+#         return res
+
+# # s ="Abcddeee" # eeeddAbc
+# # s = "Aabb" # bbAa
+# s = "tree" # eetr
+# output = Solution().frequencySort(s)
+# print(output)
+
+#! 7- 704. Binary Search (Algo Academy) (easy) (algorithm/Tech: iterative binary search) (time complexity O(log(n)) n is length of array)
+
+
+'''
+704. Binary Search
+Easy
+Topics
+Companies
+Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums. If target exists, then return its index. Otherwise, return -1.
+
+You must write an algorithm with O(log n) runtime complexity.
+
+
+
+Example 1:
+
+Input: nums = [-1,0,3,5,9,12], target = 9
+Output: 4
+Explanation: 9 exists in nums and its index is 4
+Example 2:
+
+Input: nums = [-1,0,3,5,9,12], target = 2
+Output: -1
+Explanation: 2 does not exist in nums so return -1
+
+
+Constraints:
+
+1 <= nums.length <= 104
+-104 < nums[i], target < 104
+All the integers in nums are unique.
+nums is sorted in ascending order.
+
+
+'''
+# class Solution:
+#     def search(self, nums: List[int], target: int) -> int:
+#         left, right = 0 , len(nums)-1
+
+#         while left <= right:
+#             mid = left + (right-left)//2
+#             if nums[mid] == target:
+#                 return mid
+#             elif nums[mid]> target:
+#                 right = mid-1
+#             else:
+#                 left = mid + 1
+#         return -1
+
+
+
+
+# nums = [-1,0,3,5,9,12]
+
+# target = 9
+
+# output = Solution().search(nums,target)
+# print(output)
+
+
 class Solution:
-    def frequencySort(self, s: str) -> str:
+    def search(self, nums: List[int], target: int) -> int:
 
-        n = len(s)
-        # print('n' , n)
-        c = Counter(s)
-        # print('c-items', c.items())
+        def recurse(left, right):
+            if left >=right:
+                return right if nums[right] == target else -1
+            mid = left + (right- left)//2
 
-        bucket = [[] for _ in range(n+1)] #! b/c below the reverse range starts from n which is = 4
-        # print ('bucket', bucket )
+            if nums[mid] == target:
+                return mid
+            elif target < nums[mid]:
+                return recurse(left, mid-1)
+            else:
+                return recurse(mid+1, right)
 
-        for char, freq in c.items(): # we must items to iterate otherwise it will only iterate over keys if just used (c)
-            bucket[freq].append(char) # we go to the list in the list with bucker[freq]
-            # print ("bucket", bucket)
-
-            # print ("bucket[1]", bucket[1])
-                # print ("teezzzzi", teezi)
-            # print('bucket keys+++++++++++++',bucket.keys())
+        return recurse(0, len(nums)-1)
 
 
-        res = ''
 
-        for freq in range(n,0,-1):
-            print ('freq' , freq)
-            for char in bucket[freq]:
-                # print('CHAR', char)
-                # print( 'bucket[freq]================'  ,bucket[freq])
-                res += freq*char
-                # print ('freq*char',freq*char)
-        return res
 
-# s ="Abcddeee" # eeeddAbc
-# s = "Aabb" # bbAa
-s = "tree" # eetr
-output = Solution().frequencySort(s)
+
+nums = [-1,0,3,5,9,12]
+
+target = 9
+
+output = Solution().search(nums,target)
 print(output)
