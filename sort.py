@@ -478,30 +478,102 @@ nums is sorted in ascending order.
 # print(output)
 
 
+# class Solution:
+#     def search(self, nums: List[int], target: int) -> int:
+
+#         def recurse(left, right):
+#             if left >=right:
+#                 return right if nums[right] == target else -1
+#             mid = left + (right- left)//2
+
+#             if nums[mid] == target:
+#                 return mid
+#             elif target < nums[mid]:
+#                 return recurse(left, mid-1)
+#             else:
+#                 return recurse(mid+1, right)
+
+#         return recurse(0, len(nums)-1)
+
+
+
+
+
+# nums = [-1,0,3,5,9,12]
+
+# target = 9
+
+# output = Solution().search(nums,target)
+# print(output)
+
+
+#! 7- 374. Guess Number Higher or Lower (Algo Academy) (easy) (algorithm/Tech: iterative binary search) (time complexity O(log(n)) n is length of array)
+
+'''
+374. Guess Number Higher or Lower
+Easy
+Topics
+Companies
+We are playing the Guess Game. The game is as follows:
+
+I pick a number from 1 to n. You have to guess which number I picked.
+
+Every time you guess wrong, I will tell you whether the number I picked is higher or lower than your guess.
+
+You call a pre-defined API int guess(int num), which returns three possible results:
+
+-1: Your guess is higher than the number I picked (i.e. num > pick).
+1: Your guess is lower than the number I picked (i.e. num < pick).
+0: your guess is equal to the number I picked (i.e. num == pick).
+Return the number that I picked.
+
+
+
+Example 1:
+
+Input: n = 10, pick = 6
+Output: 6
+Example 2:
+
+Input: n = 1, pick = 1
+Output: 1
+Example 3:
+
+Input: n = 2, pick = 1
+Output: 1
+
+
+Constraints:
+
+1 <= n <= 231 - 1
+1 <= pick <= n
+
+'''
+# The guess API is already defined for you.
+# @param num, your guess
+# @return -1 if num is higher than the picked number
+#          1 if num is lower than the picked number
+#          otherwise return 0
+def guess(num: int) -> int: pass
+
 class Solution:
-    def search(self, nums: List[int], target: int) -> int:
+    def guessNumber(self, n: int) -> int:
+        left, right = 0 , n
 
-        def recurse(left, right):
-            if left >=right:
-                return right if nums[right] == target else -1
-            mid = left + (right- left)//2
-
-            if nums[mid] == target:
-                return mid
-            elif target < nums[mid]:
-                return recurse(left, mid-1)
+        while left <= right:
+            mid = left + (right-left)//2
+            if guess(mid) == -1:
+                right = mid -1
+            elif guess(mid) == 1:
+                left = mid +1
             else:
-                return recurse(mid+1, right)
-
-        return recurse(0, len(nums)-1)
+                return mid
 
 
 
 
+n = 10 # you need to access the api for this to get a response 
+pick = 6
 
-nums = [-1,0,3,5,9,12]
-
-target = 9
-
-output = Solution().search(nums,target)
+output = Solution().guessNumber(n)
 print(output)
