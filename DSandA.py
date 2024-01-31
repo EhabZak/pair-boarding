@@ -1268,8 +1268,127 @@ Constraints:
 
 
 
-#! 19-???(Algo Academy) (medium) (Tech: ? )
+#! 19-74. Search a 2D Matrix (Algo Academy) (medium) (Tech: binary search )  (time complexityO(log(m * n)))
 
+'''
+74. Search a 2D Matrix
+Medium
+Topics
+Companies Amazon Adobe Apple
+You are given an m x n integer matrix matrix with the following two properties:
+
+Each row is sorted in non-decreasing order.
+The first integer of each row is greater than the last integer of the previous row.
+Given an integer target, return true if target is in matrix or false otherwise.
+
+You must write a solution in O(log(m * n)) time complexity.
+
+
+
+Example 1:
+
+
+Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
+Output: true
+
+'''
+# class Solution:
+#     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+#         rows = len(matrix)
+#         cols = len(matrix[0])
+
+#         top,bottom = 0 , rows-1
+
+#         while top <= bottom:
+#             row = top + (bottom- top)//2
+
+#             if target > matrix[row][cols-1]:
+#                 top = row+1
+#             elif target < matrix[row][0]:
+#                 bottom = row -1
+#             else:
+#                 break
+
+#         if top > bottom:
+#             return False
+
+#         row = top + (bottom - top)//2
+#         left, right = 0 , cols-1
+#         while left <= right:
+#             mid = left + (right-left)//2
+#             if target > matrix[row][mid]: # it is a value not an index that why you don't just use mid
+#                 left = mid+1
+#             elif target < matrix[row][mid]:
+#                 right = mid -1
+#             else:
+#                 return True
+#         return False
+
+
+
+# matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]]
+# target = 3
+# solution = Solution()
+# output = solution.searchMatrix(matrix,target)
+# print(output)
+
+
+#!
+
+'''
+162. Find Peak Element
+Medium
+Topics
+Companies
+A peak element is an element that is strictly greater than its neighbors.
+
+Given a 0-indexed integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks.
+
+You may imagine that nums[-1] = nums[n] = -∞. In other words, an element is always considered to be strictly greater than a neighbor that is outside the array.
+
+You must write an algorithm that runs in O(log n) time.
+
+
+
+Example 1:
+
+Input: nums = [1,2,3,1]
+Output: 2
+Explanation: 3 is a peak element and your function should return the index number 2.
+Example 2:
+
+Input: nums = [1,2,1,3,5,6,4]
+Output: 5
+Explanation: Your function can return either index number 1 where the peak element is 2, or index number 5 where the peak element is 6.
+
+
+Constraints:
+
+1 <= nums.length <= 1000
+-231 <= nums[i] <= 231 - 1
+nums[i] != nums[i + 1] for all valid i.
+
+'''
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        left, right = 0 , len(nums)-1
+
+
+        while left < right:
+            mid = left +(right-left)//2
+            if nums[mid] < nums [mid+1]:
+                left = mid+1
+            else:
+                right = mid
+                print('right is ===>', right)
+        return f'this is the answer {left}'
+
+nums = [1,2,3,1] #2
+# nums = [1,2,1,3,5,6,4] #5
+
+solution = Solution()
+output = solution.findPeakElement(nums)
+print(output)
 
 
 #! 10-1376. Time Needed to Inform All Employees -(Lecture) - (Medium)
