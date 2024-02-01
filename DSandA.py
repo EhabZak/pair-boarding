@@ -1333,7 +1333,7 @@ Output: true
 # print(output)
 
 
-#!
+#! 20-162. Find Peak Element (Algo Academy) (medium) (Tech: binary search )  (time complexityO(log (n)))
 
 '''
 162. Find Peak Element
@@ -1368,27 +1368,116 @@ Constraints:
 -231 <= nums[i] <= 231 - 1
 nums[i] != nums[i + 1] for all valid i.
 
-'''
-class Solution:
-    def findPeakElement(self, nums: List[int]) -> int:
-        left, right = 0 , len(nums)-1
+# '''
+# class Solution:
+#     def findPeakElement(self, nums: List[int]) -> int:
+#         #! iterative approach
+#         left, right = 0 , len(nums)-1
+#         while left < right:
+#             mid = left +(right-left)//2 # this is left + ((right-left)//2)
+#             print ('mid', mid)
+#             if nums[mid] < nums [mid+1]:
+#                 left = mid+1
+#                 print('left is ++++>', left)
+#             else:
+#                 right = mid
+#                 print('right is ===>', right)
+#         return left # it is like saying when left = right
+#         #! recursive approach
+#         def _search(left,right):
+#             if left == right: return left
 
+#             mid = left + (right-left)//2
 
-        while left < right:
-            mid = left +(right-left)//2
-            if nums[mid] < nums [mid+1]:
-                left = mid+1
-            else:
-                right = mid
-                print('right is ===>', right)
-        return f'this is the answer {left}'
+#             if nums[mid]< nums[mid+1]:
+#                 return _search(mid+1, right)
+#             else:
+#                 return _search(left,mid)
 
-nums = [1,2,3,1] #2
+#         return _search(0,len(nums)-1)
+
+# # nums = [1,2,3,1] #2
 # nums = [1,2,1,3,5,6,4] #5
 
+# solution = Solution()
+# output = solution.findPeakElement(nums)
+# print(output)
+
+#! 21- 206. Reverse Linked List (Algo Academy) (easy) (Tech: ? )  (time complexity: ?)
+'''
+206. Reverse Linked List
+Easy
+Topics
+Companies Amazon Apple Bloomberg
+Given the head of a singly linked list, reverse the list, and return the reversed list.
+
+
+
+Example 1:
+
+
+Input: head = [1,2,3,4,5]
+Output: [5,4,3,2,1]
+Example 2:
+
+
+Input: head = [1,2]
+Output: [2,1]
+Example 3:
+
+Input: head = []
+Output: []
+
+
+Constraints:
+
+The number of nodes in the list is the range [0, 5000].
+-5000 <= Node.val <= 5000
+
+'''
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, value=0, next=None):
+        self.value = value
+        self.next = next
+
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev = None
+
+        def _helper(head, prev):
+           print('head', head.value if head else None)
+           if head is None:
+               return prev
+
+           next = head.next
+           print('next', next.value if next else None)
+           head.next = prev
+           print ('head.next',head.next.value if head.next else None)
+           return _helper(next,head)
+        return _helper(head,prev)
+
+# Convert the input list to a linked list
+head_values = [1, 2, 3, 4, 5]
+head = ListNode(head_values[0])
+current_node = head
+for value in head_values[1:]:
+    current_node.next = ListNode(value)
+    current_node = current_node.next
+
+# Create an instance of Solution
 solution = Solution()
-output = solution.findPeakElement(nums)
-print(output)
+
+# Test the reverseList method
+reversed_head = solution.reverseList(head)
+
+# Print the reversed linked list values
+while reversed_head:
+    print(reversed_head.value, end=" ")
+    reversed_head = reversed_head.next
+
+
+
 
 
 #! 10-1376. Time Needed to Inform All Employees -(Lecture) - (Medium)

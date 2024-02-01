@@ -2,47 +2,42 @@ from typing import List
 from typing import Optional, List
 from collections import defaultdict, Counter
 
+class ListNode:
+    def __init__(self, value=0, next=None):
+        self.value = value
+        self.next = next
+
 class Solution:
-    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        rows = len(matrix)
-        cols = len (matrix[0])
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+       prev = None
 
-        top, bottom = 0 , rows-1
+       def _helper(head, prev):
 
-        while top <= bottom:
-            row = top + (bottom-top)//2
+           if head is None:
+               return prev #base case
 
-            if target > matrix[row][cols-1]:
-                top = row+1
-            elif target < matrix[row][0]:
-                bottom = row-1
-            else:
-                break
+           next = head.next
 
-        row = top + (bottom- top)//2
-        left,right = 0 , cols-1
+           head.next = prev
 
-        while left<= right:
-            mid = left + (right-left)//2
-            if target > matrix [row] [mid]:
-                left = mid + 1
-            elif target < matrix [row] [mid]:
-                right = mid -1
-            else:
-                return True
-        return False
+           return _helper(next,head)
+       return _helper(head,prev)
 
+# Convert the input list to a linked list
+head_values = [1, 2, 3, 4, 5]
+head = ListNode(head_values[0])
+current_node = head
+for value in head_values[1:]:
+    current_node.next = ListNode(value)
+    current_node = current_node.next
 
-
-
-
-
-
-
-# matrix = [[1],[3]]
-matrix = [[1]]
-# matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]]
-target = 2
+# Create an instance of Solution
 solution = Solution()
-output = solution.searchMatrix(matrix,target)
-print(output)
+
+# Test the reverseList method
+reversed_head = solution.reverseList(head)
+
+# Print the reversed linked list values
+while reversed_head:
+    print(reversed_head.value, end=" ")
+    reversed_head = reversed_head.next
