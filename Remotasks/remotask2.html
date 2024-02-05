@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 Random Websites</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .box {
+            display: inline-block;
+            width: 150px;
+            height: 150px;
+            border: 1px solid #ddd;
+            margin: 10px;
+            text-align: center;
+            line-height: 150px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div id="container"></div> -->
+    <script>
+        const websitesArray = [
+            "https://www.google.com",
+            "https://www.youtube.com",
+            "https://www.facebook.com",
+            // ... Add 47 more website URLs here, following the same format.
+        ];
+        const boxes = [];
+        const container = document.getElementById("container");
+        for (let i = 0; i < 50; i++) {
+            const boxElement = document.createElement("div");
+            boxElement.classList.add("box");
+            boxElement.textContent = `Box ${i + 1}`;
+
+            boxElement.addEventListener("click", () => {
+                const randomIndex = Math.floor(Math.random() * websitesArray.length);
+                const randomWebsite = websitesArray[randomIndex];
+                window.location.href = randomWebsite;
+            });
+            container.appendChild(boxElement);
+            boxes.push(boxElement);
+        }
+    </script>
+    <div id="container"></div>
+</body>

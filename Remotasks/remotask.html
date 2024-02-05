@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 Boxes of Mystery</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        .box {
+            width: 100px;
+            height: 50px;
+            background-color: #ccc;
+            border: 1px solid #333;
+            text-align: center;
+            line-height: 50px;
+            margin: 10px;
+            float: left;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const websites = [
+            "https://www.google.com",
+            "https://www.youtube.com",
+            "https://www.facebook.com",
+            "https://www.reddit.com",
+            "https://www.wikipedia.org",
+
+            // ... add 45 more unique websites here
+        ];
+
+        const boxes = [];
+
+        for (let i = 0; i < 50; i++) {
+            const box = document.createElement("div");
+            box.classList.add("box");
+            box.addEventListener("click", function() {
+                window.location.href = websites[Math.floor(Math.random() * websites.length)];
+            });
+            box.textContent = `Box ${i + 1}`;
+            boxes.push(box);
+            document.body.appendChild(box);
+        }
+    </script>
+</body>
+</html>
