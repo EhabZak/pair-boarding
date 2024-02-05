@@ -1,5 +1,3 @@
-#!
-
 def fibonacci(length):
     fib_sequence = [0, 1]
     if length <= 2:
