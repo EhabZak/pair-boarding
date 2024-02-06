@@ -136,14 +136,14 @@ class Solution:
         prev = None
 
         def _helper(head, prev):
-           print('head', head.value if head else None)
+        #    print('head', head.value if head else None)
            if head is None:
                return prev
 
            next = head.next
-           print('next', next.value if next else None)
+        #    print('next', next.value if next else None)
            head.next = prev
-           print ('head.next',head.next.value if head.next else None)
+        #    print ('head.next',head.next.value if head.next else None)
            return _helper(next,head)
         return _helper(head,prev)
 
