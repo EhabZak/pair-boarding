@@ -1407,7 +1407,7 @@ nums[i] != nums[i + 1] for all valid i.
 
 #! this is
 
-#! 21- 509. Fibonacci Number (Algo Academy) (medium) (Tech: binary search )  (time complexityO(log (n)))
+#! 21- 509. Fibonacci Number (Algo Academy) (medium) (Tech: ??)  (time complexityO(??))
 
 
 '''
