@@ -1488,6 +1488,27 @@ n is even.
 
 '''
 
+class Solution:
+    def distributeCandies(self, candyType: List[int]) -> int:
+        # iterate through the array
+        # Counter
+        # max is half the len
+        # for each type she can eat one
+        # the number of unique elements in array
+        #we can return min (the max or number of unique elements)
+        s = set(candyType)
+        ls = len(s)
+        length = len(candyType)//2
+
+        return min (ls, length)
+
+
+candyType = [1,1,2,2,3,3]
+
+solution = Solution()
+output = solution.distributeCandies(candyType)
+print(output)
+
 
 #! 10-1376. Time Needed to Inform All Employees -(Lecture) - (Medium)
 #! 11-752. Open the Lock -(Lecture) - (Medium)
