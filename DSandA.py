@@ -368,6 +368,21 @@ Only one valid answer exists.
 #                 return [i,hash[complement]]
 #             hash[num] = i
 
+#! mock interview solution
+
+ # create a hash
+        # we iterate through the list
+        # if number - target exists in hash we return the indices
+        #  s= {}
+
+        #  for i in range(len(nums)):
+        #      number = nums[i]
+        #      complement =  target - number
+        #      if complement in s:
+        #          return [s[complement], i]
+        #      else:
+        #          s[number] = i
+
 # nums = [2,7,11,15] #  [1, 0]
 # target = 9
 # solution = Solution()
@@ -1445,7 +1460,7 @@ Constraints:
 0 <= n <= 30
 
 '''
-#!22- Mock interview
+#!22- 575. Distribute Candies  (easy) (Tech: just a set) (Mock interview)
 
 
 '''
@@ -1488,26 +1503,21 @@ n is even.
 
 '''
 
-class Solution:
-    def distributeCandies(self, candyType: List[int]) -> int:
-        # iterate through the array
-        # Counter
-        # max is half the len
-        # for each type she can eat one
-        # the number of unique elements in array
-        #we can return min (the max or number of unique elements)
-        s = set(candyType)
-        ls = len(s)
-        length = len(candyType)//2
+# class Solution:
+#     def distributeCandies(self, candyType: List[int]) -> int:
 
-        return min (ls, length)
+#         s = set(candyType)
+#         ls = len(s)
+#         length = len(candyType)//2
+
+#         return min (ls, length)
 
 
-candyType = [1,1,2,2,3,3]
+# candyType = [1,1,2,2,3,3]
 
-solution = Solution()
-output = solution.distributeCandies(candyType)
-print(output)
+# solution = Solution()
+# output = solution.distributeCandies(candyType)
+# print(output)
 
 
 #! 10-1376. Time Needed to Inform All Employees -(Lecture) - (Medium)

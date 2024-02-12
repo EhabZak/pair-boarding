@@ -1,3 +1,5 @@
+
+#! 1- print numbers in a spiral 
 #response 2
 
 # def print_spiral(matrix):
@@ -54,7 +56,7 @@
 # print_spiral(matrix)
 
 ## response 1
-#! 
+#! Checks whether the given string is a palindrome (remotasks)
 def is_palindrome(input_str):
   """
   Checks whether the given string is a palindrome or not.
@@ -74,8 +76,8 @@ def is_palindrome(input_str):
 # input_str = "A man, a plan, a canal, Panama!"
 # print(is_palindrome(input_str))
 
-# input_str = "madam"
-# print(is_palindrome(input_str))
+input_str = "madam"
+print(is_palindrome(input_str))
 
 # input_str = "level"
 # print(is_palindrome(input_str))
@@ -83,5 +85,5 @@ def is_palindrome(input_str):
 # input_str = "Strings"
 # print(is_palindrome(input_str))
 
-input_str = ""
-print(is_palindrome(input_str))
+# input_str = ""
+# print(is_palindrome(input_str))
