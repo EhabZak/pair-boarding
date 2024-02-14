@@ -1460,6 +1460,23 @@ Constraints:
 0 <= n <= 30
 
 '''
+
+class Solution:
+    def fib(self, n: int) -> int:
+
+        if n == 0 : return 0
+        if n == 1 : return 1
+
+        return self.fib(n-1)+ self.fib(n-2)
+
+
+n = 10
+solution = Solution()
+output = solution.fib(n)
+print(output)
+
+
+
 #!22- 575. Distribute Candies  (easy) (Tech: just a set) (Mock interview)
 
 
