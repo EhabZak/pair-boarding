@@ -2,7 +2,7 @@
 from collections import Counter,defaultdict
 #! IBM questions /////////////////
 
-#! 1- find HCF (Highest Common Factor) (alog: Euclidean algorithm)
+#! 1- find HCF (Highest Common Factor) (alog: Euclidean algorithm) ✅
 '''
 
 Write a program to find HCF of two numbers by without using recursion.
@@ -18,13 +18,14 @@ Write a program to find HCF of two numbers by without using recursion.
 
 # print (find_hcf(12,15))
 
-#! 2- series of characters
+#! 2- series of characters ✅
 
 '''
 Consider a string, S, that is a series of characters,
 each followed by its frequency as an integer. The string
 is not compressed correctly, so there may be multiple occurrences
- of the same character. A properly compressed string will consist
+ of the same character.
+ A properly compressed string will consist
  of one instance of each character in alphabetical order followed
  by the total count of that character within the string.
 '''
@@ -36,22 +37,47 @@ we need to have a set so we don't have repetitions or we need to have a counter 
 
 '''
 
-# def letters(s):
-#     arr = list(enumerate(s))
-#     print (arr)
-#     st = defaultdict()
-#     for index, item in arr:
-#         if item.isalpha() and item not in st:
-#             st[item] = s[index+1]
-#         elif item.isalpha() and item in st:
-#             st[item] += s[index+1]
-
-#     print (st)
 
 
-# s= "a3b5c2a2"
+# from collections import defaultdict
 
-# letters(s)
+# def compress_string(s):
+#     counts = defaultdict(int)
+#     i = 0
+#     while i < len(s):
+#         if s[i].isalpha():
+#             char = s[i]
+#             i += 1
+#             count = ""
+#             while i < len(s) and s[i].isdigit():
+#                 count += s[i]
+#                 i += 1
+#             if count:  # Check if there was a count
+#                 counts[char] += int(count)
+#         else:
+#             i += 1
+#     compressed = ""
+#     for char in sorted(counts.keys()):
+#         compressed += char + str(counts[char])
+#     return compressed
+
+# # Example usage:
+# s = "a3b5c2a2"
+# compressed_s = compress_string(s)
+# print(compressed_s)  # Output should be "a5b5c2"
+
+
+
+
+# # Example usage:
+# s = "a3b5c2a2"
+
+# print(compress_string(s))  # Output should be "a5b5c2"
+
+
+
+
+
 
 #! 3- get Minimum Moves
 '''
@@ -78,28 +104,28 @@ items such that the median of prices is exactly k.
  It is guaranteed that nis odd
 
 '''
-def getMinimumMoves(price, k):
-    price.sort()  # Step 1: Sort the array
-    n = len(price)
-    median_index = (n + 1) // 2 - 1  # Step 2: Find the index of the median
+# def getMinimumMoves(price, k):
+#     price.sort()  # Step 1: Sort the array
+#     n = len(price)
+#     median_index = (n + 1) // 2 - 1  # Step 2: Find the index of the median
 
-    moves = 0
-    median_price = price[median_index]
+#     moves = 0
+#     median_price = price[median_index]
 
-    if median_price < k:  # If current median is less than k
-        for i in range(median_index, n):
-            if price[i] < k:
-                moves += k - price[i]
-    elif median_price > k:  # If current median is greater than k
-        for i in range(median_index, -1, -1):
-            if price[i] > k:
-                moves += price[i] - k
+#     if median_price < k:  # If current median is less than k
+#         for i in range(median_index, n):
+#             if price[i] < k:
+#                 moves += k - price[i]
+#     elif median_price > k:  # If current median is greater than k
+#         for i in range(median_index, -1, -1):
+#             if price[i] > k:
+#                 moves += price[i] - k
 
-    return moves
+#     return moves
 
-# Test example
-price = [4, 2, 1, 4, 7]
-# price = [3, 3, 6, 3, 9]
-k = 3
-# k = 2
-print(getMinimumMoves(price, k))  # Output: 1
+# # Test example
+# price = [4, 2, 1, 4, 7]
+# # price = [3, 3, 6, 3, 9]
+# k = 3
+# # k = 2
+# print(getMinimumMoves(price, k))  # Output: 1
