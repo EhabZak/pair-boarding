@@ -387,13 +387,39 @@ class Solution:
         if list2 == None: return list1
 
         if list1.val < list2.val:
-            next1 = list1.next
+            next1 = list1.next # this is a pointer
             list1.next = self.mergeTwoLists(next1,list2)
             return list1
         else:
-            next2 = list2.next
+            next2 = list2.next # this is a pointer
             list2.next = self.mergeTwoLists(list1,next2)
             return list2
+
+        #! iterative solution
+        # Initialize a dummy node to help with the iteration
+        # dummy = ListNode()
+        # # Initialize a pointer to the dummy node
+        # current = dummy #! this is a pointer
+
+
+        # # Iterate until both lists are exhausted
+        # while list1 and list2:
+        #     if list1.val < list2.val:
+        #         current.next = list1
+        #         list1 = list1.next
+        #     else:
+        #         current.next = list2
+        #         list2 = list2.next
+        #     current = current.next
+
+        # # Attach the remaining nodes from either list1 or list2
+        # if list1:
+        #     current.next = list1
+        # elif list2:
+        #     current.next = list2
+
+        # # Return the merged list starting from the next of the dummy node
+        # return dummy.next
 
 
 
