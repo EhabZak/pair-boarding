@@ -247,7 +247,12 @@ The number of nodes in the list is in the range [1, 100].
 #             slow = slow.next
 #             fast = fast.next.next
 #          return slow
-
+# '''
+# Without the condition while fast and fast.next:,
+# if we just used while fast:, the loop would not terminate correctly
+# when fast reaches the last node of the linked list. Instead, it
+# would result in an error when trying to access the next attribute of None
+# '''
 
 
 # head_values = [1, 2, 3, 4, 5, 6] #4
@@ -333,12 +338,12 @@ pos is -1 or a valid index in the linked-list.
 # head.next = ListNode(2)
 # head.next.next = ListNode(0)
 # head.next.next.next = ListNode(-4)
-# head.next.next.next.next = head.next  # Creating a cycle
+# head.next.next.next.next = head.next  !# Creating a cycle
 # solution = Solution()
 # print(solution.hasCycle(head))  # Output: True
 
 
-#! 6- 21. Merge Two Sorted Lists
+#! 6- 21. Merge Two Sorted Lists (Easy) (Algo:)
 
 '''
 
@@ -442,3 +447,81 @@ Both list1 and list2 are sorted in non-decreasing order.
 # while merged_list is not None:
 #     print(merged_list.val, end=" ")
 #     merged_list = merged_list.next
+
+#! 7- 19. Remove Nth Node From End of List (Medium)
+
+'''
+
+19. Remove Nth Node From End of List
+Medium
+Topics
+Companies Amazon Google Apple
+Hint
+Given the head of a linked list, remove the nth node from the end of the list and return its head.
+
+
+
+Example 1:
+
+
+Input: head = [1,2,3,4,5], n = 2
+Output: [1,2,3,5]
+Example 2:
+
+Input: head = [1], n = 1
+Output: []
+Example 3:
+
+Input: head = [1,2], n = 1
+Output: [1]
+
+
+Constraints:
+
+The number of nodes in the list is sz.
+1 <= sz <= 30
+0 <= Node.val <= 100
+1 <= n <= sz
+
+
+Follow up: Could you do this in one pass?
+'''
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        fast = slow = head
+
+        for i in range(n):
+            fast = fast.next
+            print( 'range of i=>' , i)
+
+        if not fast :
+            return head.next
+
+
+        while fast.next:
+            slow = slow.next
+            fast = fast.next
+        slow.next = slow.next.next
+
+        return head
+
+# head = [1,2,3,4,5]
+n = 2
+
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+head.next.next.next.next = ListNode(5)
+solution = Solution()
+result  = solution.removeNthFromEnd(head, n)  # Output: 1,2,3,5
+
+while result:
+    print (result.val, end=" ")
+    result = result.next

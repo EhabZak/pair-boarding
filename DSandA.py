@@ -4,12 +4,12 @@ from collections import defaultdict, Counter
 import json
 
 #! 1- DFS problem
-# '''   0
-#     /  |  \
-#    1   2   3
-# /   \  /
-# 4     5
-#   '''
+'''   0
+    /  |  \
+   1   2   3
+/   \  /
+4     5
+  '''
 # ad_max = [
 #   # these columns represent the relationship
 #    #0 1 2 3 4 5          # print ad-max[n]
@@ -46,10 +46,11 @@ import json
 
 # src_node = int(input('Enter the source node: '))
 # dfs(src_node)
-# print (dfs(0))
+# print (dfs(0)) # if you select 0 as source node the output will be 4 2 5 1 3 0 this shows how the nodes are traversed and popped off the stack
 
 # you can also do it like in mode 6 for both dfs and bfs and then solve the problems
 # don't forget that there are also sort methods
+
 #! 2-problem 22 leet code - Generate Parentheses
 # class Solution:
 #     def isValid(self, s: str) -> bool:
@@ -1536,9 +1537,8 @@ n is even.
 # output = solution.distributeCandies(candyType)
 # print(output)
 
-#! 21- 509. Fibonacci Number (Algo Academy) (medium) (Tech: ??)  (time complexityO(??))
-#! 23 - 62. Unique Paths
 
+#! 23 - 62. Unique Paths (Algo Academy) (medium) (Tech: ??)  (time complexity O(2^(m+n)) very bad)
 '''
 62. Unique Paths
 Medium
@@ -1593,6 +1593,261 @@ Constraints:
 # solution = Solution()
 # output = solution.uniquePaths(m,n)
 # print(output)
+
+#! 24-700. Search in a Binary Search Tree (Algo Academy) (easy) (algo: binary search)  (time complexityO(??))
+'''
+700. Search in a Binary Search Tree
+Easy
+Topics
+Companies Adobe Amazon Microsoft
+You are given the root of a binary search tree (BST) and an integer val.
+
+Find the node in the BST that the node's value equals val and return
+ the subtree rooted with that node. If such a node does not exist, return null.
+
+
+
+Example 1:
+
+
+Input: root = [4,2,7,1,3], val = 2
+Output: [2,1,3]
+Example 2:
+
+
+Input: root = [4,2,7,1,3], val = 5
+Output: []
+
+
+Constraints:
+
+The number of nodes in the tree is in the range [1, 5000].
+1 <= Node.val <= 107
+root is a binary search tree.
+1 <= val <= 107
+'''
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+#         if not root: return None
+
+#         if val< root.val:
+#             return self.searchBST(root.left, val)
+#         elif val > root.val:
+#             return self.searchBST(root.right, val)
+#         else:
+#             return root
+
+
+# root = [4,2,7,1,3]
+# # Create the binary search tree
+# root = TreeNode(4)
+# root.left = TreeNode(2)
+# root.right = TreeNode(7)
+# root.left.left = TreeNode(1)
+# root.left.right = TreeNode(3)
+
+# # Example 1
+# val1 = 2
+# solution= Solution()
+# result = solution.searchBST(root, val1)
+# if result is not None:
+#     print(result.val)
+# else:
+#     print("Node with value {} not found".format(val1))
+
+#! 25-94. Binary Tree Inorder Traversal (Algo Academy) (easy) (algo: dfs)  (time complexity O(n))
+
+'''
+94. Binary Tree Inorder Traversal
+Easy
+Topics
+Companies
+Given the root of a binary tree, return the inorder traversal of its nodes' values.
+
+
+
+Example 1:
+
+
+Input: root = [1,null,2,3]
+Output: [1,3,2]
+Example 2:
+
+Input: root = []
+Output: []
+Example 3:
+
+Input: root = [1]
+Output: [1]
+
+
+Constraints:
+
+The number of nodes in the tree is in the range [0, 100].
+-100 <= Node.val <= 100
+
+
+Follow up: Recursive solution is trivial, could you do it iteratively?
+
+'''
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+#         if root is None: return []
+
+#         left = self.inorderTraversal(root.left)
+#         right = self.inorderTraversal(root.right)
+#         return left + [root.val] + right  #[[], 1, [ [ [], 3, [] ], 2, [] ]]
+
+# # root = [1,null,2,3]
+
+# # Create a binary tree
+# root = TreeNode(1)
+# root.right = TreeNode(2)
+# root.right.left = TreeNode(3)
+
+# # Instantiate the Solution class
+# sol = Solution()
+
+# # Test the inorderTraversal method
+# result = sol.inorderTraversal(root)
+# print(result)  # Output should be [1, 3, 2]
+
+#! 25-144. Binary Tree Preorder Traversal (Algo Academy) (easy) (algo: dfs)  (time complexity O(n))
+
+'''
+144. Binary Tree Preorder Traversal
+Easy
+Topics
+Companies Google Apple Microsoft
+Given the root of a binary tree, return the preorder traversal of its nodes' values.
+
+
+
+Example 1:
+
+
+Input: root = [1,null,2,3]
+Output: [1,2,3]
+Example 2:
+
+Input: root = []
+Output: []
+Example 3:
+
+Input: root = [1]
+Output: [1]
+
+
+Constraints:
+
+The number of nodes in the tree is in the range [0, 100].
+-100 <= Node.val <= 100
+
+
+Follow up: Recursive solution is trivial, could you do it iteratively?
+
+'''
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+#         if root is None: return []
+
+#         left = self.preorderTraversal(root.left)
+#         right = self.preorderTraversal(root.right)
+#         return  [root.val]+ left + right
+
+
+
+# # Create a binary tree
+# root = TreeNode(1)
+# root.right = TreeNode(2)
+# root.right.left = TreeNode(3)
+
+# # Instantiate the Solution class
+# sol = Solution()
+
+# # Test the inorderTraversal method
+# result = sol.preorderTraversal(root)
+# print(result)  # Output should be [1, 3, 2]
+
+#! 26-145. Binary Tree Postorder Traversal (Algo Academy) (easy) (algo: dfs)  (time complexity O(n))
+
+'''
+145. Binary Tree Postorder Traversal
+Easy
+Topics
+Companies Bloomberg facebook Apple
+Given the root of a binary tree, return the postorder traversal of its nodes' values.
+
+Example 1:
+
+
+Input: root = [1,null,2,3]
+Output: [3,2,1]
+Example 2:
+
+Input: root = []
+Output: []
+Example 3:
+
+Input: root = [1]
+Output: [1]
+
+
+Constraints:
+
+The number of the nodes in the tree is in the range [0, 100].
+-100 <= Node.val <= 100
+
+
+Follow up: Recursive solution is trivial, could you do it iteratively?
+
+'''
+
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+class Solution:
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if root is None: return []
+
+        left = self.postorderTraversal(root.left)
+        right = self.postorderTraversal(root.right)
+        return   left + right +[root.val]
+
+
+# Create a binary tree
+root = TreeNode(1)
+root.right = TreeNode(2)
+root.right.left = TreeNode(3)
+
+# Instantiate the Solution class
+sol = Solution()
+
+# Test the inorderTraversal method
+result = sol.postorderTraversal(root)
+print(result)  # Output should be [1, 3, 2]
 
 #! 10-1376. Time Needed to Inform All Employees -(Lecture) - (Medium)
 #! 11-752. Open the Lock -(Lecture) - (Medium)
