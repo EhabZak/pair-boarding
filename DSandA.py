@@ -1,6 +1,6 @@
 from typing import List
 from typing import Optional, List
-from collections import defaultdict, Counter
+from collections import defaultdict, Counter,deque
 import json
 
 #! 1- DFS problem
@@ -1822,32 +1822,32 @@ Follow up: Recursive solution is trivial, could you do it iteratively?
 
 '''
 
-# Definition for a binary tree node.
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-class Solution:
-    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        if root is None: return []
+# # Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+#         if root is None: return []
 
-        left = self.postorderTraversal(root.left)
-        right = self.postorderTraversal(root.right)
-        return   left + right +[root.val]
+#         left = self.postorderTraversal(root.left)
+#         right = self.postorderTraversal(root.right)
+#         return   left + right +[root.val]
 
 
-# Create a binary tree
-root = TreeNode(1)
-root.right = TreeNode(2)
-root.right.left = TreeNode(3)
+# # Create a binary tree
+# root = TreeNode(1)
+# root.right = TreeNode(2)
+# root.right.left = TreeNode(3)
 
-# Instantiate the Solution class
-sol = Solution()
+# # Instantiate the Solution class
+# sol = Solution()
 
-# Test the inorderTraversal method
-result = sol.postorderTraversal(root)
-print(result)  # Output should be [1, 3, 2]
+# # Test the inorderTraversal method
+# result = sol.postorderTraversal(root)
+# print(result)  # Output should be [1, 3, 2]
 
 
 #!
@@ -1881,6 +1881,40 @@ Constraints:
 The number of nodes in the tree is in the range [0, 2000].
 -1000 <= Node.val <= 1000
 '''
+
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        queue = deque()
+        queue.append(root)
+        output = []
+        while queue:
+            # shift out of the queue
+            node = queue.popleft()
+            if node:
+                output.append(node.val)
+                #adding children to the queue
+                queue.append(node.left)
+                queue.append(node.right)
+        return output
+
+
+
+
+
+
+root = TreeNode(3)
+root.left = TreeNode(9)
+root.right = TreeNode(20)
+root.right.left = TreeNode(15)
+root.right.right = TreeNode(7)
+solution = Solution()
+print(solution.levelOrder(root))  # Output: [[3], [9, 20], [15, 7]]
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
 #! 12-554. Brick Wall -(Lecture) - (Medium)
