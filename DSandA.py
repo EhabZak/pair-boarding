@@ -1890,22 +1890,37 @@ class TreeNode:
         self.right = right
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        queue = deque()
-        queue.append(root)
-        output = []
-        while queue:
-            # shift out of the queue
-            node = queue.popleft()
-            if node:
-                output.append(node.val)
-                #adding children to the queue
-                queue.append(node.left)
-                queue.append(node.right)
-        return output
+        # queue = deque()
+        # queue.append(root)
+        # output = []
+        # while queue:
+        #     # shift out of the queue
+        #     node = queue.popleft()
+        #     if node:
+        #         output.append(node.val)
+        #         #adding children to the queue
+        #         queue.append(node.left)
+        #         queue.append(node.right)
+        # return output
+          queue = deque()
+          queue.append(root)
+          output = []
+
+          while queue:
+            queueLen= len(queue)
+            level = []
+            for i in range(queueLen):
 
 
+                node = queue.popleft()
+                if node:
+                    level.append(node.val)
+                    queue.append(node.left)
+                    queue.append(node.right)
+                if level:
+                    output.append(level)
 
-
+          return output
 
 
 root = TreeNode(3)
