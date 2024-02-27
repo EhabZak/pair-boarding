@@ -43,20 +43,23 @@ class Solution:
         output = []
 
         while queue:
-            queueLen= len(queue)
+            queueLen = len(queue)
             level = []
+
             for i in range(queueLen):
-
-
                 node = queue.popleft()
+
                 if node:
                     level.append(node.val)
                     queue.append(node.left)
                     queue.append(node.right)
-                if level:
-                    output.append(level)
-
+            if level:
+                output.append(level)
         return output
+
+
+
+
 
 
 

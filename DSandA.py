@@ -1910,15 +1910,15 @@ class Solution:
             queueLen= len(queue)
             level = []
             for i in range(queueLen):
-
+                print ('i ==>',i)
 
                 node = queue.popleft()
                 if node:
                     level.append(node.val)
                     queue.append(node.left)
                     queue.append(node.right)
-                if level:
-                    output.append(level)
+            if level:
+                output.append(level)
 
           return output
 
