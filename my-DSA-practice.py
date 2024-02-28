@@ -2,43 +2,41 @@ from typing import List
 from typing import Optional, List
 from collections import defaultdict, Counter,deque
 
-'''
-102. Binary Tree Level Order Traversal
-Medium
-Topics
-Companies Bloomberg Amazom Linkedin
-Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+class Solution:
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        if not p and q: return False
+        if p and not q: return False
+        if not p and not q: return True
+        if p != q: return False
+
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+
+
+## example 1
+# p1 = TreeNode(1)
+# p1.left = TreeNode(2)
+# p1.right = TreeNode(3)
+
+# q1 = TreeNode(1)
+# q1.left = TreeNode(2)
+# q1.right = TreeNode(3)
 
 
 
-Example 1:
+    # Example 3
+p1 = TreeNode(1)
+p1.left = TreeNode(2)
+p1.right = TreeNode(1)
 
+q1 = TreeNode(1)
+q1.left = TreeNode(1)
+q1.right = TreeNode(2)
 
-Input: root = [3,9,20,null,null,15,7]
-Output: [[3],[9,20],[15,7]]
-Example 2:
-
-Input: root = [1]
-Output: [[1]]
-Example 3:
-
-Input: root = []
-Output: []
-
-
-Constraints:
-
-The number of nodes in the tree is in the range [0, 2000].
--1000 <= Node.val <= 1000
-'''
-
-
-
-
-
-
-
-
-
-
-
+solution = Solution()
+print (solution.isSameTree(p1, q1))

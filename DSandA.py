@@ -1850,7 +1850,7 @@ Follow up: Recursive solution is trivial, could you do it iteratively?
 # print(result)  # Output should be [1, 3, 2]
 
 
-#!
+#! 27-  102. Binary Tree Level Order Traversal (Algo Academy) (Medium) (algo: bfs)  (time complexity O(n))
 
 '''
 102. Binary Tree Level Order Traversal
@@ -1882,6 +1882,94 @@ The number of nodes in the tree is in the range [0, 2000].
 -1000 <= Node.val <= 1000
 '''
 
+## Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+#           #! boiler plate for BFS
+#         # queue = deque()
+#         # queue.append(root)
+#         # output = []
+#         # while queue:
+#         #     # shift out of the queue
+#         #     node = queue.popleft()
+#         #     if node:
+#         #         output.append(node.val)
+#         #         #adding children to the queue
+#         #         queue.append(node.left)
+#         #         queue.append(node.right)
+#         # return output
+#           #! solution
+#           queue = deque()
+#           queue.append(root)
+#           output = []
+
+#           while queue:
+#             queueLen= len(queue)
+#             level = []
+#             for i in range(queueLen):
+#                 print ('i ==>',i)
+
+#                 node = queue.popleft()
+#                 if node:
+#                     level.append(node.val)
+#                     queue.append(node.left)
+#                     queue.append(node.right)
+#             if level:
+#                 output.append(level)
+
+#           return output
+
+
+# root = TreeNode(3)
+# root.left = TreeNode(9)
+# root.right = TreeNode(20)
+# root.right.left = TreeNode(15)
+# root.right.right = TreeNode(7)
+# solution = Solution()
+# print(solution.levelOrder(root))  # Output: [[3], [9, 20], [15, 7]]
+
+
+#! 28- 100. Same Tree (Algo Academy) (easy) (algo: dfs)  (time complexity O(n))
+
+'''
+100. Same Tree
+Easy
+Topics
+Companies Amazon linkedIn google
+Given the roots of two binary trees p and q, write a function to check if they are the same or not.
+
+Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
+
+
+
+Example 1:
+
+
+Input: p = [1,2,3], q = [1,2,3]
+Output: true
+Example 2:
+
+
+Input: p = [1,2], q = [1,null,2]
+Output: false
+Example 3:
+
+
+Input: p = [1,2,1], q = [1,1,2]
+Output: false
+
+
+Constraints:
+
+The number of nodes in both trees is in the range [0, 100].
+-104 <= Node.val <= 104
+
+'''
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -1889,47 +1977,39 @@ class TreeNode:
         self.left = left
         self.right = right
 class Solution:
-    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        # queue = deque()
-        # queue.append(root)
-        # output = []
-        # while queue:
-        #     # shift out of the queue
-        #     node = queue.popleft()
-        #     if node:
-        #         output.append(node.val)
-        #         #adding children to the queue
-        #         queue.append(node.left)
-        #         queue.append(node.right)
-        # return output
-          queue = deque()
-          queue.append(root)
-          output = []
-
-          while queue:
-            queueLen= len(queue)
-            level = []
-            for i in range(queueLen):
-                print ('i ==>',i)
-
-                node = queue.popleft()
-                if node:
-                    level.append(node.val)
-                    queue.append(node.left)
-                    queue.append(node.right)
-            if level:
-                output.append(level)
-
-          return output
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        if not p and q: return False
+        if p and not q: return False
+        if not p and not q: return True
+        if p.val != q.val: return False
+        print (p.val if p.val else None, q.val if q.val else None)
 
 
-root = TreeNode(3)
-root.left = TreeNode(9)
-root.right = TreeNode(20)
-root.right.left = TreeNode(15)
-root.right.right = TreeNode(7)
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+
+
+## example 1
+# p1 = TreeNode(1)
+# p1.left = TreeNode(2)
+# p1.right = TreeNode(3)
+
+# q1 = TreeNode(1)
+# q1.left = TreeNode(2)
+# q1.right = TreeNode(3)
+
+
+
+    # Example 3
+p1 = TreeNode(1)
+p1.left = TreeNode(2)
+p1.right = TreeNode(1)
+
+q1 = TreeNode(1)
+q1.left = TreeNode(1)
+q1.right = TreeNode(2)
+
 solution = Solution()
-print(solution.levelOrder(root))  # Output: [[3], [9, 20], [15, 7]]
+print (solution.isSameTree(p1, q1))
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
 #! 12-554. Brick Wall -(Lecture) - (Medium)
