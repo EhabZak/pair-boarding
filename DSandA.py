@@ -2,6 +2,7 @@ from typing import List
 from typing import Optional, List
 from collections import defaultdict, Counter,deque
 import json
+import heapq
 
 #! 1- DFS problem
 '''   0
@@ -1970,46 +1971,239 @@ The number of nodes in both trees is in the range [0, 100].
 -104 <= Node.val <= 104
 
 '''
-# Definition for a binary tree node.
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-class Solution:
-    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        if not p and q: return False
-        if p and not q: return False
-        if not p and not q: return True
-        if p.val != q.val: return False
-        print (p.val if p.val else None, q.val if q.val else None)
+# # Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+
+#         if not p and not q: return True
+#         if not p or not q: return False
+#         if p.val != q.val: return False
+#         print (p.val if p.val else None, q.val if q.val else None)
 
 
-        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+#         return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
 
 
-## example 1
+# ## example 1
+# # p1 = TreeNode(1)
+# # p1.left = TreeNode(2)
+# # p1.right = TreeNode(3)
+
+# # q1 = TreeNode(1)
+# # q1.left = TreeNode(2)
+# # q1.right = TreeNode(3)
+
+
+
+#     # Example 3
 # p1 = TreeNode(1)
 # p1.left = TreeNode(2)
-# p1.right = TreeNode(3)
+# p1.right = TreeNode(1)
 
 # q1 = TreeNode(1)
-# q1.left = TreeNode(2)
-# q1.right = TreeNode(3)
+# q1.left = TreeNode(1)
+# q1.right = TreeNode(2)
+
+# solution = Solution()
+# print (solution.isSameTree(p1, q1))
+
+#! 29- 104. Maximum Depth of Binary Tree (Algo Academy) (easy) (algo: dfs)  (time complexity O(n))
+
+'''
+104. Maximum Depth of Binary Tree
+Easy
+Topics
+Companies Apple Amazon Google
+Given the root of a binary tree, return its maximum depth.
+
+A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
 
 
 
-    # Example 3
-p1 = TreeNode(1)
-p1.left = TreeNode(2)
-p1.right = TreeNode(1)
+Example 1:
 
-q1 = TreeNode(1)
-q1.left = TreeNode(1)
-q1.right = TreeNode(2)
 
-solution = Solution()
-print (solution.isSameTree(p1, q1))
+Input: root = [3,9,20,null,null,15,7]
+Output: 3
+Example 2:
+
+Input: root = [1,null,2]
+Output: 2
+
+
+Constraints:
+
+The number of nodes in the tree is in the range [0, 104].
+-100 <= Node.val <= 100
+
+'''
+# # Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     def maxDepth(self, root: Optional[TreeNode]) -> int:
+#         if not root: return 0
+#         left = self.maxDepth(root.left)
+#         right = self.maxDepth(root.right)
+#         return max(left,right) + 1
+
+
+
+# root1 = TreeNode(3)
+# root1.left = TreeNode(9)
+# root1.right = TreeNode(20)
+# root1.right.left = TreeNode(15)
+# root1.right.right = TreeNode(7)
+
+# solution = Solution()
+# print (solution.maxDepth(root1))
+
+#! 30- 222. Count Complete Tree Nodes (Algo Academy) (easy) (algo: bfs but you can also do in dfs)  (time complexity O(n))
+
+'''
+222. Count Complete Tree Nodes
+Easy
+Topics
+Companies Amazon Google Apple
+Given the root of a complete binary tree, return the number of the nodes in the tree.
+
+According to Wikipedia, every level, except possibly the last, is completely filled in a complete binary tree, and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.
+
+Design an algorithm that runs in less than O(n) time complexity.
+
+
+
+Example 1:
+
+
+Input: root = [1,2,3,4,5,6]
+Output: 6
+Example 2:
+
+Input: root = []
+Output: 0
+Example 3:
+
+Input: root = [1]
+Output: 1
+
+
+Constraints:
+
+The number of nodes in the tree is in the range [0, 5 * 104].
+0 <= Node.val <= 5 * 104
+The tree is guaranteed to be complete.
+
+'''
+
+# #Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     def countNodes(self, root: Optional[TreeNode]) -> int:
+#         # 1- create a queue that is initialized with root
+#         # 2- shift out from queue (this is our current node)
+#         # 3- process node -increment a count (in this problem case)
+#         # 4 push the current node children into the queue
+#         #5- repeat steps 2-4 until queue is empty
+
+#         queue = deque()
+#         queue.append(root)
+#         count = 0
+
+#         while queue:
+#             node = queue.popleft()
+
+#             if node:
+#                 count +=1
+#                 queue.append(node.left)
+#                 queue.append(node.right)
+#         return count
+
+
+# root1 = TreeNode(1)
+# root1.left = TreeNode(2)
+# root1.right = TreeNode(3)
+# root1.left.left = TreeNode(4)
+# root1.left.right = TreeNode(5)
+# root1.right.left = TreeNode(6)
+# sol = Solution()
+# print(sol.countNodes(root1))
+
+
+#! 31- 1046. Last Stone Weight (Algo Academy) (easy) (algo: heap)  (time complexity O(n))
+
+'''
+1046. Last Stone Weight
+Easy
+Topics
+Companies
+Hint
+You are given an array of integers stones where stones[i] is the weight of the ith stone.
+
+We are playing a game with the stones. On each turn, we choose the heaviest two stones and smash them together. Suppose the heaviest two stones have weights x and y with x <= y. The result of this smash is:
+
+If x == y, both stones are destroyed, and
+If x != y, the stone of weight x is destroyed, and the stone of weight y has new weight y - x.
+At the end of the game, there is at most one stone left.
+
+Return the weight of the last remaining stone. If there are no stones left, return 0.
+
+
+
+Example 1:
+
+Input: stones = [2,7,4,1,8,1]
+Output: 1
+Explanation:
+We combine 7 and 8 to get 1 so the array converts to [2,4,1,1,1] then,
+we combine 2 and 4 to get 2 so the array converts to [2,1,1,1] then,
+we combine 2 and 1 to get 1 so the array converts to [1,1,1] then,
+we combine 1 and 1 to get 0 so the array converts to [1] then that's the value of the last stone.
+Example 2:
+
+Input: stones = [1]
+Output: 1
+
+
+Constraints:
+
+1 <= stones.length <= 30
+1 <= stones[i] <= 1000
+
+'''
+
+class Solution:
+    def lastStoneWeight(self, stones: List[int]) -> int:
+
+        stones = [-s for s in stones]
+        heapq.heapify(stones)
+        # print (stones)
+        while len(stones)>1:
+
+            first = heapq.heappop(stones)
+            second = heapq.heappop(stones)
+
+        stones.append(0)
+        return abs(stones[0])
+
+
+
+
+stones = [2,7,4,1,8,1]
+sol = Solution()
+print(sol.lastStoneWeight(stones))
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
 #! 12-554. Brick Wall -(Lecture) - (Medium)
