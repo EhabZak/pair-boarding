@@ -2142,7 +2142,7 @@ The tree is guaranteed to be complete.
 # print(sol.countNodes(root1))
 
 
-#! 31- 1046. Last Stone Weight (Algo Academy) (easy) (algo: heap)  (time complexity O(n))
+#! 31- 1046. Last Stone Weight (Algo Academy) (easy) (algo: heap)  (time complexity O(log(n)))
 
 '''
 1046. Last Stone Weight
@@ -2194,14 +2194,27 @@ class Solution:
 
             first = heapq.heappop(stones)
             second = heapq.heappop(stones)
+            if second > first:
+                heapq.heappush(stones, first -second)
 
         stones.append(0)
         return abs(stones[0])
 
+'''
+                 -8
+               /    \
+              -7     -4
+             /  \   /  \
+           -1   -2 -1
+
+Overall, considering the most significant operation in
+the loop is heappop and heappush, the time complexity is
+dominated by the while loop and is approximately O(n log n),
+where n is the number of stones in the initial list.
+'''
 
 
-
-stones = [2,7,4,1,8,1]
+stones = [2,7,4,1,8,1] #1
 sol = Solution()
 print(sol.lastStoneWeight(stones))
 
