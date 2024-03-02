@@ -3,6 +3,7 @@ from typing import Optional, List
 from collections import defaultdict, Counter,deque
 import json
 import heapq
+import math
 
 #! 1- DFS problem
 '''   0
@@ -2143,7 +2144,7 @@ The tree is guaranteed to be complete.
 
 
 #! 31- 1046. Last Stone Weight (Algo Academy) (easy) (algo: heap)  (time complexity O(log(n)))
-
+#! the most important part is to know when to use a heap the solution is not that hard
 '''
 1046. Last Stone Weight
 Easy
@@ -2155,7 +2156,7 @@ You are given an array of integers stones where stones[i] is the weight of the i
 We are playing a game with the stones. On each turn, we choose the heaviest two stones and smash them together. Suppose the heaviest two stones have weights x and y with x <= y. The result of this smash is:
 
 If x == y, both stones are destroyed, and
-If x != y, the stone of weight x is destroyed, and the stone of weight y has new weight y - x.
+If x != y, the stone of weight x is destroyed, and the stone of weight y has new weight y - x.(which mean second - first)
 At the end of the game, there is at most one stone left.
 
 Return the weight of the last remaining stone. If there are no stones left, return 0.
@@ -2184,39 +2185,188 @@ Constraints:
 
 '''
 
+# class Solution:
+#     def lastStoneWeight(self, stones: List[int]) -> int:
+
+#         stones = [-s for s in stones]
+#         heapq.heapify(stones)
+#         # print (stones)
+#         while len(stones)>1:
+
+#             first = heapq.heappop(stones)
+#             second = heapq.heappop(stones)
+#             if second > first:
+#                 heapq.heappush(stones, first -second)
+
+#         stones.append(0)
+#         return abs(stones[0])
+
+# '''
+#                  -8
+#                /    \
+#               -7     -4
+#              /  \   /  \
+#            -1   -2 -1
+
+# Overall, considering the most significant operation in
+# the loop is heappop and heappush, the time complexity is
+# dominated by the while loop and is approximately O(n log n),
+# where n is the number of stones in the initial list.
+# '''
+
+
+# stones = [2,7,4,1,8,1] #1
+# sol = Solution()
+# print(sol.lastStoneWeight(stones))
+
+#! 32- 1845. Seat Reservation Manager (Algo Academy) (Medium) (algo: heap)  (time complexity O(log(n)))
+
+'''
+1845. Seat Reservation Manager
+Medium
+Topics
+Companies
+Hint
+Design a system that manages the reservation state of n seats that are numbered from 1 to n.
+
+Implement the SeatManager class:
+
+SeatManager(int n) Initializes a SeatManager object that will manage n seats numbered from 1 to n. All seats are initially available.
+int reserve() Fetches the #!smallest-numbered unreserved seat,(b/c we are getting the smallest number every time we know we can solve it with a heap )
+ reserves it, and returns its number.
+void unreserve(int seatNumber) Unreserves the seat with the given seatNumber.
+
+
+Example 1:
+
+Input
+["SeatManager", "reserve", "reserve", "unreserve", "reserve", "reserve", "reserve", "reserve", "unreserve"]
+[[5], [], [], [2], [], [], [], [], [5]]
+Output
+[null, 1, 2, null, 2, 3, 4, 5, null]
+
+Explanation
+SeatManager seatManager = new SeatManager(5); // Initializes a SeatManager with 5 seats.
+seatManager.reserve();    // All seats are available, so return the lowest numbered seat, which is 1.
+seatManager.reserve();    // The available seats are [2,3,4,5], so return the lowest of them, which is 2.
+seatManager.unreserve(2); // Unreserve seat 2, so now the available seats are [2,3,4,5].
+seatManager.reserve();    // The available seats are [2,3,4,5], so return the lowest of them, which is 2.
+seatManager.reserve();    // The available seats are [3,4,5], so return the lowest of them, which is 3.
+seatManager.reserve();    // The available seats are [4,5], so return the lowest of them, which is 4.
+seatManager.reserve();    // The only available seat is seat 5, so return 5.
+seatManager.unreserve(5); // Unreserve seat 5, so now the available seats are [5].
+
+
+Constraints:
+
+1 <= n <= 105
+1 <= seatNumber <= n
+For each call to reserve, it is guaranteed that there will be at least one unreserved seat.
+For each call to unreserve, it is guaranteed that seatNumber will be reserved.
+At most 105 calls in total will be made to reserve and unreserve.
+
+'''
+
+# class SeatManager:
+
+#     def __init__(self, n: int):
+#         self.unreserved =[i for i in range(1, n+1)]
+#         # heapq.heapify(self.unreserved) we don't need this cause the list is already arranged with the range above
+
+
+#     def reserve(self) -> int:
+#         return heapq.heappop(self.unreserved)
+
+
+#     def unreserve(self, seatNumber: int) -> None:
+#         heapq.heappush(self.unreserved, seatNumber)
+
+
+
+# # Your SeatManager object will be instantiated and called as such:
+# # obj = SeatManager(n)
+# # param_1 = obj.reserve()
+# # obj.unreserve(seatNumber)
+
+# # Test case
+# seatManager = SeatManager(5)
+# print(seatManager.reserve())    # Output should be 1
+# print(seatManager.reserve())    # Output should be 2
+# seatManager.unreserve(2)
+# print(seatManager.reserve())    # Output should be 2
+# print(seatManager.reserve())    # Output should be 3
+# print(seatManager.reserve())    # Output should be 4
+# print(seatManager.reserve())    # Output should be 5
+# seatManager.unreserve(5)
+# print(seatManager.reserve())    # Output should be 5
+
+
+#! 33- 973. K Closest Points to Origin (Algo Academy) (Medium) (algo: heap)  (time complexity O(log(n)))
+
+'''
+973. K Closest Points to Origin
+Medium
+Topics
+Companies Amazon Asana Facebook
+Given an array of points where points[i] = [xi, yi] represents a point on the X-Y plane and an integer k, return the k closest points to the origin (0, 0).
+
+The distance between two points on the X-Y plane is the Euclidean distance (i.e., √(x1 - x2)2 + (y1 - y2)2).
+
+You may return the answer in any order. The answer is guaranteed to be unique (except for the order that it is in).
+
+
+
+Example 1:
+
+
+Input: points = [[1,3],[-2,2]], k = 1
+Output: [[-2,2]]
+Explanation:
+The distance between (1, 3) and the origin is sqrt(10).
+The distance between (-2, 2) and the origin is sqrt(8).
+Since sqrt(8) < sqrt(10), (-2, 2) is closer to the origin.
+We only want the closest k = 1 points from the origin, so the answer is just [[-2,2]].
+Example 2:
+
+Input: points = [[3,3],[5,-1],[-2,4]], k = 2
+Output: [[3,3],[-2,4]]
+Explanation: The answer [[-2,4],[3,3]] would also be accepted.
+
+
+Constraints:
+
+1 <= k <= points.length <= 104
+-104 <= xi, yi <= 104
+
+'''
+
 class Solution:
-    def lastStoneWeight(self, stones: List[int]) -> int:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        pts= []
 
-        stones = [-s for s in stones]
-        heapq.heapify(stones)
-        # print (stones)
-        while len(stones)>1:
+        for x,y in points:
+            # dist = math.sqrt(abs(x-0)**2 + abs(y-0)**2)
+            dist = abs(x-0)**2 + abs(y-0)**2
+            pts.append([dist,x,y])
+        res = []
+        heapq.heapify(pts)
+        # print (pts)
 
-            first = heapq.heappop(stones)
-            second = heapq.heappop(stones)
-            if second > first:
-                heapq.heappush(stones, first -second)
+        for i in range(k):
+            dist, x , y = heapq.heappop(pts)
+            res.append([x,y])
 
-        stones.append(0)
-        return abs(stones[0])
-
-'''
-                 -8
-               /    \
-              -7     -4
-             /  \   /  \
-           -1   -2 -1
-
-Overall, considering the most significant operation in
-the loop is heappop and heappush, the time complexity is
-dominated by the while loop and is approximately O(n log n),
-where n is the number of stones in the initial list.
-'''
+        return res
+points = [[1,3],[-2,2]]
+k = 1
 
 
-stones = [2,7,4,1,8,1] #1
+# points = [[3,3],[5,-1],[-2,4]] # [[3,3],[-2,4]]
+# k = 2
+
 sol = Solution()
-print(sol.lastStoneWeight(stones))
+print(sol.kClosest(points, k))
+
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
 #! 12-554. Brick Wall -(Lecture) - (Medium)

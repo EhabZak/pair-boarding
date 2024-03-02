@@ -1,30 +1,37 @@
 from typing import List
 from typing import Optional, List
 from collections import defaultdict, Counter,deque
-
 import heapq
+import math
+
 
 class Solution:
-    def lastStoneWeight(self, stones: List[int]) -> int:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        pts= []
 
-        stones = [-s for s in stones]
+        for x, y in points:
+            dist = math.sqrt(abs(x-0)**2 + abs(y-0)**2)
+            pts.append([dist,x , y] )
 
-        heapq.heapify(stones)
+        res = []
+        heapq.heapify(pts)
+        # print(pts)
 
-        while len(stones)> 1:
-            first = heapq.heappop(stones)
-            second = heapq.heappop(stones)
+        for i in range(k):
+            dist, x , y = heapq.heappop(pts)
+            res.append([x,y])
 
-            if second > first:
-                heapq.heappush(stones, first - second)
-
-        stones.append(0)
-        return abs(stones[0])
-
-
-
+        return res
 
 
-stones = [2,7,4,1,8,1]
+
+
+# points = [[1,3],[-2,2]]
+# k = 1
+
+
+points = [[3,3],[5,-1],[-2,4]] # [[3,3],[-2,4]]
+k = 2
+
 sol = Solution()
-print(sol.lastStoneWeight(stones))
+print(sol.kClosest(points, k))
