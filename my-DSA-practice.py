@@ -6,17 +6,25 @@ import math
 
 
 class Solution:
-    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-        pass
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        subset = []
+
+        def backtrack(i):
+            #base case
+            if i >= len(nums):
+                ans.append(subset.copy())
+                return
+            # to include nums[i]
+            subset.append(nums[i])
+            backtrack(i+1)
+            subset.pop()
+            # exclude
+            backtrack(i+1)
+        backtrack(0)
+        return ans
 
 
-
-# points = [[1,3],[-2,2]]
-# k = 1
-
-
-points = [[3,3],[5,-1],[-2,4]] # [[3,3],[-2,4]]
-k = 2
-
+nums = [1,2,3]
 sol = Solution()
-print(sol.kClosest(points, k))
+print(sol.subsets(nums))

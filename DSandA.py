@@ -2340,33 +2340,96 @@ Constraints:
 
 '''
 
+# class Solution:
+#     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+#         pts= []
+
+#         for x,y in points:
+#             # dist = math.sqrt(abs(x-0)**2 + abs(y-0)**2)
+#             dist = abs(x-0)**2 + abs(y-0)**2
+#             pts.append([dist,x,y])
+#         res = []
+#         heapq.heapify(pts)
+#         # print (pts)
+
+#         for i in range(k):
+#             dist, x , y = heapq.heappop(pts)
+#             res.append([x,y])
+
+#         return res
+# points = [[1,3],[-2,2]]
+# k = 1
+
+
+# # points = [[3,3],[5,-1],[-2,4]] # [[3,3],[-2,4]]
+# # k = 2
+
+# sol = Solution()
+# print(sol.kClosest(points, k))
+
+
+#! 78. Subsets (Algo Academy) (Medium) (algo: backtracking)  (time complexity ???)
+
+'''
+78. Subsets
+Medium
+Topics
+Companies
+Given an integer array nums of unique elements, return all possible
+subsets
+ (the power set).
+
+The solution set must not contain duplicate subsets. Return the solution in any order.
+
+
+
+Example 1:
+
+Input: nums = [1,2,3]
+Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+Example 2:
+
+Input: nums = [0]
+Output: [[],[0]]
+
+
+Constraints:
+
+1 <= nums.length <= 10
+-10 <= nums[i] <= 10
+All the numbers of nums are unique.
+
+'''
+
+
 class Solution:
-    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-        pts= []
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        ans = []
+        sub_set = []
 
-        for x,y in points:
-            # dist = math.sqrt(abs(x-0)**2 + abs(y-0)**2)
-            dist = abs(x-0)**2 + abs(y-0)**2
-            pts.append([dist,x,y])
-        res = []
-        heapq.heapify(pts)
-        # print (pts)
+        def _backtrack(i):
+            # base case
+            if i >= len(nums):
+                ans.append(sub_set.copy())
+                print ('sub_set in base case #########', sub_set)
+                print ('Done')
 
-        for i in range(k):
-            dist, x , y = heapq.heappop(pts)
-            res.append([x,y])
+                return
+            #Decision to include nums[i]
+            sub_set.append(nums[i])
+            print('nums[i]======>', nums[i])
+            _backtrack(i+1)
+            sub_set.pop()
+            print ('sub_set---------------------------->', sub_set)
+            # Decision to exclude nums[i]
+            _backtrack(i+1)
+        _backtrack(0)
+        return ans
 
-        return res
-points = [[1,3],[-2,2]]
-k = 1
-
-
-# points = [[3,3],[5,-1],[-2,4]] # [[3,3],[-2,4]]
-# k = 2
-
+nums = [1,2,3]
 sol = Solution()
-print(sol.kClosest(points, k))
-
+print(sol.subsets(nums))
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
 #! 12-554. Brick Wall -(Lecture) - (Medium)
