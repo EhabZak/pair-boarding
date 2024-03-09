@@ -2402,34 +2402,71 @@ All the numbers of nums are unique.
 '''
 
 
+# class Solution:
+#     def subsets(self, nums: List[int]) -> List[List[int]]:
+#         ans = []
+#         ans = []
+#         sub_set = []
+
+#         def _backtrack(i):
+#             # base case
+#             if i >= len(nums):
+#                 ans.append(sub_set.copy())
+#                 print ('sub_set in base case #########', sub_set)
+#                 print ('Done')
+
+#                 return
+#             #Decision to include nums[i]
+#             sub_set.append(nums[i])
+#             print('nums[i]======>', nums[i])
+#             _backtrack(i+1)
+#             sub_set.pop()
+#             print ('sub_set---------------------------->', sub_set)
+#             # Decision to exclude nums[i]
+#             _backtrack(i+1)
+#         _backtrack(0)
+#         return ans
+
+# nums = [1,2,3]
+# sol = Solution()
+# print(sol.subsets(nums))
+
+
+#! 22. Generate Parentheses (Medium) (algo: backtracking)  (time complexity exponent)
+
+'''
+22. Generate Parentheses
+Medium
+Topics
+Companies
+Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+
+
+
+Example 1:
+
+Input: n = 3
+Output: ["((()))","(()())","(())()","()(())","()()()"]
+Example 2:
+
+Input: n = 1
+Output: ["()"]
+
+
+Constraints:
+
+1 <= n <= 8
+'''
+
 class Solution:
-    def subsets(self, nums: List[int]) -> List[List[int]]:
-        ans = []
-        ans = []
-        sub_set = []
+    def generateParenthesis(self, n: int) -> List[str]:
+        print(n)
 
-        def _backtrack(i):
-            # base case
-            if i >= len(nums):
-                ans.append(sub_set.copy())
-                print ('sub_set in base case #########', sub_set)
-                print ('Done')
 
-                return
-            #Decision to include nums[i]
-            sub_set.append(nums[i])
-            print('nums[i]======>', nums[i])
-            _backtrack(i+1)
-            sub_set.pop()
-            print ('sub_set---------------------------->', sub_set)
-            # Decision to exclude nums[i]
-            _backtrack(i+1)
-        _backtrack(0)
-        return ans
 
-nums = [1,2,3]
+n = 3
 sol = Solution()
-print(sol.subsets(nums))
+print(sol.generateParenthesis(n))
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
 #! 12-554. Brick Wall -(Lecture) - (Medium)
