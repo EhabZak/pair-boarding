@@ -2438,7 +2438,7 @@ All the numbers of nums are unique.
 22. Generate Parentheses
 Medium
 Topics
-Companies
+Companies Amazon Microsoft TikTok
 Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 
 
@@ -2458,10 +2458,57 @@ Constraints:
 1 <= n <= 8
 '''
 
+# class Solution:
+#     def generateParenthesis(self, n: int) -> List[str]:
+#         stack = []
+#         res = []
+
+#         def _backtrack(openN, closedN):
+#             if openN == closedN == n:
+#                 res.append("".join(stack)) # here we created a string to add to res
+#                 return
+#             if openN < n:
+#                 # print (openN ,"^1^", closedN)
+#                 stack.append("(")
+#                 _backtrack(openN +1, closedN)
+#                 stack.pop() # if we remove this it will keep adding parentheses
+
+#             if closedN < openN:
+#                 # print (openN, "*2*", closedN)
+#                 stack.append(")")
+#                 _backtrack(openN, closedN +1)
+#                 stack.pop() # if we remove this it will keep adding parentheses
+
+#         _backtrack(0,0)
+#         return res
+'''
+n is total num of parentheses we don't want open ( to exceed it
+we also don't want closed ) to exceed open ( . Remember it said in the
+question "well-formed parentheses." and "pairs of parentheses"
+'''
+#! a faster solution from leet code
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        print(n)
+            def backtrack(parenthesis, opened, closed):
+                # save solution
+                if len(parenthesis) == 2*n:
+                    res.append(parenthesis)
+                # add opened parenthesis
+                if opened < n:
+                    backtrack(parenthesis + "(", opened+1, closed)
+                # add closed parenthesis
+                if closed < opened:
+                    backtrack(parenthesis + ")", opened, closed+1)
 
+            res = []
+            backtrack("", 0, 0)
+            return res
+'''
+    this solution is much faster cause it uses a string not a stack/list
+    the base case is also faster
+    also recursion only for the number of open parentheses
+    there is no backtracking here
+'''
 
 
 n = 3
