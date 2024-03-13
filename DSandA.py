@@ -2368,7 +2368,7 @@ Constraints:
 # print(sol.kClosest(points, k))
 
 
-#! 78. Subsets (Algo Academy) (Medium) (algo: backtracking)  (time complexity ???)
+#! 34- 78. Subsets (Algo Academy) (Medium) (algo: backtracking)  (time complexity ???)
 
 '''
 78. Subsets
@@ -2432,7 +2432,7 @@ All the numbers of nums are unique.
 # print(sol.subsets(nums))
 
 
-#! 22. Generate Parentheses (Medium) (algo: backtracking)  (time complexity exponent)
+#! 35- 22. Generate Parentheses (Medium) (algo: backtracking)  (time complexity exponent)
 
 '''
 22. Generate Parentheses
@@ -2486,34 +2486,115 @@ n is total num of parentheses we don't want open ( to exceed it
 we also don't want closed ) to exceed open ( . Remember it said in the
 question "well-formed parentheses." and "pairs of parentheses"
 '''
-#! a faster solution from leet code
+# #! a faster solution from leet code
+# class Solution:
+#     def generateParenthesis(self, n: int) -> List[str]:
+#             def backtrack(parenthesis, opened, closed):
+#                 # save solution
+#                 if len(parenthesis) == 2*n:
+#                     res.append(parenthesis)
+#                 # add opened parenthesis
+#                 if opened < n:
+#                     backtrack(parenthesis + "(", opened+1, closed)
+#                 # add closed parenthesis
+#                 if closed < opened:
+#                     backtrack(parenthesis + ")", opened, closed+1)
+
+#             res = []
+#             backtrack("", 0, 0)
+#             return res
+# '''
+#     this solution is much faster cause it uses a string not a stack/list
+#     the base case is also faster
+#     also recursion only for the number of open parentheses
+#     there is no backtracking here
+# '''
+
+
+# n = 3
+# sol = Solution()
+# print(sol.generateParenthesis(n))
+
+#! 36- 79. Word Search (Medium) (algo: backtracking)  (time complexity O(R*C*4**s))
+'''
+79. Word Search
+Medium
+Topics
+Companies Bloomberg Uber TikTok
+Given an m x n grid of characters board and a string word, return true if word exists in the grid.
+
+The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+
+
+
+Example 1:
+
+
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
+Output: true
+Example 2:
+
+
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
+Output: true
+Example 3:
+
+
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
+Output: false
+
+
+Constraints:
+
+m == board.length
+n = board[i].length
+1 <= m, n <= 6
+1 <= word.length <= 15
+board and word consists of only lowercase and uppercase English letters.
+
+
+'''
 class Solution:
-    def generateParenthesis(self, n: int) -> List[str]:
-            def backtrack(parenthesis, opened, closed):
-                # save solution
-                if len(parenthesis) == 2*n:
-                    res.append(parenthesis)
-                # add opened parenthesis
-                if opened < n:
-                    backtrack(parenthesis + "(", opened+1, closed)
-                # add closed parenthesis
-                if closed < opened:
-                    backtrack(parenthesis + ")", opened, closed+1)
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        # base cases
+        #1.if we find the word we return true
+        #   a. keep track of index done when i == len(word)
+        #2. return false
+        #    a.when we are out of bounds
+        #    b. letter does not match with the word[i]
+        #    c.we have visited
+        ROWS , COLS = len(board), len(board[0])
+        visited = set()
 
-            res = []
-            backtrack("", 0, 0)
-            return res
-'''
-    this solution is much faster cause it uses a string not a stack/list
-    the base case is also faster
-    also recursion only for the number of open parentheses
-    there is no backtracking here
-'''
+        def backtrack(r,c,i):
+            if i == len(word):
+                return True
+            if not inbound(r,c) or word[i] != board[r][c] or (r,c)in visited:
+                return False
+            visited.add(r,c)
+        def inbound (r,c):
+            rowInbound = r >= 0 and r < ROWS
+            colInbound = c >= 0 and c < COLS
+            return rowInbound and colInbound
 
 
-n = 3
+            return
+        for r in range (ROWS):
+            for c in range(COLS):
+                if backtrack(r,c,0):
+                    return True
+        return False
+
+
+
+
+
+board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
+word = "ABCCED"
 sol = Solution()
-print(sol.generateParenthesis(n))
+print(sol.exist(board, word))
+
+
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
 #! 12-554. Brick Wall -(Lecture) - (Medium)
