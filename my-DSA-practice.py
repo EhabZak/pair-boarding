@@ -5,11 +5,52 @@ import heapq
 import math
 
 
-def backtrack (n):
-    return n+2
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
 
-res = (backtrack (2) or
-backtrack (4)
-or backtrack(3))
+        # base cases/ do the thing / recursion / backtrack / three functions
+        ROWS, COLS = len(board), len(board[0])
+        visited = set()
 
-print (res)
+        def backtrack(r,c,i):
+            #base cases
+            if i == len(word):
+                return True
+
+            if word[i] != board[r][c] or (r,c) in visited or not inbound(r,c):
+                return False
+
+            # do the thing
+            visited.add((r,c))
+
+            # recursion
+            res = (backtrack(r+1, c, i+1) or
+            backtrack(r-1, c, i+1) or
+            backtrack(r, c+1, i+1) or
+            backtrack(r, c-1, i+1))
+
+            # backtrack
+            visited.discard((r,c))
+
+            # imobound helper
+            def inbound (r,c):
+                rowInbound = r >= 0 and r < ROWS
+                colInbound = c >=0 and c < COLS
+                return rowInbound and colInbound
+            return res
+
+
+        for r in range(ROWS):
+            for c in range(COLS):
+                if backtrack:
+                    return True
+
+
+
+
+
+
+board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
+word = "ABCCED"
+sol = Solution()
+print(sol.exist(board, word))
