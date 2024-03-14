@@ -5,3 +5,11 @@ import heapq
 import math
 
 
+def backtrack (n):
+    return n+2
+
+res = (backtrack (2) or
+backtrack (4)
+or backtrack(3))
+
+print (res)

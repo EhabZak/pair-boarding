@@ -2565,28 +2565,40 @@ class Solution:
         #    c.we have visited
         ROWS , COLS = len(board), len(board[0])
         visited = set()
-
+        ##############################################
         def backtrack(r,c,i):
+            #base cases
             if i == len(word):
                 return True
             if not inbound(r,c) or word[i] != board[r][c] or (r,c)in visited:
                 return False
-            visited.add(r,c)
+
+            # modify
+            visited.add((r,c))
+            print ('row and columns', (r,c))
+
+             # recursion
+            res = (backtrack(r+1, c, i+1) or
+            backtrack(r-1, c, i+1) or
+            backtrack(r, c+1, i+1) or
+            backtrack(r, c-1, i+1))
+
+            #backtrack
+            print ('discard row and columns ==============', (r,c))
+            visited.discard((r,c))
+
+            return res
+        ###############################################
         def inbound (r,c):
             rowInbound = r >= 0 and r < ROWS
             colInbound = c >= 0 and c < COLS
             return rowInbound and colInbound
-
-
-            return
+        ###############################################
         for r in range (ROWS):
             for c in range(COLS):
                 if backtrack(r,c,0):
                     return True
         return False
-
-
-
 
 
 board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
