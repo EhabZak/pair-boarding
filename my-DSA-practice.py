@@ -8,7 +8,6 @@ import math
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
 
-        # base cases/ do the thing / recursion / backtrack / three functions
         ROWS, COLS = len(board), len(board[0])
         visited = set()
 
@@ -16,37 +15,36 @@ class Solution:
             #base cases
             if i == len(word):
                 return True
-
-            if word[i] != board[r][c] or (r,c) in visited or not inbound(r,c):
+            if not inbound(r,c) or  word[i] != board[r][c] or (r,c) in visited:
                 return False
 
             # do the thing
             visited.add((r,c))
 
-            # recursion
-            res = (backtrack(r+1, c, i+1) or
-            backtrack(r-1, c, i+1) or
-            backtrack(r, c+1, i+1) or
-            backtrack(r, c-1, i+1))
+            #recursion
+            res = (backtrack(r+1,c, i+1) or
+                   backtrack(r-1,c, i+1) or
+                   backtrack(r,c+1, i+1) or
+                   backtrack(r,c-1, i+1))
 
-            # backtrack
+            #backtrack
+
             visited.discard((r,c))
 
-            # imobound helper
-            def inbound (r,c):
-                rowInbound = r >= 0 and r < ROWS
-                colInbound = c >=0 and c < COLS
-                return rowInbound and colInbound
             return res
+
+            # inbound
+        def inbound(r,c):
+            rowInbound = r >= 0 and r < ROWS
+            colInbound = c >= 0 and c < COLS
+            return rowInbound and colInbound
 
 
         for r in range(ROWS):
             for c in range(COLS):
-                if backtrack:
+                if backtrack(r,c,0):
                     return True
-
-
-
+        return False
 
 
 
