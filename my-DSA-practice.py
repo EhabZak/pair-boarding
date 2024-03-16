@@ -20,10 +20,18 @@ class RandomizedSet:
             return False
         self.list.append(val)
         self.map[val] = len(self.list)-1
+        return True
 
 
 
     def remove(self, val: int) -> bool:
+        if val not in self.map:
+            return False
+        lastElement, idx = self.list[-1], self.map[val]
+        self.list[idx], self.map[lastElement] = lastElement, idx
+        self.list.pop()
+        del self.map[val]
+        return True
 
 
 
@@ -31,6 +39,7 @@ class RandomizedSet:
 
 
     def getRandom(self) -> int:
+        return random.choice(self.list)
 
 
 
