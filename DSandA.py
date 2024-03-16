@@ -2676,24 +2676,25 @@ class RandomizedSet:
             return False
         # swamp element in list
         lastElement , idx = self.list[-1], self.map[val]
-        # print ('list ******', self.list)
-        # print ( 'lastElement=======' , lastElement)
-        # print ('map is ++++++++++++++',self.map)
-        # print ('self.map[val]*************', self.map[val])
+        print ('list ******', self.list)
+        print ( 'lastElement=======' , lastElement)
+        print ('map is ++++++++++++++',self.map)
+        print ('self.map[val]*************', self.map[val])
         self.list[idx], self.map[lastElement] = lastElement, idx
-        # print ('____________________________')
-        # print ('list ******', self.list)
-        # print ( 'lastElement=======' , lastElement)
-        # print ('map is ++++++++++++++',self.map)
-        # print ('self.map[val]*************', self.map[val])
+        print ('____________________________')
+        print ('list ******', self.list)
+        print ( 'lastElement=======' , lastElement)
+        print ('map is ++++++++++++++',self.map)
+        print ('self.map[val]*************', self.map[val])
         #pop from list
-        # print (' before pop list is ==' , self.list)
+        print (' before pop list is ==' , self.list)
         self.list.pop()
-        # print (' now after the pop list is ==' , self.list)
+        print (' now after the pop list is ==' , self.list)
+        print ('map is ++++++++++++++',self.map)
         # update map
 
         del self.map[val]
-
+        print ('map is ^^^^^^^^^^^',self.map)
         return True
 
 
@@ -2706,6 +2707,7 @@ randomizedSet = RandomizedSet()
 print(randomizedSet.insert(1))  # Inserts 1 to the set. Returns true as 1 was inserted successfully.
 print(randomizedSet.remove(2))  # Returns false as 2 does not exist in the set.
 print(randomizedSet.insert(2))  # Inserts 2 to the set, returns true. Set now contains [1,2].
+print(randomizedSet.insert(3))  # 2 was already in the set, so return false.
 print(randomizedSet.getRandom())  # getRandom() should return either 1 or 2 randomly.
 print(randomizedSet.remove(1))  # Removes 1 from the set, returns true. Set now contains [2].
 print(randomizedSet.insert(2))  # 2 was already in the set, so return false.
