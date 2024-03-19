@@ -8,18 +8,25 @@ import math, random
 class LRUCache:
 
     def __init__(self, capacity: int):
-        pass
+        self.capacity = capacity
+        self.dll = DoubleLinkedList()
+        self.hash = {}
+        
 
 
 
     def get(self, key: int) -> int:
-        pass
+        if key not in self.hash:
+             return -1
+        self.dll.remove(self.hash[key])
+        self.has[key] = self.dll.push(self.hash[key])
+        return self.hash[key].val
+
 
 
 
     def put(self, key: int, value: int) -> None:
         pass
-
 
 class Node:
     def __init__(self, val, key):
@@ -35,7 +42,22 @@ class DoubleLinkedList:
              self.tail.prev = self.head
 
              self.length = 0
-             
+        def remove(self, node):
+             prev = node.prev
+             nxt = node.next
+             prev.next = nxt
+             next.prev = prev
+             self.length = -1
+        def push(self, node):
+             prev = self.tail.prev
+             nxt = self.tail
+             prev.next = node
+             nxt.prev = node
+             node.next = nxt
+             node.prev = prev
+             self.length +=1
+             return node
+
 
 
 

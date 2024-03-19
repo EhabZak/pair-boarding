@@ -2777,11 +2777,13 @@ class LRUCache:
         self.hash = {}
 
 
+
     def get(self, key: int) -> int:
         if key not in self.hash:
             return -1
         self.dll.remove(self.hash[key])
         self.hash[key] = self.dll.push(self.hash[key])
+        print ('hash is ',self.hash[key])
         return self.hash[key].val
 
 
@@ -2797,6 +2799,8 @@ class LRUCache:
             lru = self.dll.head.next
             del self.hash[lru.key]
             self.dll.remove(lru)
+        # print ('hash is ',self.hash) you can't print it you need to iterate over it to print the nodes
+
 
 
 
@@ -2828,13 +2832,13 @@ class DoubleLinkedList:
 
         self.length -= 1
         # print("Doubly Linked List after decrementing length:")
-        self.print_list()
+        # self.print_list()
 
     def push(self,node):
         prev = self.tail.prev
         nxt = self.tail
         # print("Doubly Linked List before incrementing length:")
-        self.print_list()
+        # self.print_list()
 
         prev.next = node
         nxt.prev = node
@@ -2843,11 +2847,12 @@ class DoubleLinkedList:
         node.prev = prev
 
         self.length +=1
-        print("Doubly Linked List after incrementing length:")
-        self.print_list()
-        print ('node key is ==>', node.key,'node val is ==>', node.val)
+        # print("Doubly Linked List after incrementing length:")
+        # self.print_list()
+        # print ('node key is ==>', node.key,'node val is ==>', node.val)
 
         return node
+
     def print_list(self):
         current =self.head
         values = []
