@@ -5,52 +5,74 @@ import heapq
 import math, random
 
 
-class RandomizedSet:
+class LRUCache:
 
-    def __init__(self):
-        self.map = {}
-        self.list= []
-
-
-
-    def insert(self, val: int) -> bool:
-        self.map = {}
-        self.list = []
-        if val in self.map:
-            return False
-        self.list.append(val)
-        self.map[val] = len(self.list)-1
-        return True
+    def __init__(self, capacity: int):
+        pass
 
 
 
-    def remove(self, val: int) -> bool:
-        if val not in self.map:
-            return False
-        lastElement, idx = self.list[-1], self.map[val]
-        self.list[idx], self.map[lastElement] = lastElement, idx
-        self.list.pop()
-        del self.map[val]
-        return True
+    def get(self, key: int) -> int:
+        pass
 
 
 
+    def put(self, key: int, value: int) -> None:
+        pass
 
 
+class Node:
+    def __init__(self, val, key):
+        self.val = val
+        self.key = key
+        self.next = None
+        self.prev = None
+class DoubleLinkedList:
+        def __init__(self,node):
+             self.head = Node(None, None)
+             self.tail = Node (None,None)
+             self.head.next = self.tail
+             self.tail.prev = self.head
 
-    def getRandom(self) -> int:
-        return random.choice(self.list)
+             self.length = 0
+             
 
 
 
 
 
-randomizedSet = RandomizedSet()
-print(randomizedSet.insert(1))  # Inserts 1 to the set. Returns true as 1 was inserted successfully.
-print(randomizedSet.remove(2))  # Returns false as 2 does not exist in the set.
-print(randomizedSet.insert(2))  # Inserts 2 to the set, returns true. Set now contains [1,2].
-print(randomizedSet.insert(3))  # Inserts 2 to the set, returns true. Set now contains [1,2].
-print(randomizedSet.getRandom())  # getRandom() should return either 1 or 2 randomly.
-print(randomizedSet.remove(1))  # Removes 1 from the set, returns true. Set now contains [2].
-print(randomizedSet.insert(2))  # 2 was already in the set, so return false.
-print(randomizedSet.getRandom())
+
+
+        return node
+    def print_list(self):
+        current =self.head
+        values = []
+        while current != self.tail:
+            if current.key is not None and current.val is not None:
+                values.append(f"({current.key}, {current.val})")
+            current = current.next
+        print ("double linked list:"+"<->".join(values))
+
+
+
+
+
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
+
+    # Instantiate the LRUCache object with capacity 2
+cache = LRUCache(2)
+
+# Perform operations as specified in the input
+print(cache.put(1, 1))  # Put key=1, value=1
+print(cache.put(2, 2))  # Put key=2, value=2
+print(cache.get(1))     # Get value associated with key=1 (Expected output: 1)
+print(cache.put(3, 3))  # Put key=3, value=3
+print(cache.get(2))     # Get value associated with key=2 (Expected output: -1, as key 2 was evicted by key 3)
+print(cache.put(4, 4))  # Put key=4, value=4
+print(cache.get(1))     # Get value associated with key=1 (Expected output: -1, as key 1 was evicted by key 4)
+print(cache.get(3))     # Get value associated with key=3 (Expected output: 3)
+print(cache.get(4))     # Get value associated with key=4 (Expected output: 4)

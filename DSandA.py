@@ -2815,18 +2815,26 @@ class DoubleLinkedList:
         self.tail.prev =self.head
 
         self.length = 0
+        # print ('self is', self)
 
     def remove(self, node):
         prev =node.prev
         nxt = node.next
+        # print("Doubly Linked List before decrementing length:")
+        # self.print_list()
+
         prev.next = nxt
         nxt.prev = prev
 
         self.length -= 1
+        # print("Doubly Linked List after decrementing length:")
+        self.print_list()
 
     def push(self,node):
         prev = self.tail.prev
         nxt = self.tail
+        # print("Doubly Linked List before incrementing length:")
+        self.print_list()
 
         prev.next = node
         nxt.prev = node
@@ -2835,8 +2843,22 @@ class DoubleLinkedList:
         node.prev = prev
 
         self.length +=1
+        print("Doubly Linked List after incrementing length:")
+        self.print_list()
+        print ('node key is ==>', node.key,'node val is ==>', node.val)
 
         return node
+    def print_list(self):
+        current =self.head
+        values = []
+        while current != self.tail:
+            if current.key is not None and current.val is not None:
+                values.append(f"({current.key}, {current.val})")
+            current = current.next
+        print ("double linked list:"+"<->".join(values))
+
+
+
 
 
 
