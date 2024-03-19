@@ -2607,7 +2607,7 @@ board and word consists of only lowercase and uppercase English letters.
 # sol = Solution()
 # print(sol.exist(board, word))
 
-#! 37- 380. Insert Delete GetRandom O(1) (Medium) (algo: design problem)  (time complexity O(???))
+#! 37- 380. Insert Delete GetRandom O(1) (Medium) (algo: design problem)  (time complexity O(1))
 
 '''
 380. Insert Delete GetRandom O(1)
@@ -2652,80 +2652,82 @@ There will be at least one element in the data structure when getRandom is calle
 '''
 
 
-class RandomizedSet:
+# class RandomizedSet:
 
-    def __init__(self):
-        self.map = {}
-        self.list =[]
-
-
-    def insert(self, val: int) -> bool:
-        # print ('value ===========>',val)
-        if val in self.map:
-            return False
-        self.list.append(val)
-        # print ('list ******', self.list)
-        self.map[val] = len(self.list)-1
-        # print ('map is ++++++++++++++',self.map)
-         # key value pair with index as the value
-        return True
+#     def __init__(self):
+#         self.map = {}
+#         self.list =[]
 
 
-    def remove(self, val: int) -> bool:
-        if val not in self.map:
-            return False
-        # swamp element in list
-        lastElement , idx = self.list[-1], self.map[val]
-        print ('list ******', self.list)
-        print ( 'lastElement=======' , lastElement)
-        print ('map is ++++++++++++++',self.map)
-        print ('self.map[val]*************', self.map[val])
-        self.list[idx], self.map[lastElement] = lastElement, idx
-        print ('____________________________')
-        print ('list ******', self.list)
-        print ( 'lastElement=======' , lastElement)
-        print ('map is ++++++++++++++',self.map)
-        print ('self.map[val]*************', self.map[val])
-        #pop from list
-        print (' before pop list is ==' , self.list)
-        self.list.pop()
-        print (' now after the pop list is ==' , self.list)
-        print ('map is ++++++++++++++',self.map)
-        # update map
-
-        del self.map[val]
-        print ('map is ^^^^^^^^^^^',self.map)
-        return True
+#     def insert(self, val: int) -> bool:
+#         # print ('value ===========>',val)
+#         if val in self.map:
+#             return False
+#         self.list.append(val)
+#         # print ('list ******', self.list)
+#         self.map[val] = len(self.list)-1
+#         # print ('map is ++++++++++++++',self.map)
+#          # key value pair with index as the value
+#         return True
 
 
-    def getRandom(self) -> int:
-        return random.choice(self.list)
+#     def remove(self, val: int) -> bool:
+#         if val not in self.map:
+#             return False
+#         # swamp element in list
+#         lastElement , idx = self.list[-1], self.map[val]
+#         print ('list ******', self.list)
+#         print ( 'lastElement=======' , lastElement)
+#         print ('map is ++++++++++++++',self.map)
+#         print ('self.map[val]*************', self.map[val])
+#         self.list[idx], self.map[lastElement] = lastElement, idx
+#         print ('____________________________')
+#         print ('list ******', self.list)
+#         print ( 'lastElement=======' , lastElement)
+#         print ('map is ++++++++++++++',self.map)
+#         print ('self.map[val]*************', self.map[val])
+#         #pop from list
+#         print (' before pop list is ==' , self.list)
+#         self.list.pop()
+#         print (' now after the pop list is ==' , self.list)
+#         print ('map is ++++++++++++++',self.map)
+#         # update map
+
+#         del self.map[val]
+#         print ('map is ^^^^^^^^^^^',self.map)
+#         return True
+
+
+#     def getRandom(self) -> int:
+#         return random.choice(self.list)
 
 
 
-randomizedSet = RandomizedSet()
-print(randomizedSet.insert(1))  # Inserts 1 to the set. Returns true as 1 was inserted successfully.
-print(randomizedSet.remove(2))  # Returns false as 2 does not exist in the set.
-print(randomizedSet.insert(2))  # Inserts 2 to the set, returns true. Set now contains [1,2].
-print(randomizedSet.insert(3))  # 2 was already in the set, so return false.
-print(randomizedSet.getRandom())  # getRandom() should return either 1 or 2 randomly.
-print(randomizedSet.remove(1))  # Removes 1 from the set, returns true. Set now contains [2].
-print(randomizedSet.insert(2))  # 2 was already in the set, so return false.
-print(randomizedSet.getRandom())  # Since 2 is the only number in the set, getRandom() will always return 2.
+# randomizedSet = RandomizedSet()
+# print(randomizedSet.insert(1))  # Inserts 1 to the set. Returns true as 1 was inserted successfully.
+# print(randomizedSet.remove(2))  # Returns false as 2 does not exist in the set.
+# print(randomizedSet.insert(2))  # Inserts 2 to the set, returns true. Set now contains [1,2].
+# print(randomizedSet.insert(3))  # 2 was already in the set, so return false.
+# print(randomizedSet.getRandom())  # getRandom() should return either 1 or 2 randomly.
+# print(randomizedSet.remove(1))  # Removes 1 from the set, returns true. Set now contains [2].
+# print(randomizedSet.insert(2))  # 2 was already in the set, so return false.
+# print(randomizedSet.getRandom())  # Since 2 is the only number in the set, getRandom() will always return 2.
 
+'''
 # Your RandomizedSet object will be instantiated and called as such:
 # obj = RandomizedSet()
 # param_1 = obj.insert(val)
 # param_2 = obj.remove(val)
 # param_3 = obj.getRandom()
+'''
 
-#!
+#! 35-146. LRU Cache (Medium) (algo: design problem)  (time complexity O(1))
 
 '''
 146. LRU Cache
 Medium
 Topics
-Companies
+Companies Amazon DoorDash Bloomberg
 Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
 
 Implement the LRUCache class:
@@ -2766,6 +2768,98 @@ Constraints:
 At most 2 * 105 calls will be made to get and put.
 
 '''
+
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.dll =DoubleLinkedList()
+        self.hash = {}
+
+
+    def get(self, key: int) -> int:
+        if key not in self.hash:
+            return -1
+        self.dll.remove(self.hash[key])
+        self.hash[key] = self.dll.push(self.hash[key])
+        return self.hash[key].val
+
+
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.hash:
+            self.dll.remove(self.hash[key])
+
+        newNode = Node(key,value)
+        self.hash[key]= self.dll.push(newNode)
+
+        if self.dll.length > self.capacity:
+            lru = self.dll.head.next
+            del self.hash[lru.key]
+            self.dll.remove(lru)
+
+
+
+class Node:
+    def __init__(self,key, val):
+        self.key = key
+        self.val = val
+        self.next = None
+        self.prev = None
+class DoubleLinkedList:
+
+    def __init__(self):
+        self.head = Node(None, None)
+        self.tail = Node(None, None)
+        self.head.next = self.tail
+        self.tail.prev =self.head
+
+        self.length = 0
+
+    def remove(self, node):
+        prev =node.prev
+        nxt = node.next
+        prev.next = nxt
+        nxt.prev = prev
+
+        self.length -= 1
+
+    def push(self,node):
+        prev = self.tail.prev
+        nxt = self.tail
+
+        prev.next = node
+        nxt.prev = node
+
+        node.next = nxt
+        node.prev = prev
+
+        self.length +=1
+
+        return node
+
+
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
+
+    # Instantiate the LRUCache object with capacity 2
+cache = LRUCache(2)
+
+# Perform operations as specified in the input
+print(cache.put(1, 1))  # Put key=1, value=1
+print(cache.put(2, 2))  # Put key=2, value=2
+print(cache.get(1))     # Get value associated with key=1 (Expected output: 1)
+print(cache.put(3, 3))  # Put key=3, value=3
+print(cache.get(2))     # Get value associated with key=2 (Expected output: -1, as key 2 was evicted by key 3)
+print(cache.put(4, 4))  # Put key=4, value=4
+print(cache.get(1))     # Get value associated with key=1 (Expected output: -1, as key 1 was evicted by key 4)
+print(cache.get(3))     # Get value associated with key=3 (Expected output: 3)
+print(cache.get(4))     # Get value associated with key=4 (Expected output: 4)
+
+
 
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
