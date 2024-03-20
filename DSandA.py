@@ -2792,13 +2792,13 @@ class LRUCache:
         if key in self.hash:
             self.dll.remove(self.hash[key])
 
-        newNode = Node(key,value)
-        self.hash[key]= self.dll.push(newNode)
+        newNode = Node(key,value) # create the new node
+        self.hash[key]= self.dll.push(newNode) # add node to the hash WHAT!!!?
 
         if self.dll.length > self.capacity:
-            lru = self.dll.head.next
-            del self.hash[lru.key]
-            self.dll.remove(lru)
+            lru = self.dll.head.next # cause head is dummy
+            del self.hash[lru.key] # remove lru from hash too
+            self.dll.remove(lru) # remove lru from dll 
         # print ('hash is ',self.hash) you can't print it you need to iterate over it to print the nodes
 
 
