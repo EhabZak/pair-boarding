@@ -8,10 +8,14 @@ import math, random
 class LRUCache:
 
     def __init__(self, capacity: int):
+        pass
+
 
 
 
     def get(self, key: int) -> int:
+        pass
+
 
 
 
@@ -21,33 +25,14 @@ class LRUCache:
         pass
 
 
-class Node:
-    def __init__(self, key,val) -> None:
-        self.val = val
-        self.key = key
-        self.prev = None
-        self.next = None
 
 
 
-class DoubleLinkedList:
 
-    def __init__(self) -> None:
-        self.head = Node(None, None)
-        self.tail = Node (None, None)
-        self.head.next = self.tail
-        self.tail.prev = self.head
-        self.length = 0
 
-    def remove(self, node):
-        prev = node.prev
-        nxt = node.next
 
-        prev.next = nxt
-        nxt.prev = prev
-        self.length -=1
-    def push(self, node):
-        prev = 
+
+
 
 
 
