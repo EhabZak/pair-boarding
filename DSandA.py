@@ -2728,7 +2728,7 @@ There will be at least one element in the data structure when getRandom is calle
 Medium
 Topics
 Companies Amazon DoorDash Bloomberg
-Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
+Design a data structure that follows the constraints of a #!Least Recently Used (LRU) cache.
 
 Implement the LRUCache class:
 
@@ -2773,7 +2773,7 @@ class LRUCache:
 
     def __init__(self, capacity: int):
         self.capacity = capacity
-        self.dll =DoubleLinkedList()
+        self.dll =DoubleLinkedList() # creates only one double linked list # there is only one instance of double linked list
         self.hash = {}
 
 
@@ -2781,24 +2781,31 @@ class LRUCache:
     def get(self, key: int) -> int:
         if key not in self.hash:
             return -1
-        self.dll.remove(self.hash[key])
-        self.hash[key] = self.dll.push(self.hash[key])
-        print ('hash is ',self.hash[key])
+        # 1-remove if in dll to re-position
+        self.dll.remove(self.hash[key]) # why remove from dll? to place again at the end to indicate it is most recently used
+        # 2- add to the new position in dll and update the hash
+        self.hash[key] = self.dll.push(self.hash[key]) # why? updating the position of the node in hash and add it to dll
+        # print ('hash is ',self.hash[key])
         return self.hash[key].val
 
 
 
     def put(self, key: int, value: int) -> None:
+
+        # 1-remove the node if exists in dll
         if key in self.hash:
-            self.dll.remove(self.hash[key])
+            self.dll.remove(self.hash[key]) # why? cause we want to put the node which the value of the key near the tail
 
+        # 2-add the new node
         newNode = Node(key,value) # create the new node
-        self.hash[key]= self.dll.push(newNode) # add node to the hash WHAT!!!?
+        self.hash[key]= self.dll.push(newNode) #  form the push() it returned the new node with new next and prev
+        # the node is connected to the double linked list through the next and prev attributes
 
+        #3-# remove the lru
         if self.dll.length > self.capacity:
             lru = self.dll.head.next # cause head is dummy
             del self.hash[lru.key] # remove lru from hash too
-            self.dll.remove(lru) # remove lru from dll 
+            self.dll.remove(lru) # remove lru from dll
         # print ('hash is ',self.hash) you can't print it you need to iterate over it to print the nodes
 
 
@@ -2810,6 +2817,8 @@ class Node:
         self.val = val
         self.next = None
         self.prev = None
+    # def __str__(self):
+    #     return f"Node({self.key}, {self.val})" # this is override printing the node to show key and val in stead of memory address
 class DoubleLinkedList:
 
     def __init__(self):
@@ -2850,8 +2859,11 @@ class DoubleLinkedList:
         # print("Doubly Linked List after incrementing length:")
         # self.print_list()
         # print ('node key is ==>', node.key,'node val is ==>', node.val)
+        print ( 'this is the put node' , node)
 
-        return node
+        return node #! what is this node returned? is it the linked list?
+
+
 
     def print_list(self):
         current =self.head

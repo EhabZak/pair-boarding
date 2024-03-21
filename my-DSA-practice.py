@@ -8,83 +8,46 @@ import math, random
 class LRUCache:
 
     def __init__(self, capacity: int):
-        self.capacity = capacity
-        self.dll = DoubleLinkedList()
-        self.hash = {}
+
 
 
     def get(self, key: int) -> int:
-        pass
 
 
 
 
 
     def put(self, key: int, value: int) -> None:
-        if key in self.hash:
-            self.dll.remove(self.hash[key])
-        newNode = Node(key,value)
-        self.hash[key]= self.dll.push(newNode)
-        if self.dll.length > self.capacity:
-            lru = self.dll.head.next # why is lru a dictionary ?
-            del self.hash[lru.key]
-
-
+        pass
 
 
 class Node:
-    def __init__(self,val,key):
+    def __init__(self, key,val) -> None:
         self.val = val
         self.key = key
-        self.next = None
         self.prev = None
+        self.next = None
+
 
 
 class DoubleLinkedList:
-    def __init__(self, node) -> None:
+
+    def __init__(self) -> None:
         self.head = Node(None, None)
-        self.tail = Node(None, None)
+        self.tail = Node (None, None)
         self.head.next = self.tail
         self.tail.prev = self.head
         self.length = 0
 
-        def remove(self, node):
-            prev = node.prev
-            nxt = node.next
-            prev.next = nxt
-            nxt.prev = prev
-            self.length -=1
+    def remove(self, node):
+        prev = node.prev
+        nxt = node.next
 
-        def push (self, node):
-            prev = self.tail.prev
-            nxt = self.tail
-            prev.next = node
-            nxt.prev = node
-
-            node.next = nxt
-            node.prev = prev
-
-            self.length +=1
-            return node
-
-
-
-
-
-
-
-
-
-
-
-    # add
-
-
-    #remove
-
-
-
-
+        prev.next = nxt
+        nxt.prev = prev
+        self.length -=1
+    def push(self, node):
+        prev = 
 
 
 
