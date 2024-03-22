@@ -2861,7 +2861,7 @@ class DoubleLinkedList:
         # print ('node key is ==>', node.key,'node val is ==>', node.val)
         print ( 'this is the put node' , node)
 
-        return node #! what is this node returned? is it the linked list?
+        return node #! what is this node returned? is it the linked list? it is the node with attribures next and prev
 
 
 
