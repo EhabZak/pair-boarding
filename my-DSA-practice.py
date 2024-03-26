@@ -5,32 +5,26 @@ import heapq
 import math, random
 
 
-ad_max = [
-  # these columns represent the relationship
-   #0 1 2 3 4 5          # print ad-max[n]
-   [0,1,1,1,0,0],#0    # 0 line 2 times  # 5 line 5 times # this line represents the node 0
-   [1,0,0,0,1,1],#1    # 1 line 5 times  # 3 line 6 times
-   [1,0,0,0,0,1],#2    # 4 line 6 time   # 0 line 2 times
-   [1,0,0,0,0,0],#3    # 2 line 1  time
-   [0,1,0,0,0,0],#4    # 5 line 3  time
-   [0,1,1,0,0,0] #5    # 2 line 6  time
-]
+class TreeNode:
+    def __init__(self, val = 0, left= None, right= None) -> None:
+        self.val = val
+        self.left = left
+        self.right = right
+class Solution:
+    def pot(self, root):
+        if root is None: return []
 
-visited = [0,0,0,0,0,0]
+        left = self.pot(root.left)
+        right = self.pot(root.right)
+        return left+right+ [root.val]
 
-def dfs(node):
-    if visited[node] != 0:
-        return
-    else:
-        visited[node]= 1
-        num = 0
-        for relation in ad_max[node]:
-            if relation != 0:
-                dfs(num)
-            num +=1
-        print (node)
+root = TreeNode(1)
+root.right = TreeNode(2)
+root.right.left = TreeNode(3)
 
+# Instantiate the Solution class
+sol = Solution()
 
-
-
-print (dfs(0))
+# Test the inorderTraversal method
+result = sol.pot(root)
+print(result)
