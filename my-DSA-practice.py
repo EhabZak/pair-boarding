@@ -5,79 +5,32 @@ import heapq
 import math, random
 
 
-class LRUCache:
+ad_max = [
+  # these columns represent the relationship
+   #0 1 2 3 4 5          # print ad-max[n]
+   [0,1,1,1,0,0],#0    # 0 line 2 times  # 5 line 5 times # this line represents the node 0
+   [1,0,0,0,1,1],#1    # 1 line 5 times  # 3 line 6 times
+   [1,0,0,0,0,1],#2    # 4 line 6 time   # 0 line 2 times
+   [1,0,0,0,0,0],#3    # 2 line 1  time
+   [0,1,0,0,0,0],#4    # 5 line 3  time
+   [0,1,1,0,0,0] #5    # 2 line 6  time
+]
 
-    def __init__(self, capacity: int):
-        pass
+visited = [0,0,0,0,0,0]
 
-
-
-    def get(self, key: int) -> int:
-        pass
-
-
-
-
-    def put(self, key: int, value: int) -> None:
-        pass
-
-
-
-
-
-
-
-class Node:
-    def __init__(self, key, val) -> None:
-        self.val = val
-        self.key = key
-        self.next = None
-        self.prev = None
-
-class DoubleLinkedList:
-    def __init__(self) -> None:
-        self.head = Node(None,None)
-        self.tail = Node(None,None)
-        self.length = 0
-
-        self.head.next = self.tail
-        self.tail.prev =self.head
+def dfs(node):
+    if visited[node] != 0:
+        return
+    else:
+        visited[node]= 1
+        num = 0
+        for relation in ad_max[node]:
+            if relation != 0:
+                dfs(num)
+            num +=1
+        print (node)
 
 
 
 
-
-
-
-    def print_list(self):
-        current =self.head
-        values = []
-        while current != self.tail:
-            if current.key is not None and current.val is not None:
-                values.append(f"({current.key}, {current.val})")
-            current = current.next
-        print ("double linked list:"+"<->".join(values))
-
-
-
-
-
-
-# Your LRUCache object will be instantiated and called as such:
-# obj = LRUCache(capacity)
-# param_1 = obj.get(key)
-# obj.put(key,value)
-
-    # Instantiate the LRUCache object with capacity 2
-cache = LRUCache(2)
-
-# Perform operations as specified in the input
-print(cache.put(1, 1))  # Put key=1, value=1
-print(cache.put(2, 2))  # Put key=2, value=2
-print(cache.get(1))     # Get value associated with key=1 (Expected output: 1)
-print(cache.put(3, 3))  # Put key=3, value=3
-print(cache.get(2))     # Get value associated with key=2 (Expected output: -1, as key 2 was evicted by key 3)
-print(cache.put(4, 4))  # Put key=4, value=4
-print(cache.get(1))     # Get value associated with key=1 (Expected output: -1, as key 1 was evicted by key 4)
-print(cache.get(3))     # Get value associated with key=3 (Expected output: 3)
-print(cache.get(4))
+print (dfs(0))

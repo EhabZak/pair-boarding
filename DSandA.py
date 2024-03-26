@@ -13,43 +13,44 @@ import random
 /   \  /
 4     5
   '''
-# ad_max = [
-#   # these columns represent the relationship
-#    #0 1 2 3 4 5          # print ad-max[n]
-#    [0,1,1,1,0,0],#0    # 0 line 2 times  # 5 line 5 times # this line represents the node 0
-#    [1,0,0,0,1,1],#1    # 1 line 5 times  # 3 line 6 times
-#    [1,0,0,0,0,1],#2    # 4 line 6 time   # 0 line 2 times
-#    [1,0,0,0,0,0],#3    # 2 line 1  time
-#    [0,1,0,0,0,0],#4    # 5 line 3  time
-#    [0,1,1,0,0,0] #5    # 2 line 6  time
-# ]
-# visited= [0,0,0,0,0,0] #indicates if a node has been visited or not
-# # n = means a node
-# #what are the numbers in the matrix? relationships to the node
-# #what are the numbers in visited? tracking the status of the node if visited or not
-# #where is the relation? in the matrix columns the rows represent the nodes
-# # why is relation different when we put it in the for loop and outside the for loop?
-# #where is the visited?
-# #where is the n? n = node the rows are the nodes or the n
-# # what is num? why do we have it? it represent the index of the numbers (which represent the relationship) in the ad_max[n] so the arrays in the ad_max array
-# def dfs (n):
-#     if visited[n] != 0: #! this is the base case
-#         return
-#     else:
-#         visited[n] = 1 # this means if node is not visited then mark it as visited
-#         num = 0 #! num is initiated here it means start at index zero in the ad_max[n]
-#         for relation in ad_max[n]: # for the numbers in the array of node 0 = [0,1,1,1,0,0]
+ad_max = [
+  # these columns represent the relationship
+   #0 1 2 3 4 5          # print ad-max[n]
+   [0,1,1,1,0,0],#0    # 0 line 2 times  # 5 line 5 times # this line represents the node 0
+   [1,0,0,0,1,1],#1    # 1 line 5 times  # 3 line 6 times
+   [1,0,0,0,0,1],#2    # 4 line 6 time   # 0 line 2 times
+   [1,0,0,0,0,0],#3    # 2 line 1  time
+   [0,1,0,0,0,0],#4    # 5 line 3  time
+   [0,1,1,0,0,0] #5    # 2 line 6  time
+]
+visited= [0,0,0,0,0,0] #indicates if a node has been visited or not
+# n = means a node
+#what are the numbers in the matrix? relationships to the node
+#what are the numbers in visited? tracking the status of the node if visited or not
+#where is the relation? in the matrix columns the rows represent the nodes
+# why is relation different when we put it in the for loop and outside the for loop?
+#where is the visited?
+#where is the n? n = node the rows are the nodes or the n
+# what is num? why do we have it? it represent the index of the numbers (which represent the relationship) in the ad_max[n] so the arrays in the ad_max array
+def dfs (n):
+    if visited[n] != 0: #! this is the base case
+        return
+    else:
+        visited[n] = 1 # this means if node is not visited then mark it as visited
+        num = 0 #! num is initiated here it means start at index zero in the ad_max[n]
+        for relation in ad_max[n]: # for the numbers in the array of node 0 = [0,1,1,1,0,0]
 
-#             if relation != 0:
-#                 dfs(num) # recursively calls the dfs function for each adjacent node that is connected.
-#             num = num + 1 # this will be used to iterate over the adjacent nodes of the current node n
+            if relation != 0:
+                dfs(num) # recursively calls the dfs function for each adjacent node that is connected.
+            num = num + 1 # this will be used to iterate over the adjacent nodes of the current node n
 
-#         print (n)
+        print (n)
 
 
 # src_node = int(input('Enter the source node: '))
-# dfs(src_node)
-# print (dfs(0)) # if you select 0 as source node the output will be 4 2 5 1 3 0 this shows how the nodes are traversed and popped off the stack
+src_node = int(0)
+dfs(src_node)
+print (dfs(0)) # if you select 0 as source node the output will be 4 2 5 1 3 0 this shows how the nodes are traversed and popped off the stack
 
 # you can also do it like in mode 6 for both dfs and bfs and then solve the problems
 # don't forget that there are also sort methods
@@ -2769,134 +2770,134 @@ At most 2 * 105 calls will be made to get and put.
 
 '''
 
-class LRUCache:
+# class LRUCache:
 
-    def __init__(self, capacity: int):
-        self.capacity = capacity
-        self.dll =DoubleLinkedList() # creates only one double linked list # there is only one instance of double linked list
-        self.hash = {}
-
-
-
-    def get(self, key: int) -> int:
-        if key not in self.hash:
-            return -1
-        # 1-remove if in dll to re-position
-        self.dll.remove(self.hash[key]) # why remove from dll? to place again at the end to indicate it is most recently used
-        # 2- add to the new position in dll and update the hash
-        self.hash[key] = self.dll.push(self.hash[key]) # why? updating the position of the node in hash and add it to dll
-        # print ('hash is ',self.hash[key])
-        return self.hash[key].val
+#     def __init__(self, capacity: int):
+#         self.capacity = capacity
+#         self.dll =DoubleLinkedList() # creates only one double linked list # there is only one instance of double linked list
+#         self.hash = {}
 
 
 
-    def put(self, key: int, value: int) -> None:
-
-        # 1-remove the node if exists in dll
-        if key in self.hash:
-            self.dll.remove(self.hash[key]) # why? cause we want to put the node which the value of the key near the tail
-
-        # 2-add the new node
-        newNode = Node(key,value) # create the new node
-        self.hash[key]= self.dll.push(newNode) #  form the push() it returned the new node with new next and prev
-        # the node is connected to the double linked list through the next and prev attributes
-
-        #3-# remove the lru
-        if self.dll.length > self.capacity:
-            lru = self.dll.head.next # cause head is dummy
-            del self.hash[lru.key] # remove lru from hash too
-            self.dll.remove(lru) # remove lru from dll
-        # print ('hash is ',self.hash) you can't print it you need to iterate over it to print the nodes
+#     def get(self, key: int) -> int:
+#         if key not in self.hash:
+#             return -1
+#         # 1-remove if in dll to re-position
+#         self.dll.remove(self.hash[key]) # why remove from dll? to place again at the end to indicate it is most recently used
+#         # 2- add to the new position in dll and update the hash
+#         self.hash[key] = self.dll.push(self.hash[key]) # why? updating the position of the node in hash and add it to dll
+#         # print ('hash is ',self.hash[key])
+#         return self.hash[key].val
 
 
 
+#     def put(self, key: int, value: int) -> None:
 
-class Node:
-    def __init__(self,key, val):
-        self.key = key
-        self.val = val
-        self.next = None
-        self.prev = None
-    # def __str__(self):
-    #     return f"Node({self.key}, {self.val})" # this is override printing the node to show key and val in stead of memory address
-class DoubleLinkedList:
+#         # 1-remove the node if exists in dll
+#         if key in self.hash:
+#             self.dll.remove(self.hash[key]) # why? cause we want to put the node which the value of the key near the tail
 
-    def __init__(self):
-        self.head = Node(None, None)
-        self.tail = Node(None, None)
-        self.head.next = self.tail
-        self.tail.prev =self.head
+#         # 2-add the new node
+#         newNode = Node(key,value) # create the new node
+#         self.hash[key]= self.dll.push(newNode) #  form the push() it returned the new node with new next and prev
+#         # the node is connected to the double linked list through the next and prev attributes
 
-        self.length = 0
-        # print ('self is', self)
-
-    def remove(self, node):
-        prev =node.prev
-        nxt = node.next
-        # print("Doubly Linked List before decrementing length:")
-        # self.print_list()
-
-        prev.next = nxt
-        nxt.prev = prev
-
-        self.length -= 1
-        # print("Doubly Linked List after decrementing length:")
-        # self.print_list()
-
-    def push(self,node):
-        prev = self.tail.prev
-        nxt = self.tail
-        # print("Doubly Linked List before incrementing length:")
-        # self.print_list()
-
-        prev.next = node
-        nxt.prev = node
-
-        node.next = nxt
-        node.prev = prev
-
-        self.length +=1
-        # print("Doubly Linked List after incrementing length:")
-        # self.print_list()
-        # print ('node key is ==>', node.key,'node val is ==>', node.val)
-        print ( 'this is the put node' , node)
-
-        return node #! what is this node returned? is it the linked list? it is the node with attribures next and prev
-
-
-
-    def print_list(self):
-        current =self.head
-        values = []
-        while current != self.tail:
-            if current.key is not None and current.val is not None:
-                values.append(f"({current.key}, {current.val})")
-            current = current.next
-        print ("double linked list:"+"<->".join(values))
+#         #3-# remove the lru
+#         if self.dll.length > self.capacity:
+#             lru = self.dll.head.next # cause head is dummy
+#             del self.hash[lru.key] # remove lru from hash too
+#             self.dll.remove(lru) # remove lru from dll
+#         # print ('hash is ',self.hash) you can't print it you need to iterate over it to print the nodes
 
 
 
 
+# class Node:
+#     def __init__(self,key, val):
+#         self.key = key
+#         self.val = val
+#         self.next = None
+#         self.prev = None
+#     # def __str__(self):
+#     #     return f"Node({self.key}, {self.val})" # this is override printing the node to show key and val in stead of memory address
+# class DoubleLinkedList:
+
+#     def __init__(self):
+#         self.head = Node(None, None)
+#         self.tail = Node(None, None)
+#         self.head.next = self.tail
+#         self.tail.prev =self.head
+
+#         self.length = 0
+#         # print ('self is', self)
+
+#     def remove(self, node):
+#         prev =node.prev
+#         nxt = node.next
+#         # print("Doubly Linked List before decrementing length:")
+#         # self.print_list()
+
+#         prev.next = nxt
+#         nxt.prev = prev
+
+#         self.length -= 1
+#         # print("Doubly Linked List after decrementing length:")
+#         # self.print_list()
+
+#     def push(self,node):
+#         prev = self.tail.prev
+#         nxt = self.tail
+#         # print("Doubly Linked List before incrementing length:")
+#         # self.print_list()
+
+#         prev.next = node
+#         nxt.prev = node
+
+#         node.next = nxt
+#         node.prev = prev
+
+#         self.length +=1
+#         # print("Doubly Linked List after incrementing length:")
+#         # self.print_list()
+#         # print ('node key is ==>', node.key,'node val is ==>', node.val)
+#         # print ( 'this is the put node' , node)
+
+#         return node #! what is this node returned? is it the linked list? it is the node with attribures next and prev
 
 
-# Your LRUCache object will be instantiated and called as such:
-# obj = LRUCache(capacity)
-# param_1 = obj.get(key)
-# obj.put(key,value)
 
-    # Instantiate the LRUCache object with capacity 2
-cache = LRUCache(2)
+#     def print_list(self):
+#         current =self.head
+#         values = []
+#         while current != self.tail:
+#             if current.key is not None and current.val is not None:
+#                 values.append(f"({current.key}, {current.val})")
+#             current = current.next
+#         print ("double linked list:"+"<->".join(values))
 
-# Perform operations as specified in the input
-print(cache.put(1, 1))  # Put key=1, value=1
-print(cache.put(2, 2))  # Put key=2, value=2
-print(cache.get(1))     # Get value associated with key=1 (Expected output: 1)
-print(cache.put(3, 3))  # Put key=3, value=3
-print(cache.get(2))     # Get value associated with key=2 (Expected output: -1, as key 2 was evicted by key 3)
-print(cache.put(4, 4))  # Put key=4, value=4
-print(cache.get(1))     # Get value associated with key=1 (Expected output: -1, as key 1 was evicted by key 4)
-print(cache.get(3))     # Get value associated with key=3 (Expected output: 3)
-print(cache.get(4))     # Get value associated with key=4 (Expected output: 4)
+
+
+
+
+
+# # Your LRUCache object will be instantiated and called as such:
+# # obj = LRUCache(capacity)
+# # param_1 = obj.get(key)
+# # obj.put(key,value)
+
+#     # Instantiate the LRUCache object with capacity 2
+# cache = LRUCache(2)
+
+# # Perform operations as specified in the input
+# print(cache.put(1, 1))  # Put key=1, value=1
+# print(cache.put(2, 2))  # Put key=2, value=2
+# print(cache.get(1))     # Get value associated with key=1 (Expected output: 1)
+# print(cache.put(3, 3))  # Put key=3, value=3
+# print(cache.get(2))     # Get value associated with key=2 (Expected output: -1, as key 2 was evicted by key 3)
+# print(cache.put(4, 4))  # Put key=4, value=4
+# print(cache.get(1))     # Get value associated with key=1 (Expected output: -1, as key 1 was evicted by key 4)
+# print(cache.get(3))     # Get value associated with key=3 (Expected output: 3)
+# print(cache.get(4))     # Get value associated with key=4 (Expected output: 4)
 
 
 
