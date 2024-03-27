@@ -1892,13 +1892,13 @@ The number of nodes in the tree is in the range [0, 2000].
 '''
 
 ## Definition for a binary tree node.
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-class Solution:
-    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
 #           #! boiler plate for BFS
 #         # queue = deque()
 #         # queue.append(root)
@@ -1913,36 +1913,36 @@ class Solution:
 #         #         queue.append(node.right)
 #         # return output
 #           #! solution
-          queue = deque()
-          queue.append(root)
-          output = []
+#           queue = deque()
+#           queue.append(root)
+#           output = []
 
-          while queue:
-            queueLen= len(queue)
-            print (' this is the queue ************', queue)
-            print('queuelen', queueLen)
-            level = []
-            for i in range(queueLen):
-                print ('i ==>',i)
+#           while queue:
+#             queueLen= len(queue)
+#             print (' this is the queue ************', queue)
+#             print('queuelen', queueLen)
+#             level = []
+#             for i in range(queueLen):
+#                 print ('i ==>',i)
 
-                node = queue.popleft()
-                if node:
-                    level.append(node.val)
-                    queue.append(node.left)
-                    queue.append(node.right)
-            if level:
-                output.append(level)
+#                 node = queue.popleft()
+#                 if node:
+#                     level.append(node.val)
+#                     queue.append(node.left)
+#                     queue.append(node.right)
+#             if level:
+#                 output.append(level)
 
-          return output
+#           return output
 
 
-root = TreeNode(3)
-root.left = TreeNode(9)
-root.right = TreeNode(20)
-root.right.left = TreeNode(15)
-root.right.right = TreeNode(7)
-solution = Solution()
-print(solution.levelOrder(root))  # Output: [[3], [9, 20], [15, 7]]
+# root = TreeNode(3)
+# root.left = TreeNode(9)
+# root.right = TreeNode(20)
+# root.right.left = TreeNode(15)
+# root.right.right = TreeNode(7)
+# solution = Solution()
+# print(solution.levelOrder(root))  # Output: [[3], [9, 20], [15, 7]]
 
 
 #! 28- 100. Same Tree (Algo Academy) (easy) (algo: dfs)  (time complexity O(n))
@@ -2905,6 +2905,95 @@ At most 2 * 105 calls will be made to get and put.
 # print(cache.get(1))     # Get value associated with key=1 (Expected output: -1, as key 1 was evicted by key 4)
 # print(cache.get(3))     # Get value associated with key=3 (Expected output: 3)
 # print(cache.get(4))     # Get value associated with key=4 (Expected output: 4)
+
+#! 36- 200. Number of Islands (Medium) (algo: matrix dfs)  (time complexity O(1))
+
+'''
+200. Number of Islands
+Medium
+Topics
+Companies Amazon Bloomberg Google
+Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
+
+An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+
+
+
+Example 1:
+
+Input: grid = [
+  ["1","1","1","1","0"],
+  ["1","1","0","1","0"],
+  ["1","1","0","0","0"],
+  ["0","0","0","0","0"]
+]
+Output: 1
+Example 2:
+
+Input: grid = [
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
+]
+Output: 3
+
+
+Constraints:
+
+m == grid.length
+n == grid[i].length
+1 <= m, n <= 300
+grid[i][j] is '0' or '1'.
+'''
+
+
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        def _dfs(row,col):
+            if not _inbound(row,col): # check if out of bound
+                return False
+            pos = f'{row}, {col}'
+
+            if pos in visited: # check if in visited
+                return False
+
+            if grid[row][col] =='0': # check if an island
+                return False
+            visited.add(pos)
+
+            directions = ((1,0),(0,1),(-1,0),(0,-1))
+
+            for dir in directions:
+                newRow = row+dir[0]
+                newCol = col+dir[1]
+                _dfs(newRow,newCol)
+            return True
+        
+        def _inbound(row,col):
+            rowInbound = 0 <= row and row < len(grid)
+            colInbound = 0 <= col and col < len(grid[0])
+            return rowInbound and colInbound
+        count = 0
+        visited = set()
+
+        for row in range(len(grid)):
+            for col in range(len(grid[0])):
+                if _dfs(row,col):
+                    count+=1
+        return count
+
+
+
+
+grid = [
+  ["1","1","1","1","0"],
+  ["1","1","0","1","0"],
+  ["1","1","0","0","0"],
+  ["0","0","0","0","0"]
+]
+sol = Solution()
+print(sol.numIslands(grid))
 
 
 
