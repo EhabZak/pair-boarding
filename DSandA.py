@@ -2950,6 +2950,8 @@ grid[i][j] is '0' or '1'.
 
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
+        ######################################################
+        #!helper function to traverse
         def _dfs(row,col):
             if not _inbound(row,col): # check if out of bound
                 return False
@@ -2963,24 +2965,28 @@ class Solution:
             visited.add(pos)
 
             directions = ((1,0),(0,1),(-1,0),(0,-1))
-
+            #! what the fuck is this? how many recursions do we have?
             for dir in directions:
+                # print ("dir is ",dir)
                 newRow = row+dir[0]
+                # print ('new row' , newRow)
                 newCol = col+dir[1]
                 _dfs(newRow,newCol)
             return True
-        
+        ####################################################
+        #! helper function to check inbound
         def _inbound(row,col):
             rowInbound = 0 <= row and row < len(grid)
             colInbound = 0 <= col and col < len(grid[0])
             return rowInbound and colInbound
         count = 0
         visited = set()
-
+        #! find th coordinates and recursion
         for row in range(len(grid)):
             for col in range(len(grid[0])):
                 if _dfs(row,col):
                     count+=1
+        print (visited)
         return count
 
 
