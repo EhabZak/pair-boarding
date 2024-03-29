@@ -7,39 +7,44 @@ import math, random
 
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        #base cases
-        def dfs(row,col):
-            if not inBound(row,col):
-                return False
-            pos = f'{row},{col}'
-
-            if pos in visited:
-                return False
-            if grid[row][col] == '0':
-                return False
-            visited.add(pos)
-
-            directions = ((1,0),(0,1), (-1,0),(0,-1))
-            for dir in directions:
-                newRow = row+ dir[0]
-                newCol = col + dir[1]
-                dfs(newRow, newCol)
-            return True
-
-
-        def inBound(row,col):
-            rowInbound = 0 <= row and row < len(grid)
-            colInbound = 0 <= col and col < len(grid[0])
-            return rowInbound and colInbound
-
         count = 0
+
+        def dfs(r,c):
+            if r < 0 or c < 0 or r >= len(grid) or c >= len(grid[0]):
+                return
+            if grid[r][c] =="0":
+                return
+
+            grid[r][c]= '0'
+
+            dfs(r-1,c)
+            dfs(r+1, c)
+            dfs(r, c-1)
+            dfs(r,c+1)
+
+
+
+
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
+                if grid[r][c] == "1":
+                    count +=1
+                    dfs(r,c)
+        return count
+
+
+            # direction check
+
+
+            # coordinates and do the thing
         visited = set()
+        count = 0
 
         for row in range(len(grid)):
             for col in range(len(grid[0])):
-                if dfs(row,col):
-                    count += 1
 
+                if dfs(row, col):
+                    count +=1
         return count
 
 
@@ -49,15 +54,17 @@ class Solution:
 
 
 
-
-
-
-
+# grid = [
+#   ["1","1","1","1","0"],
+#   ["1","1","0","1","0"],
+#   ["1","1","0","0","0"],
+#   ["0","0","0","0","0"]
+# ]
 grid = [
-  ["1","1","1","1","0"],
-  ["1","1","0","1","0"],
   ["1","1","0","0","0"],
-  ["0","0","0","0","0"]
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
 ]
 sol = Solution()
 print(sol.numIslands(grid))

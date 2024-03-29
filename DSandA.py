@@ -2948,55 +2948,88 @@ grid[i][j] is '0' or '1'.
 '''
 
 
+# class Solution:
+    # def numIslands(self, grid: List[List[str]]) -> int:
+        ######################################################
+        # #!helper function to traverse
+        # def _dfs(row,col):
+        #     if not _inbound(row,col): # check if out of bound
+        #         return False
+        #     pos = f'{row}, {col}'
+
+        #     if pos in visited: # check if in visited
+        #         return False
+
+        #     if grid[row][col] =='0': # check if an island
+        #         return False
+        #     visited.add(pos)
+
+        #     directions = ((1,0),(0,1),(-1,0),(0,-1))
+        #     #! what the fuck is this? how many recursions do we have?
+        #     for dir in directions:
+        #         # print ("dir is ",dir)
+        #         newRow = row+dir[0]
+        #         # print ('new row' , newRow)
+        #         newCol = col+dir[1]
+        #         _dfs(newRow,newCol)
+        #     return True
+        # ####################################################
+        # #! helper function to check inbound
+        # def _inbound(row,col):
+        #     rowInbound = 0 <= row and row < len(grid)
+        #     colInbound = 0 <= col and col < len(grid[0])
+        #     return rowInbound and colInbound
+        # count = 0
+        # visited = set()
+        # #! find th coordinates and recursion
+        # for row in range(len(grid)):
+        #     for col in range(len(grid[0])):
+        #         if _dfs(row,col):
+        #             count+=1
+        # print (visited)
+        # return count
+#! fastest code
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        ######################################################
-        #!helper function to traverse
-        def _dfs(row,col):
-            if not _inbound(row,col): # check if out of bound
-                return False
-            pos = f'{row}, {col}'
-
-            if pos in visited: # check if in visited
-                return False
-
-            if grid[row][col] =='0': # check if an island
-                return False
-            visited.add(pos)
-
-            directions = ((1,0),(0,1),(-1,0),(0,-1))
-            #! what the fuck is this? how many recursions do we have?
-            for dir in directions:
-                # print ("dir is ",dir)
-                newRow = row+dir[0]
-                # print ('new row' , newRow)
-                newCol = col+dir[1]
-                _dfs(newRow,newCol)
-            return True
-        ####################################################
-        #! helper function to check inbound
-        def _inbound(row,col):
-            rowInbound = 0 <= row and row < len(grid)
-            colInbound = 0 <= col and col < len(grid[0])
-            return rowInbound and colInbound
         count = 0
-        visited = set()
-        #! find th coordinates and recursion
-        for row in range(len(grid)):
-            for col in range(len(grid[0])):
-                if _dfs(row,col):
-                    count+=1
-        print (visited)
+        ROWS = len(grid)
+        COLS = len(grid[0])
+
+        def dfs(r, c):
+            if c < 0 or r < 0 or c >= COLS or r >= ROWS:
+                return
+            if grid[r][c] == "0":
+                return
+
+            grid[r][c] = "0"
+
+            dfs(r - 1, c)
+            dfs(r + 1, c)
+            dfs(r, c - 1)
+            dfs(r, c + 1)
+
+        for r in range(ROWS):
+            for c in range(COLS):
+                if grid[r][c] == "1":
+                    count += 1
+                    dfs(r, c)
+
+        print (grid)
         return count
 
 
 
-
+# grid = [
+#   ["1","1","1","1","0"],
+#   ["1","1","0","1","0"],
+#   ["1","1","0","0","0"],
+#   ["0","0","0","0","0"]
+# ]
 grid = [
-  ["1","1","1","1","0"],
-  ["1","1","0","1","0"],
   ["1","1","0","0","0"],
-  ["0","0","0","0","0"]
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
 ]
 sol = Solution()
 print(sol.numIslands(grid))
