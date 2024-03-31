@@ -2989,50 +2989,50 @@ grid[i][j] is '0' or '1'.
         # print (visited)
         # return count
 #! fastest code
-class Solution:
-    def numIslands(self, grid: List[List[str]]) -> int:
-        count = 0
-        ROWS = len(grid)
-        COLS = len(grid[0])
+# class Solution:
+#     def numIslands(self, grid: List[List[str]]) -> int:
+#         count = 0
+#         ROWS = len(grid)
+#         COLS = len(grid[0])
 
-        def dfs(r, c):
-            if c < 0 or r < 0 or c >= COLS or r >= ROWS:
-                return
-            if grid[r][c] == "0":
-                return
+#         def dfs(r, c):
+#             if c < 0 or r < 0 or c >= COLS or r >= ROWS:
+#                 return
+#             if grid[r][c] == "0":
+#                 return
 
-            grid[r][c] = "0"
+#             grid[r][c] = "0"
 
-            dfs(r - 1, c)
-            dfs(r + 1, c)
-            dfs(r, c - 1)
-            dfs(r, c + 1)
+#             dfs(r - 1, c)
+#             dfs(r + 1, c)
+#             dfs(r, c - 1)
+#             dfs(r, c + 1)
 
-        for r in range(ROWS):
-            for c in range(COLS):
-                if grid[r][c] == "1":
-                    count += 1
-                    dfs(r, c)
+#         for r in range(ROWS):
+#             for c in range(COLS):
+#                 if grid[r][c] == "1":
+#                     count += 1
+#                     dfs(r, c)
 
-        print (grid)
-        return count
+#         print (grid)
+#         return count
 
 
 
+# # grid = [
+# #   ["1","1","1","1","0"],
+# #   ["1","1","0","1","0"],
+# #   ["1","1","0","0","0"],
+# #   ["0","0","0","0","0"]
+# # ]
 # grid = [
-#   ["1","1","1","1","0"],
-#   ["1","1","0","1","0"],
 #   ["1","1","0","0","0"],
-#   ["0","0","0","0","0"]
+#   ["1","1","0","0","0"],
+#   ["0","0","1","0","0"],
+#   ["0","0","0","1","1"]
 # ]
-grid = [
-  ["1","1","0","0","0"],
-  ["1","1","0","0","0"],
-  ["0","0","1","0","0"],
-  ["0","0","0","1","1"]
-]
-sol = Solution()
-print(sol.numIslands(grid))
+# sol = Solution()
+# print(sol.numIslands(grid))
 
 
 
