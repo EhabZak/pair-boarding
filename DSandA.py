@@ -3073,10 +3073,20 @@ grid[i][j] is either 0 or 1.
 
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        # base cases
+        # 1-is it inbound
+        # 2-is the value 0
+        # 3-has the cell been visited
+
+
+
+
+
+
         rows, cols = len(grid), len(grid[0])
 
         def dfs(r,c):
-            if inbound(r,c) or grid[r][c] ==0:
+            if not inbound(r,c) or grid[r][c] ==0:
                 return 0
             pos = (r,c)
             if pos in visited:
@@ -3093,8 +3103,8 @@ class Solution:
 
 
         def inbound(r,c):
-            rowInbound = 0 < r < rows
-            colInbound = 0 < c < cols
+            rowInbound = 0 <= r < rows
+            colInbound = 0 <= c < cols
             return rowInbound and colInbound
 
         largestIsland = 0
