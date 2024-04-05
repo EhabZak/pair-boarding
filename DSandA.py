@@ -3113,42 +3113,42 @@ grid[i][j] is either 0 or 1.
 
     #! another faster solution
 
-class Solution:
-    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        max_row, max_col = len(grid), len(grid[0])
-        max_area = 0
+# class Solution:
+#     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+#         max_row, max_col = len(grid), len(grid[0])
+#         max_area = 0
 
-        def find_max_area(r, c):
-            nonlocal max_row, max_col, max_area
-            if r < 0 or r >= max_row or c < 0 or c >= max_col:
-                return 0
+#         def find_max_area(r, c):
+#             nonlocal max_row, max_col, max_area
+#             if r < 0 or r >= max_row or c < 0 or c >= max_col:
+#                 return 0
 
-            if grid[r][c] == 0:
-                return 0
+#             if grid[r][c] == 0:
+#                 return 0
 
-            grid[r][c] = 0
-            return 1 + find_max_area(r+1, c) + find_max_area(r-1, c) + find_max_area(r, c+1) + find_max_area(r, c-1)
-
-
-        for r in range(max_row):
-            for c in range(max_col):
-                if grid[r][c] == 1:
-                    max_area = max(max_area, find_max_area(r, c))
-
-        return max_area
+#             grid[r][c] = 0
+#             return 1 + find_max_area(r+1, c) + find_max_area(r-1, c) + find_max_area(r, c+1) + find_max_area(r, c-1)
 
 
-grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
-        [0,0,0,0,0,0,0,1,1,1,0,0,0],
-        [0,1,1,0,1,0,0,0,0,0,0,0,0],
-        [0,1,0,0,1,1,0,0,1,0,1,0,0],
-        [0,1,0,0,1,1,0,0,1,1,1,0,0],
-        [0,0,0,0,0,0,0,0,0,0,1,0,0],
-        [0,0,0,0,0,0,0,1,1,1,0,0,0],
-        [0,0,0,0,0,0,0,1,1,0,0,0,0]]
+#         for r in range(max_row):
+#             for c in range(max_col):
+#                 if grid[r][c] == 1:
+#                     max_area = max(max_area, find_max_area(r, c))
 
-sol = Solution()
-print(sol.maxAreaOfIsland(grid))
+#         return max_area
+
+
+# grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
+#         [0,0,0,0,0,0,0,1,1,1,0,0,0],
+#         [0,1,1,0,1,0,0,0,0,0,0,0,0],
+#         [0,1,0,0,1,1,0,0,1,0,1,0,0],
+#         [0,1,0,0,1,1,0,0,1,1,1,0,0],
+#         [0,0,0,0,0,0,0,0,0,0,1,0,0],
+#         [0,0,0,0,0,0,0,1,1,1,0,0,0],
+#         [0,0,0,0,0,0,0,1,1,0,0,0,0]]
+
+# sol = Solution()
+# print(sol.maxAreaOfIsland(grid))
 
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
