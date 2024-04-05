@@ -3071,50 +3071,71 @@ grid[i][j] is either 0 or 1.
 
 '''
 
+# class Solution:
+#     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+#         # base cases
+#         # 1-is it inbound
+#         # 2-is the value 0
+#         # 3-has the cell been visited
+
+#         rows, cols = len(grid), len(grid[0])
+
+#         def dfs(r,c):
+#             if not inbound(r,c) or grid[r][c] ==0:
+#                 return 0
+#             pos = (r,c)
+#             if pos in visited:
+#                 return 0
+#             size = 1
+#             visited.add(pos)
+
+#             directions = ((1,0),(0,1),(-1,0),(0,-1))
+#             for dir in directions:
+#                 newRow = r + dir[0]
+#                 newCol = c + dir[1]
+#                 size += dfs(newRow, newCol)
+#             return size
+
+
+#         def inbound(r,c):
+#             rowInbound = 0 <= r < rows
+#             colInbound = 0 <= c < cols
+#             return rowInbound and colInbound
+
+#         largestIsland = 0
+#         visited = set()
+#         for r in range(rows):
+#             for c in range(cols):
+#                 if grid[r][c] == 1:
+#                   largestIsland = max(largestIsland, dfs(r,c))
+
+#         return largestIsland
+
+    #! another faster solution
+
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        # base cases
-        # 1-is it inbound
-        # 2-is the value 0
-        # 3-has the cell been visited
+        max_row, max_col = len(grid), len(grid[0])
+        max_area = 0
 
-
-
-
-
-
-        rows, cols = len(grid), len(grid[0])
-
-        def dfs(r,c):
-            if not inbound(r,c) or grid[r][c] ==0:
+        def find_max_area(r, c):
+            nonlocal max_row, max_col, max_area
+            if r < 0 or r >= max_row or c < 0 or c >= max_col:
                 return 0
-            pos = (r,c)
-            if pos in visited:
+
+            if grid[r][c] == 0:
                 return 0
-            size = 1
-            visited.add(pos)
 
-            directions = ((1,0),(0,1),(-1,0),(0,-1))
-            for dir in directions:
-                newRow = r + dir[0]
-                newCol = c + dir[1]
-                size += dfs(newRow, newCol)
-            return size
+            grid[r][c] = 0
+            return 1 + find_max_area(r+1, c) + find_max_area(r-1, c) + find_max_area(r, c+1) + find_max_area(r, c-1)
 
 
-        def inbound(r,c):
-            rowInbound = 0 <= r < rows
-            colInbound = 0 <= c < cols
-            return rowInbound and colInbound
-
-        largestIsland = 0
-        visited = set()
-        for r in range(rows):
-            for c in range(cols):
+        for r in range(max_row):
+            for c in range(max_col):
                 if grid[r][c] == 1:
-                  largestIsland = max(largestIsland, dfs(r,c))
+                    max_area = max(max_area, find_max_area(r, c))
 
-        return largestIsland
+        return max_area
 
 
 grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
