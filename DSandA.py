@@ -3207,49 +3207,46 @@ n == heights[r].length
 class Solution:
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
         rows, cols = len(heights), len(heights[0])
-
+# traverse helper function and base cases
         def dfs(r,c,visited,prevHeight):
             if (r,c) in visited or not inbound(r,c) or heights[r][c]< prevHeight:
                 return
             visited.add((r,c))
-
+             # check directions
             directions = ((1,0),(0,1),(-1,0),(0,-1))
             for dir in directions:
                 newRow = r + dir[0]
                 newCol = c + dir[1]
-                dfs(newRow,newCol,visited,heights[r][c])
-
+                dfs(newRow,newCol,visited,heights[r][c]) #!
+        # check inbound
         def inbound(r,c):
             rowInbound = 0 <= r < rows
             colInbound = 0 <= c < cols
             return rowInbound and colInbound
-
-
-
+        ################################################3
         res = []
         pacific = set()
         atlantic = set()
-
-
-
-
+# check the columns
         for c in range(cols):
             #first row (north)
+            # print ('columns' ,heights[0][c])
+            print ('pacific', pacific)
             dfs(0,c,pacific,heights[0][c])
-
 
             #last row (south)
             dfs(rows-1,c,atlantic,heights[rows-1][c])
-
+# check the rows
         for r in range(rows):
             #first row (west)
-
+            # print ('rows' ,heights[r][0])
             dfs(r,0,pacific,heights[r][0])
 
             #last row (east)
 
             dfs(r,c-1,atlantic,heights[r][cols-1])
 
+# coordinates and do what you need to do
         for r in range(rows):
             for c in range(cols):
                 if (r,c) in pacific and (r,c) in atlantic:
