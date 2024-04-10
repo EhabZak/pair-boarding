@@ -3231,20 +3231,25 @@ class Solution:
         for c in range(cols):
             #first row (north)
             # print ('columns' ,heights[0][c])
-            print ('pacific', pacific)
-            dfs(0,c,pacific,heights[0][c])
+            # print ('pacific', pacific)
+            dfs(0,c,pacific,heights[0][c]) #! puts the tuples in pacific
 
             #last row (south)
-            dfs(rows-1,c,atlantic,heights[rows-1][c])
+            # print ('atlantic',atlantic)
+            # print ('rows' ,heights[rows-1][c])
+            dfs(rows-1,c,atlantic,heights[rows-1][c]) #! puts the tuples in atlantic
+        print ('atlantic',atlantic)
+###############################################################
 # check the rows
         for r in range(rows):
             #first row (west)
             # print ('rows' ,heights[r][0])
             dfs(r,0,pacific,heights[r][0])
-
             #last row (east)
-
             dfs(r,c-1,atlantic,heights[r][cols-1])
+        # print ('atlantic22222',atlantic)
+
+#############################################################
 
 # coordinates and do what you need to do
         for r in range(rows):
