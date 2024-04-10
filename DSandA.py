@@ -3209,6 +3209,10 @@ class Solution:
         rows, cols = len(heights), len(heights[0])
 # traverse helper function and base cases
         def dfs(r,c,visited,prevHeight):
+
+            print ('prevHeight=================', prevHeight  )
+            print ('heights[r][c]', heights[r][c] if inbound (r,c) else None)
+
             if (r,c) in visited or not inbound(r,c) or heights[r][c]< prevHeight:
                 return
             visited.add((r,c))
@@ -3217,18 +3221,19 @@ class Solution:
             for dir in directions:
                 newRow = r + dir[0]
                 newCol = c + dir[1]
-                dfs(newRow,newCol,visited,heights[r][c]) #!
+                dfs(newRow,newCol,visited,heights[r][c]) #! this is where we get the prev hight
         # check inbound
         def inbound(r,c):
             rowInbound = 0 <= r < rows
             colInbound = 0 <= c < cols
             return rowInbound and colInbound
-        ################################################3
+#################################################################
         res = []
         pacific = set()
         atlantic = set()
 # check the columns
         for c in range(cols):
+            print ('start the north traverse ************************************************************')
             #first row (north)
             # print ('columns' ,heights[0][c])
             # print ('pacific', pacific)
@@ -3246,8 +3251,8 @@ class Solution:
             # print ('rows' ,heights[r][0])
             dfs(r,0,pacific,heights[r][0])
             #last row (east)
-            dfs(r,c-1,atlantic,heights[r][cols-1])
-        # print ('atlantic22222',atlantic)
+            dfs(r,cols-1,atlantic,heights[r][cols-1])
+        print ('atlantic22222',atlantic)
 
 #############################################################
 
