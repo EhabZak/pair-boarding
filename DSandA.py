@@ -3210,8 +3210,8 @@ class Solution:
 # traverse helper function and base cases
         def dfs(r,c,visited,prevHeight):
 
-            print ('prevHeight=================', prevHeight  )
-            print ('heights[r][c]', heights[r][c] if inbound (r,c) else None)
+            # print ('prevHeight=================', prevHeight  )
+            # print ('heights[r][c]', heights[r][c] if inbound (r,c) else None)
 
             if (r,c) in visited or not inbound(r,c) or heights[r][c]< prevHeight:
                 return
@@ -3233,7 +3233,7 @@ class Solution:
         atlantic = set()
 # check the columns
         for c in range(cols):
-            print ('start the north traverse ************************************************************')
+            # print ('start the north traverse ************************************************************')
             #first row (north)
             # print ('columns' ,heights[0][c])
             # print ('pacific', pacific)
@@ -3243,7 +3243,7 @@ class Solution:
             # print ('atlantic',atlantic)
             # print ('rows' ,heights[rows-1][c])
             dfs(rows-1,c,atlantic,heights[rows-1][c]) #! puts the tuples in atlantic
-        print ('atlantic',atlantic)
+        # print ('atlantic',atlantic)
 ###############################################################
 # check the rows
         for r in range(rows):
@@ -3252,7 +3252,7 @@ class Solution:
             dfs(r,0,pacific,heights[r][0])
             #last row (east)
             dfs(r,cols-1,atlantic,heights[r][cols-1])
-        print ('atlantic22222',atlantic)
+        # print ('atlantic22222',atlantic)
 
 #############################################################
 
