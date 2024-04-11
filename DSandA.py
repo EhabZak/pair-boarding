@@ -3204,69 +3204,69 @@ n == heights[r].length
 
 
 '''
-class Solution:
-    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
-        rows, cols = len(heights), len(heights[0])
-# traverse helper function and base cases
-        def dfs(r,c,visited,prevHeight):
+# class Solution:
+#     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+#         rows, cols = len(heights), len(heights[0])
+# # traverse helper function and base cases
+#         def dfs(r,c,visited,prevHeight):
 
-            # print ('prevHeight=================', prevHeight  )
-            # print ('heights[r][c]', heights[r][c] if inbound (r,c) else None)
+#             # print ('prevHeight=================', prevHeight  )
+#             # print ('heights[r][c]', heights[r][c] if inbound (r,c) else None)
 
-            if (r,c) in visited or not inbound(r,c) or heights[r][c]< prevHeight:
-                return
-            visited.add((r,c))
-             # check directions
-            directions = ((1,0),(0,1),(-1,0),(0,-1))
-            for dir in directions:
-                newRow = r + dir[0]
-                newCol = c + dir[1]
-                dfs(newRow,newCol,visited,heights[r][c]) #! this is where we get the prev hight
-        # check inbound
-        def inbound(r,c):
-            rowInbound = 0 <= r < rows
-            colInbound = 0 <= c < cols
-            return rowInbound and colInbound
-#################################################################
-        res = []
-        pacific = set()
-        atlantic = set()
-# check the columns
-        for c in range(cols):
-            # print ('start the north traverse ************************************************************')
-            #first row (north)
-            # print ('columns' ,heights[0][c])
-            # print ('pacific', pacific)
-            dfs(0,c,pacific,heights[0][c]) #! puts the tuples in pacific
+#             if (r,c) in visited or not inbound(r,c) or heights[r][c]< prevHeight:
+#                 return
+#             visited.add((r,c))
+#              # check directions
+#             directions = ((1,0),(0,1),(-1,0),(0,-1))
+#             for dir in directions:
+#                 newRow = r + dir[0]
+#                 newCol = c + dir[1]
+#                 dfs(newRow,newCol,visited,heights[r][c]) #! this is where we get the prev hight
+#         # check inbound
+#         def inbound(r,c):
+#             rowInbound = 0 <= r < rows
+#             colInbound = 0 <= c < cols
+#             return rowInbound and colInbound
+# #################################################################
+#         res = []
+#         pacific = set()
+#         atlantic = set()
+# # check the columns
+#         for c in range(cols):
+#             # print ('start the north traverse ************************************************************')
+#             #first row (north)
+#             # print ('columns' ,heights[0][c])
+#             # print ('pacific', pacific)
+#             dfs(0,c,pacific,heights[0][c]) #! puts the tuples in pacific
 
-            #last row (south)
-            # print ('atlantic',atlantic)
-            # print ('rows' ,heights[rows-1][c])
-            dfs(rows-1,c,atlantic,heights[rows-1][c]) #! puts the tuples in atlantic
-        # print ('atlantic',atlantic)
-###############################################################
-# check the rows
-        for r in range(rows):
-            #first row (west)
-            # print ('rows' ,heights[r][0])
-            dfs(r,0,pacific,heights[r][0])
-            #last row (east)
-            dfs(r,cols-1,atlantic,heights[r][cols-1])
-        # print ('atlantic22222',atlantic)
+#             #last row (south)
+#             # print ('atlantic',atlantic)
+#             # print ('rows' ,heights[rows-1][c])
+#             dfs(rows-1,c,atlantic,heights[rows-1][c]) #! puts the tuples in atlantic
+#         # print ('atlantic',atlantic)
+# ###############################################################
+# # check the rows
+#         for r in range(rows):
+#             #first row (west)
+#             # print ('rows' ,heights[r][0])
+#             dfs(r,0,pacific,heights[r][0])
+#             #last row (east)
+#             dfs(r,cols-1,atlantic,heights[r][cols-1])
+#         # print ('atlantic22222',atlantic)
 
-#############################################################
+# #############################################################
 
-# coordinates and do what you need to do
-        for r in range(rows):
-            for c in range(cols):
-                if (r,c) in pacific and (r,c) in atlantic:
-                    res.append([r,c])
-        return res
+# # coordinates and do what you need to do
+#         for r in range(rows):
+#             for c in range(cols):
+#                 if (r,c) in pacific and (r,c) in atlantic:
+#                     res.append([r,c])
+#         return res
 
 
-heights = [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]
-sol = Solution()
-print(sol.pacificAtlantic(heights))
+# heights = [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]
+# sol = Solution()
+# print(sol.pacificAtlantic(heights))
 
 
 #! 39-1091. Shortest Path in Binary Matrix (Medium) (algo: matrix bfs)  (time complexity ???))
