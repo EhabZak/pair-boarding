@@ -3405,51 +3405,129 @@ grid[i][j] is 0, 1, or 2.
 
 '''
 
+# class Solution:
+#     def orangesRotting(self, grid: List[List[int]]) -> int:
+#         rows , cols = len(grid) , len(grid[0])
+
+#         def inbound(r,c):
+#             rowInbound = 0 <= r < rows
+#             colInbound = 0 <= c < cols
+#             return rowInbound and colInbound
+#         queue = deque()
+#         freshOranges = 0
+#         time = 0
+
+#         for r in range(rows):
+#             for c in range(cols):
+#                 if grid[r][c] ==1 :
+#                     freshOranges +=1
+#                 elif grid[r][c] ==2:
+#                     queue.append((r,c,0)) #! I don't understand
+#         print (queue)
+#         print('fresh oranges No =',freshOranges)
+
+#         directions = ((1,0),(0,1),(-1,0),(0,-1))
+#         while queue:
+#             r,c, level = queue.popleft() # don't forget level becomes zero again
+#             time = level
+#             for dir in directions:
+#                 newRow = r + dir[0]
+#                 newCol = c + dir[1]
+
+#                 if inbound(newRow,newCol) and grid[newRow][newCol] == 1:
+#                     queue.append((newRow,newCol,level+1))
+#                     print('queue ========',queue)
+#                     grid[newRow][newCol] = 2
+#                     freshOranges -= 1
+#         return time if freshOranges == 0 else -1
+
+
+# grid = [[2,1,1],[1,1,0],[0,1,1]] # 4
+# grid = [[2,1,1],[2,1,0],[0,1,1]] # 3 # it takes them in pairs cause there are more than one starting node here
+
+# sol = Solution()
+# print(sol.orangesRotting(grid))
+
+
+#! 41- 542. 01 Matrix (Medium) (algo: matrix bfs)  (time complexity ???))
+
+'''
+542. 01 Matrix
+Medium
+Topics
+Companies Amazon Google Bloomberg
+Given an m x n binary matrix mat, return the distance of the nearest 0 for each cell.
+
+The distance between two adjacent cells is 1.
+
+
+
+Example 1:
+
+
+Input: mat = [[0,0,0],[0,1,0],[0,0,0]]
+Output: [[0,0,0],[0,1,0],[0,0,0]]
+Example 2:
+
+
+Input: mat = [[0,0,0],[0,1,0],[1,1,1]]
+Output: [[0,0,0],[0,1,0],[1,2,1]]
+
+
+Constraints:
+
+m == mat.length
+n == mat[i].length
+1 <= m, n <= 104
+1 <= m * n <= 104
+mat[i][j] is either 0 or 1.
+There is at least one 0 in mat.
+'''
 class Solution:
-    def orangesRotting(self, grid: List[List[int]]) -> int:
-        rows , cols = len(grid) , len(grid[0])
-        
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        rows , cols = len(mat) , len(mat[0])
+        directions = ((1,0),(0,1),(-1,0),(0,-1))
+
+
         def inbound(r,c):
             rowInbound = 0 <= r < rows
             colInbound = 0 <= c < cols
             return rowInbound and colInbound
         queue = deque()
-        freshOranges = 0
-        time = 0
-
         for r in range(rows):
             for c in range(cols):
-                if grid[r][c] ==1 :
-                    freshOranges +=1
-                elif grid[r][c] ==2:
-                    queue.append((r,c,0)) #! I don't understand
-        print (queue)
-        print('fresh oranges No =',freshOranges)
-
-        directions = ((1,0),(0,1),(-1,0),(0,-1))
+                if mat[r][c] == 0:
+                    queue.append((r,c)) # add starting points
+                else:
+                    mat[r][c] = -1
+        print ('queue===========', queue)
         while queue:
-            r,c, level = queue.popleft() # don't forget level becomes zero again
-            time = level
+            r,c = queue.popleft()
+
             for dir in directions:
                 newRow = r + dir[0]
                 newCol = c + dir[1]
 
-                if inbound(newRow,newCol) and grid[newRow][newCol] == 1:
-                    queue.append((newRow,newCol,level+1))
-                    print('queue ========',queue)
-                    grid[newRow][newCol] = 2
-                    freshOranges -= 1
-        return time if freshOranges == 0 else -1
+                # print ('mat is **** before', mat)
+                if not inbound(newRow,newCol) or mat[newRow][newCol] != -1: continue
+                mat[newRow][newCol] = mat [r][c] +1 # just notice that it is the adjacent one r c
+                print ('mat  is ====', mat)
+                queue.append((newRow,newCol))
+
+        return mat
 
 
-
-
-
-grid = [[2,1,1],[1,1,0],[0,1,1]] # 4
-grid = [[2,1,1],[2,1,0],[0,1,1]] # 3 # it takes them in pairs cause there are more than one starting node here
-
+mat = [[0,0,0],[0,1,0],[0,0,0]]
 sol = Solution()
-print(sol.orangesRotting(grid))
+print(sol.updateMatrix(mat))
+
+
+
+
+
+
+
+
 
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
