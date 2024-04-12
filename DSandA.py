@@ -3483,51 +3483,111 @@ n == mat[i].length
 mat[i][j] is either 0 or 1.
 There is at least one 0 in mat.
 '''
+# class Solution:
+#     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+#         rows , cols = len(mat) , len(mat[0])
+#         directions = ((1,0),(0,1),(-1,0),(0,-1))
+
+
+#         def inbound(r,c):
+#             rowInbound = 0 <= r < rows
+#             colInbound = 0 <= c < cols
+#             return rowInbound and colInbound
+#         queue = deque()
+#         for r in range(rows):
+#             for c in range(cols):
+#                 if mat[r][c] == 0:
+#                     queue.append((r,c)) # add starting points
+#                 else:
+#                     mat[r][c] = -1
+#         print ('queue===========', queue)
+#         while queue:
+#             r,c = queue.popleft()
+
+#             for dir in directions:
+#                 newRow = r + dir[0]
+#                 newCol = c + dir[1]
+
+#                 # print ('mat is **** before', mat)
+#                 if not inbound(newRow,newCol) or mat[newRow][newCol] != -1: continue
+#                 mat[newRow][newCol] = mat [r][c] +1 # just notice that it is the adjacent one r c
+#                 print ('mat  is ====', mat)
+#                 queue.append((newRow,newCol))
+
+#         return mat
+
+
+# mat = [[0,0,0],[0,1,0],[0,0,0]]
+# sol = Solution()
+# print(sol.updateMatrix(mat))
+
+
+#! 41- 797. All Paths From Source to Target (Medium) (algo: adjacency list, dfs , backtracking)  (time complexity ???))
+
+'''
+797. All Paths From Source to Target
+Medium
+Topics
+Companies Google Bloomberg Adobe
+Given a directed acyclic graph (DAG) of n nodes labeled from 0 to n - 1, find all possible paths from node 0 to node n - 1 and return them in any order.
+
+The graph is given as follows: graph[i] is a list of all nodes you can visit from node i (i.e., there is a directed edge from node i to node graph[i][j]).
+
+
+
+Example 1:
+
+
+Input: graph = [[1,2],[3],[3],[]]
+Output: [[0,1,3],[0,2,3]]
+Explanation: There are two paths: 0 -> 1 -> 3 and 0 -> 2 -> 3.
+Example 2:
+
+
+Input: graph = [[4,3,1],[3,2,4],[3],[4],[]]
+Output: [[0,4],[0,3,4],[0,1,3,4],[0,1,2,3,4],[0,1,4]]
+
+
+Constraints:
+
+n == graph.length
+2 <= n <= 15
+0 <= graph[i][j] < n
+graph[i][j] != i (i.e., there will be no self-loops).
+All the elements of graph[i] are unique.
+The input graph is guaranteed to be a DAG.
+
+'''
 class Solution:
-    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
-        rows , cols = len(mat) , len(mat[0])
-        directions = ((1,0),(0,1),(-1,0),(0,-1))
+    def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
+        target = len(graph) -1
+        results =[]
+
+        def backtrack(currentNode, path):
+            if currentNode == target:
+                results.append(list(path))
+                return
+
+            for neighbor in graph[currentNode]:
+                # print ('graph current node ',graph[currentNode]) # [1,2] # [3]
+                # print('path before', path) # [0] # [0,1]
+                path.append(neighbor)
+                # print ('neighbor is ===>',neighbor) #1 # 3 # None
+                # print ('path middle', path) #[0,1] [0,1,3]
+                backtrack(neighbor,path)
+                print ('path end', path) # nothing # [0,1,3] then [0,1] #
+                path.pop()
+
+        path = [0]
+        backtrack(0,path)
+
+        return results
 
 
-        def inbound(r,c):
-            rowInbound = 0 <= r < rows
-            colInbound = 0 <= c < cols
-            return rowInbound and colInbound
-        queue = deque()
-        for r in range(rows):
-            for c in range(cols):
-                if mat[r][c] == 0:
-                    queue.append((r,c)) # add starting points
-                else:
-                    mat[r][c] = -1
-        print ('queue===========', queue)
-        while queue:
-            r,c = queue.popleft()
+graph = [[1,2],[3],[3],[]]
 
-            for dir in directions:
-                newRow = r + dir[0]
-                newCol = c + dir[1]
-
-                # print ('mat is **** before', mat)
-                if not inbound(newRow,newCol) or mat[newRow][newCol] != -1: continue
-                mat[newRow][newCol] = mat [r][c] +1 # just notice that it is the adjacent one r c
-                print ('mat  is ====', mat)
-                queue.append((newRow,newCol))
-
-        return mat
-
-
-mat = [[0,0,0],[0,1,0],[0,0,0]]
 sol = Solution()
-print(sol.updateMatrix(mat))
-
-
-
-
-
-
-
-
+print(sol.allPathsSourceTarget(graph))
 
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
