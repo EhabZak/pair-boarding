@@ -13,24 +13,27 @@ class Solution:
         def inbound(r,c):
             rowInbound = 0 <= r < rows
             colInbound = 0 <= c < cols
-            return rowInbound and colInbound
+
         queue = deque()
         for r in range(rows):
             for c in range(cols):
-                if mat[r][c] ==0:
+                if mat[r][c] == 0:
                     queue.append((r,c))
-                else:
-                    mat[r][c] = -1
+            else:
+                mat [r][c] == -1
+
         while queue:
             r,c = queue.popleft()
+
             for dir in directions:
                 newRow = r + dir[0]
                 newCol = c + dir[1]
-                if not inbound(newRow, newCol) or mat[newRow][newCol] !=-1: continue
-                mat[newRow][newCol] = mat[r][c]+1
+
+                if not inbound(newRow,newCol) or mat[newRow][newCol] != -1: continue
+
+                mat[newRow][newCol] = mat[r][c]+ 1
                 queue.append((newRow,newCol))
         return mat
-
 
 
 
