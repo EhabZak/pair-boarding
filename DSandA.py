@@ -3311,55 +3311,55 @@ grid[i][j] is 0 or 1
 '''
 
 
-class Solution:
-    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
-        rows , cols = len(grid), len(grid[0])
-        if grid[0][0] ==1 or grid[rows-1][cols-1] ==1:
-            return -1
-        # 1. Initialize the queue with starting value(s)
-        # 2.pop current node from queue
-        # 3.process current node
-        # 4.push neighbors into queue if they are valid
-        # 5.repeat steps 2-4 until queue is empty
-        def inbound(r,c):
-            rowInbound = 0 <= r < rows
-            colInbound = 0 <= c < cols
-            return rowInbound and colInbound
+# class Solution:
+#     def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
+#         rows , cols = len(grid), len(grid[0])
+#         if grid[0][0] ==1 or grid[rows-1][cols-1] ==1: #!
+#             return -1
+#         # 1. Initialize the queue with starting value(s)
+#         # 2.pop current node from queue
+#         # 3.process current node
+#         # 4.push neighbors into queue if they are valid
+#         # 5.repeat steps 2-4 until queue is empty
+#         def inbound(r,c):
+#             rowInbound = 0 <= r < rows
+#             colInbound = 0 <= c < cols
+#             return rowInbound and colInbound
 
-        queue = deque()
-        queue.append((0,0,1)) #(r,c,layer)
-        directions = ((1,0),(0,1),(-1,0),(0,-1),(1,1), (1,-1),(-1,1), (-1,-1))
-        visited = set()
-        visited.add((0,0))
-        print ('queue start',queue)
-
-
-        while queue:
-            row,col, level = queue.popleft() # destructure
-            print('level', level )
-            if row == rows-1 and col == cols-1:
-                return level
-
-            for dir in directions:
-                newRow = row+ dir[0]
-                newCol = col + dir[1]
-
-                if inbound(newRow, newCol) and grid[newRow][newCol] != 1 and (newRow, newCol) not in visited:
-                    print ('newrow , newcol', newRow,newCol)
-                    queue.append((newRow,newCol,level+1))
-                    print (queue)
-                    visited.add((newRow,newCol))
-
-        return -1
+#         queue = deque()
+#         queue.append((0,0,1)) #(r,c,layer)
+#         directions = ((1,0),(0,1),(-1,0),(0,-1),(1,1), (1,-1),(-1,1), (-1,-1))
+#         visited = set()
+#         visited.add((0,0))
+#         print ('queue start',queue)
 
 
+#         while queue:
+#             row,col, level = queue.popleft() # destructure
+#             print('level', level )
+#             if row == rows-1 and col == cols-1:
+#                 return level
+
+#             for dir in directions:
+#                 newRow = row+ dir[0]
+#                 newCol = col + dir[1]
+
+#                 if inbound(newRow, newCol) and grid[newRow][newCol] != 1 and (newRow, newCol) not in visited:
+#                     print ('newrow , newcol', newRow,newCol)
+#                     queue.append((newRow,newCol,level+1))
+#                     print (queue)
+#                     visited.add((newRow,newCol))
+
+#         return -1
 
 
 
 
-grid = [[0,0,0],[1,1,0],[1,1,0]] # 4
-sol = Solution()
-print(sol.shortestPathBinaryMatrix(grid))
+
+
+# grid = [[0,0,0],[1,1,0],[1,1,0]] # 4
+# sol = Solution()
+# print(sol.shortestPathBinaryMatrix(grid))
 
 
 
