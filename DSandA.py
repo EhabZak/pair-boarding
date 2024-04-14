@@ -3422,7 +3422,7 @@ grid[i][j] is 0, 1, or 2.
 #                 if grid[r][c] ==1 :
 #                     freshOranges +=1
 #                 elif grid[r][c] ==2:
-#                     queue.append((r,c,0)) #! I don't understand
+#                     queue.append((r,c,0)) #! new starting point
 #         print (queue)
 #         print('fresh oranges No =',freshOranges)
 
@@ -3560,10 +3560,10 @@ The input graph is guaranteed to be a DAG.
 '''
 class Solution:
     def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
-        target = len(graph) -1
+        target = len(graph) -1 #3
         results =[]
-
-        def backtrack(currentNode, path):
+        # you back track to go again the other way
+        def backtrack(currentNode, path): #0 , [0]
             if currentNode == target:
                 results.append(list(path))
                 return
@@ -3572,19 +3572,26 @@ class Solution:
                 # print ('graph current node ',graph[currentNode]) # [1,2] # [3]
                 # print('path before', path) # [0] # [0,1]
                 path.append(neighbor)
-                # print ('neighbor is ===>',neighbor) #1 # 3 # None
+                print ('neighbor is ===>',neighbor) #1 # 3 # None
                 # print ('path middle', path) #[0,1] [0,1,3]
                 backtrack(neighbor,path)
                 print ('path end', path) # nothing # [0,1,3] then [0,1] #
                 path.pop()
+                # print (' path ****',path)
 
         path = [0]
         backtrack(0,path)
 
         return results
 
+'''
+0 --> 1
+|     |
+v     v
+2 --> 3
 
-graph = [[1,2],[3],[3],[]]
+'''
+graph = [[1,2],[3],[3],[]] # [[0, 1, 3], [0, 2, 3]]
 
 sol = Solution()
 print(sol.allPathsSourceTarget(graph))
