@@ -3483,43 +3483,43 @@ n == mat[i].length
 mat[i][j] is either 0 or 1.
 There is at least one 0 in mat.
 '''
-# class Solution:
-#     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
-#         rows , cols = len(mat) , len(mat[0])
-#         directions = ((1,0),(0,1),(-1,0),(0,-1))
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        rows , cols = len(mat) , len(mat[0])
+        directions = ((1,0),(0,1),(-1,0),(0,-1))
 
 
-#         def inbound(r,c):
-#             rowInbound = 0 <= r < rows
-#             colInbound = 0 <= c < cols
-#             return rowInbound and colInbound
-#         queue = deque()
-#         for r in range(rows):
-#             for c in range(cols):
-#                 if mat[r][c] == 0:
-#                     queue.append((r,c)) # add starting points
-#                 else:
-#                     mat[r][c] = -1
-#         print ('queue===========', queue)
-#         while queue:
-#             r,c = queue.popleft()
+        def inbound(r,c):
+            rowInbound = 0 <= r < rows
+            colInbound = 0 <= c < cols
+            return rowInbound and colInbound
+        queue = deque()
+        for r in range(rows):
+            for c in range(cols):
+                if mat[r][c] == 0:
+                    queue.append((r,c)) # add starting points
+                else:
+                    mat[r][c] = -1  # to mark the visited ones later
+        print ('queue===========', queue)
+        while queue:
+            r,c = queue.popleft()
 
-#             for dir in directions:
-#                 newRow = r + dir[0]
-#                 newCol = c + dir[1]
+            for dir in directions:
+                newRow = r + dir[0]
+                newCol = c + dir[1]
 
-#                 # print ('mat is **** before', mat)
-#                 if not inbound(newRow,newCol) or mat[newRow][newCol] != -1: continue
-#                 mat[newRow][newCol] = mat [r][c] +1 # just notice that it is the adjacent one r c
-#                 print ('mat  is ====', mat)
-#                 queue.append((newRow,newCol))
+                # print ('mat is **** before', mat)
+                if not inbound(newRow,newCol) or mat[newRow][newCol] != -1: continue # move to next iteration if true
+                mat[newRow][newCol] = mat [r][c] +1 # just notice that it is the adjacent one r c
+                print ('mat  is ====', mat)
+                queue.append((newRow,newCol))
 
-#         return mat
+        return mat
 
-
-# mat = [[0,0,0],[0,1,0],[0,0,0]]
-# sol = Solution()
-# print(sol.updateMatrix(mat))
+# mat = [[0,0,0],[0,1,0],[0,0,0]] # [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
+mat = [[0,0,0],[0,1,0],[1,1,1]] #[[0,0,0],[0,1,0],[1,2,1]]
+sol = Solution()
+print(sol.updateMatrix(mat))
 
 
 #! 41- 797. All Paths From Source to Target (Medium) (algo: adjacency list, dfs , backtracking)  (time complexity ???))
@@ -3558,43 +3558,92 @@ All the elements of graph[i] are unique.
 The input graph is guaranteed to be a DAG.
 
 '''
+# class Solution:
+#     def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
+#         target = len(graph) -1 #3
+#         results =[]
+#         # you back track to go again the other way
+#         def backtrack(currentNode, path): #0 , [0]
+#             if currentNode == target:
+#                 results.append(list(path))
+#                 return
+
+#             for neighbor in graph[currentNode]:
+#                 # print ('graph current node ',graph[currentNode]) # [1,2] # [3]
+#                 # print('path before', path) # [0] # [0,1]
+#                 path.append(neighbor)
+#                 print ('neighbor is ===>',neighbor) #1 # 3 # None
+#                 # print ('path middle', path) #[0,1] [0,1,3]
+#                 backtrack(neighbor,path)
+#                 print ('path end', path) # nothing # [0,1,3] then [0,1] #
+#                 path.pop()
+#                 # print (' path ****',path)
+
+#         path = [0]
+#         backtrack(0,path)
+
+#         return results
+
+# '''
+# 0 --> 1
+# |     |
+# v     v
+# 2 --> 3
+
+# '''
+# graph = [[1,2],[3],[3],[]] # [[0, 1, 3], [0, 2, 3]]
+
+# sol = Solution()
+# print(sol.allPathsSourceTarget(graph))
+
+#! 42- 1129. Shortest Path with Alternating Colors
+
+'''
+1129. Shortest Path with Alternating Colors
+Medium
+Topics
+Companies Bloomberg linkedin Google
+Hint
+You are given an integer n, the number of nodes in a directed graph where the nodes are labeled from 0 to n - 1. Each edge is red or blue in this graph, and there could be self-edges and parallel edges.
+
+You are given two arrays redEdges and blueEdges where:
+
+redEdges[i] = [ai, bi] indicates that there is a directed red edge from node ai to node bi in the graph, and
+blueEdges[j] = [uj, vj] indicates that there is a directed blue edge from node uj to node vj in the graph.
+Return an array answer of length n, where each answer[x] is the length of the shortest path from node 0 to node x such that the edge colors alternate along the path, or -1 if such a path does not exist.
+
+
+
+Example 1:
+
+Input: n = 3, redEdges = [[0,1],[1,2]], blueEdges = []
+Output: [0,1,-1]
+Example 2:
+
+Input: n = 3, redEdges = [[0,1]], blueEdges = [[2,1]]
+Output: [0,1,-1]
+
+
+Constraints:
+
+1 <= n <= 100
+0 <= redEdges.length, blueEdges.length <= 400
+redEdges[i].length == blueEdges[j].length == 2
+0 <= ai, bi, uj, vj < n
+
+'''
+
 class Solution:
-    def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
-        target = len(graph) -1 #3
-        results =[]
-        # you back track to go again the other way
-        def backtrack(currentNode, path): #0 , [0]
-            if currentNode == target:
-                results.append(list(path))
-                return
+    def shortestAlternatingPaths(self, n: int, redEdges: List[List[int]], blueEdges: List[List[int]]) -> List[int]:
+        pass
 
-            for neighbor in graph[currentNode]:
-                # print ('graph current node ',graph[currentNode]) # [1,2] # [3]
-                # print('path before', path) # [0] # [0,1]
-                path.append(neighbor)
-                print ('neighbor is ===>',neighbor) #1 # 3 # None
-                # print ('path middle', path) #[0,1] [0,1,3]
-                backtrack(neighbor,path)
-                print ('path end', path) # nothing # [0,1,3] then [0,1] #
-                path.pop()
-                # print (' path ****',path)
 
-        path = [0]
-        backtrack(0,path)
-
-        return results
-
-'''
-0 --> 1
-|     |
-v     v
-2 --> 3
-
-'''
-graph = [[1,2],[3],[3],[]] # [[0, 1, 3], [0, 2, 3]]
-
+n = 3
+redEdges = [[0,1],[1,2]]
+blueEdges = []
 sol = Solution()
-print(sol.allPathsSourceTarget(graph))
+print(sol.shortestAlternatingPaths(n,redEdges,blueEdges))
+
 
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
