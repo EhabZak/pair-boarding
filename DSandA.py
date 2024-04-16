@@ -3483,43 +3483,68 @@ n == mat[i].length
 mat[i][j] is either 0 or 1.
 There is at least one 0 in mat.
 '''
-class Solution:
-    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
-        rows , cols = len(mat) , len(mat[0])
-        directions = ((1,0),(0,1),(-1,0),(0,-1))
+# class Solution:
+#     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+#         rows , cols = len(mat) , len(mat[0])
+#         directions = ((1,0),(0,1),(-1,0),(0,-1))
 
 
-        def inbound(r,c):
-            rowInbound = 0 <= r < rows
-            colInbound = 0 <= c < cols
-            return rowInbound and colInbound
-        queue = deque()
-        for r in range(rows):
-            for c in range(cols):
-                if mat[r][c] == 0:
-                    queue.append((r,c)) # add starting points
-                else:
-                    mat[r][c] = -1  # to mark the visited ones later
-        print ('queue===========', queue)
-        while queue:
-            r,c = queue.popleft()
+#         def inbound(r,c):
+#             rowInbound = 0 <= r < rows
+#             colInbound = 0 <= c < cols
+#             return rowInbound and colInbound
+#         queue = deque()
+#         for r in range(rows):
+#             for c in range(cols):
+#                 if mat[r][c] == 0:
+#                     queue.append((r,c)) # add starting points
+#                 else:
+#                     mat[r][c] = -1  # to mark the visited ones later
+#         print ('queue===========', queue)
+#         while queue:
+#             r,c = queue.popleft()
 
-            for dir in directions:
-                newRow = r + dir[0]
-                newCol = c + dir[1]
+#             for dir in directions:
+#                 newRow = r + dir[0]
+#                 newCol = c + dir[1]
 
-                # print ('mat is **** before', mat)
-                if not inbound(newRow,newCol) or mat[newRow][newCol] != -1: continue # move to next iteration if true
-                mat[newRow][newCol] = mat [r][c] +1 # just notice that it is the adjacent one r c
-                print ('mat  is ====', mat)
-                queue.append((newRow,newCol))
+#                 # print ('mat is **** before', mat)
+#                 if not inbound(newRow,newCol) or mat[newRow][newCol] != -1: continue # move to next iteration if true
+#                 mat[newRow][newCol] = mat [r][c] +1 # just notice that it is the adjacent one r c
+#                 print ('mat  is ====', mat)
+#                 queue.append((newRow,newCol))
 
-        return mat
+#         return mat
+    #! faster solution
+
+    # rows,cols = len(mat), len(mat[0])
+    #     directions = ((0,1),(1,0),(0,-1),(-1,0))
+
+    #     m, n = len(mat), len(mat[0])
+
+    #     for r in range(m):
+    #         for c in range(n):
+    #             if mat[r][c] > 0:
+    #                 top = mat[r - 1][c] if r > 0 else math.inf
+    #                 left = mat[r][c - 1] if c > 0 else math.inf
+    #                 print ('mat====>', mat)
+    #                 mat[r][c] = min(top, left) + 1
+    #                 print (min(top, left))
+
+    #     for r in range(m - 1, -1, -1):
+    #         for c in range(n - 1, -1, -1):
+    #             if mat[r][c] > 0:
+    #                 bottom = mat[r + 1][c] if r < m - 1 else math.inf
+    #                 right = mat[r][c + 1] if c < n - 1 else math.inf
+    #                 mat[r][c] = min(mat[r][c], bottom + 1, right + 1)
+    #     return mat
+
+
 
 # mat = [[0,0,0],[0,1,0],[0,0,0]] # [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
-mat = [[0,0,0],[0,1,0],[1,1,1]] #[[0,0,0],[0,1,0],[1,2,1]]
-sol = Solution()
-print(sol.updateMatrix(mat))
+# mat = [[0,0,0],[0,1,0],[1,1,1]] #[[0,0,0],[0,1,0],[1,2,1]]
+# sol = Solution()
+# print(sol.updateMatrix(mat))
 
 
 #! 41- 797. All Paths From Source to Target (Medium) (algo: adjacency list, dfs , backtracking)  (time complexity ???))
