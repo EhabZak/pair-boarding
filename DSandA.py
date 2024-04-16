@@ -3704,13 +3704,13 @@ redEdges[i].length == blueEdges[j].length == 2
 # sol = Solution()
 # print(sol.shortestAlternatingPaths(n,redEdges,blueEdges))
 
-#! 43- 785. Is Graph Bipartite? (Medium) (algo: adjacency list , ???)  (time complexity ???))
+#! 43- 785. Is Graph Bipartite? (Medium) (algo: adjacency list , dfs)  (time complexity ???))
 
 '''
 785. Is Graph Bipartite?
 Medium
 Topics
-Companies
+Companies TikTok Apple Amazon
 There is an undirected graph with n nodes, where each node is numbered between 0 and n - 1. You are given a 2D array graph, where graph[u] is an array of nodes that node u is adjacent to. More formally, for each v in graph[u], there is an undirected edge between node u and node v. The graph has the following properties:
 
 There are no self-edges (graph[u] does not contain u).
@@ -3731,6 +3731,31 @@ Output: false
 Explanation: There is no way to partition the nodes into two independent sets such that every edge connects a node in one and a node in the other.
 
 '''
+class Solution:
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+        nodeColors = {}
+        LEN = len(graph)
+
+        def colorNodes(node, currentColor):
+            if node in nodeColors:
+                return nodeColors[node] == currentColor
+            nodeColors[node] = currentColor
+            for neighbor in graph[node]:
+                if not colorNodes(neighbor,not currentColor):
+                    return False
+            return True
+        for node in range(LEN):
+            if node not in nodeColors and not colorNodes(node,True):
+                return False
+        return True
+
+
+
+
+# graph = [[1,2,3],[0,2],[0,1,3],[0,2]] # False
+graph = [[1,3],[0,2],[1,3],[0,2]] #True
+sol = Solution()
+print(sol.isBipartite(graph))
 
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
