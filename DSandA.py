@@ -3621,7 +3621,7 @@ The input graph is guaranteed to be a DAG.
 # sol = Solution()
 # print(sol.allPathsSourceTarget(graph))
 
-#! 42- 1129. Shortest Path with Alternating Colors
+#! 42- 1129. Shortest Path with Alternating Colors (Medium) (algo: adjacency list, bfs)  (time complexity ???))
 
 '''
 1129. Shortest Path with Alternating Colors
@@ -3658,17 +3658,58 @@ redEdges[i].length == blueEdges[j].length == 2
 
 '''
 
-class Solution:
-    def shortestAlternatingPaths(self, n: int, redEdges: List[List[int]], blueEdges: List[List[int]]) -> List[int]:
-        pass
+# class Solution:
+#     def shortestAlternatingPaths(self, n: int, redEdges: List[List[int]], blueEdges: List[List[int]]) -> List[int]:
+#         red = defaultdict(list)
+#         blue = defaultdict(list)
+
+#         for src , dst in redEdges:
+#             red[src].append(dst) # we use append cause it is a list in the defaultdict we can use assignment [] = dst for the first value only
+#         for src, dst in blueEdges:
+#             blue[src].append(dst)
+#         # print ('red=========' , red)
+#         # print ('blue',blue)
+
+#         #initialize queue with starting node
+#         answer = [-1 for _ in range(n)]
+#         queue = deque([(0,0,None)]) # (node,length, prev_edge color)   #! why do we have tuple and list
+#         visited = set([(0,None)])
+
+#         while queue:
+#             # shift current node out from queue
+#             node, length , edgeColor = queue.popleft()
+#             #process node
+#             if answer[node] == -1:
+#                 answer[node] = length
+
+#             #push all valid neighbors into queue
+#             if edgeColor != 'RED': # not because we start with 'None'
+#                 for neighbor in red[node]:
+#                     if (neighbor, 'RED') not in visited:
+#                         visited.add((neighbor,'RED'))
+#                         queue.append((neighbor,length+1, 'RED'))
+#             if edgeColor != 'BLUE':
+#                 for neighbor in blue[node]:
+#                     if (neighbor, 'BLUE') not in visited:
+#                         visited.add((neighbor,'BLUE'))
+#                         queue.append((neighbor,length+1, 'BLUE'))
+
+#         print ('visited', visited)
+#         return answer
 
 
-n = 3
-redEdges = [[0,1],[1,2]]
-blueEdges = []
-sol = Solution()
-print(sol.shortestAlternatingPaths(n,redEdges,blueEdges))
+# n = 3
+# redEdges = [[0,1],[1,2]] #[0,1,-1]
+# blueEdges = []
+# sol = Solution()
+# print(sol.shortestAlternatingPaths(n,redEdges,blueEdges))
 
+#! 43-
+
+'''
+
+
+'''
 
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
