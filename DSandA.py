@@ -3680,11 +3680,11 @@ class Solution:
             node, length , edgeColor = queue.popleft()
             #process node
             if answer[node] == -1:
-                answer[node] = length # replace it with the length 
+                answer[node] = length # replace it with the length
 
             #push all valid neighbors into queue
-            if edgeColor != 'RED': # not because we start with 'None'
-                for neighbor in red[node]:
+            if edgeColor != 'RED': # we use not because we start with 'None' # if the previous node popped off is not red then the code starts exploring the red list
+                for neighbor in red[node]: # we check the red list , this check the val of the key
                     if (neighbor, 'RED') not in visited:
                         visited.add((neighbor,'RED'))
                         queue.append((neighbor,length+1, 'RED'))
