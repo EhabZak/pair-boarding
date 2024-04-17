@@ -3658,51 +3658,51 @@ redEdges[i].length == blueEdges[j].length == 2
 
 '''
 
-class Solution:
-    def shortestAlternatingPaths(self, n: int, redEdges: List[List[int]], blueEdges: List[List[int]]) -> List[int]:
-        red = defaultdict(list)
-        blue = defaultdict(list)
+# class Solution:
+#     def shortestAlternatingPaths(self, n: int, redEdges: List[List[int]], blueEdges: List[List[int]]) -> List[int]:
+#         red = defaultdict(list)
+#         blue = defaultdict(list)
 
-        for src , dst in redEdges:
-            red[src].append(dst) # we use append cause it is a list in the defaultdict we can use assignment [] = dst for the first value only
-        for src, dst in blueEdges:
-            blue[src].append(dst)
-        # print ('red=========' , red)
-        # print ('blue',blue)
+#         for src , dst in redEdges:
+#             red[src].append(dst) # we use append cause it is a list in the defaultdict we can use assignment [] = dst for the first value only
+#         for src, dst in blueEdges:
+#             blue[src].append(dst)
+#         # print ('red=========' , red)
+#         # print ('blue',blue)
 
-        #initialize queue with starting node
-        answer = [-1 for _ in range(n)]
-        queue = deque([(0,0,None)]) # (node,length, prev_edge, color)   #! why do we have tuple and list
-        visited = set([(0,None)])
+#         #initialize queue with starting node
+#         answer = [-1 for _ in range(n)]
+#         queue = deque([(0,0,None)]) # (node,length, prev_edge, color)   #! why do we have tuple and list
+#         visited = set([(0,None)])
 
-        while queue:
-            # shift current node out from queue
-            node, length , edgeColor = queue.popleft()
-            #process node
-            if answer[node] == -1:
-                answer[node] = length # replace it with the length
+#         while queue:
+#             # shift current node out from queue
+#             node, length , edgeColor = queue.popleft()
+#             #process node
+#             if answer[node] == -1:
+#                 answer[node] = length # replace it with the length
 
-            #push all valid neighbors into queue
-            if edgeColor != 'RED': # we use not because we start with 'None' # if the previous node popped off is not red then the code starts exploring the red list
-                for neighbor in red[node]: # we check the red list , this check the val of the key
-                    if (neighbor, 'RED') not in visited:
-                        visited.add((neighbor,'RED'))
-                        queue.append((neighbor,length+1, 'RED'))
-            if edgeColor != 'BLUE':
-                for neighbor in blue[node]:
-                    if (neighbor, 'BLUE') not in visited:
-                        visited.add((neighbor,'BLUE'))
-                        queue.append((neighbor,length+1, 'BLUE'))
+#             #push all valid neighbors into queue
+#             if edgeColor != 'RED': # we use not because we start with 'None' # if the previous node popped off is not red then the code starts exploring the red list
+#                 for neighbor in red[node]: # we check the red list , this check the val of the key
+#                     if (neighbor, 'RED') not in visited:
+#                         visited.add((neighbor,'RED'))
+#                         queue.append((neighbor,length+1, 'RED'))
+#             if edgeColor != 'BLUE':
+#                 for neighbor in blue[node]:
+#                     if (neighbor, 'BLUE') not in visited:
+#                         visited.add((neighbor,'BLUE'))
+#                         queue.append((neighbor,length+1, 'BLUE'))
 
-        print ('visited', visited)
-        return answer
+#         print ('visited', visited)
+#         return answer
 
 
-n = 3
-redEdges = [[0,1],[1,2]] #[0,1,-1]
-blueEdges = []
-sol = Solution()
-print(sol.shortestAlternatingPaths(n,redEdges,blueEdges))
+# n = 3
+# redEdges = [[0,1],[1,2]] #[0,1,-1]
+# blueEdges = []
+# sol = Solution()
+# print(sol.shortestAlternatingPaths(n,redEdges,blueEdges))
 
 #! 43- 785. Is Graph Bipartite? (Medium) (algo: adjacency list , dfs)  (time complexity ???))
 
