@@ -16,18 +16,23 @@ class Solution:
            if node in nodeColors: # Check if the node is already colored
                print ('node in nodeColors #####',node)
                print ('nodeColors[node] == currentColor =>$$$$$$$$$$',nodeColors[node] == currentColor)
+               print (f'nodeColors[node]=, {nodeColors[node]} , currentColor is = {currentColor}')
+
                return nodeColors[node] == currentColor # Check if the color matches
            nodeColors[node] = currentColor # if node not in nodeColors then Color the current node with the given color
+           print ('nodeColors after nodeColors[node] = currentColor!!!!!!', nodeColors)
            print ('nodeColors[node]==== ', nodeColors[node] )
            print('currentColor *****', currentColor  )
 
            for neighbor in graph[node]:
-               if not colorNodes(neighbor,not currentColor):
+               if not colorNodes(neighbor,not currentColor): # if colorNodes returns false it will be not False (True) then this condition will apply
+               # if not (True) it means this condition is false thus not applicable
                    return False
            return True
 ##########################################################################
        #! execution start
        for node in range(len(graph)):
+           print ('===========================================>>>>>>>>>>>>>>>>>>START AGAIN')
            #Checks if the node is not already colored and colors it with True (considering it as part of set A).
            print('colorNodes(node,True)@@@@@@@@@@@@@@@@@@@@@@@',colorNodes(node,True))
            if node not in nodeColors and not colorNodes(node,True): #! why does it have to be true and red is not working?
