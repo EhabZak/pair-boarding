@@ -24,14 +24,14 @@ class Solution:
            print ('nodeColors[node]==== ', nodeColors[node] )
            print('currentColor *****', currentColor  )
 
-           for neighbor in graph[node]:
+           for neighbor in graph[node]: #! second iteration 
                if not colorNodes(neighbor,not currentColor): # if colorNodes returns false it will be not False (True) then this condition will apply
                # if not (True) it means this condition is false thus not applicable
                    return False
            return True
 ##########################################################################
        #! execution start
-       for node in range(len(graph)):
+       for node in range(len(graph)): #! first iteration
            print ('===========================================>>>>>>>>>>>>>>>>>>START AGAIN')
            #Checks if the node is not already colored and colors it with True (considering it as part of set A).
            print('colorNodes(node,True)@@@@@@@@@@@@@@@@@@@@@@@',colorNodes(node,True))
