@@ -3747,10 +3747,10 @@ class Solution:
         for node in range(LEN):
 
             if node not in nodeColors and not colorNodes(node,True):
-                print ('nodeColors at the end if it is false', nodeColors)
+                # print ('nodeColors at the end if it is false', nodeColors)
                 return False
 
-        print ('nodeColors at the end if it is true', nodeColors)
+        # print ('nodeColors at the end if it is true', nodeColors)
         return True
 
 #! with full explanation
