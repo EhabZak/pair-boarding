@@ -8,12 +8,20 @@ import math, random
 class Solution:
     def fib(self, n: int, mono = {}) -> int:
 
-        if n == 0: return 0
-        if n == 1: return 1
-        if n in mono: return mono[n]
 
-        mono[n] = self.fib(n-1)+ self.fib(n-2)
-        return mono[n]
+        if n ==1: return 1
+        elif n == 0: return 0
+        else:
+            x = [0,1]
+            y = 2
+
+            while y < n:
+                x.append(x[y-1]+x[y-2])
+                y +=1
+            return x[n-1]+x[n-2]
+
+
+
 
 
 

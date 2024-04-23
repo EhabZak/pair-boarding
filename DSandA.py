@@ -3836,16 +3836,32 @@ Constraints:
 
 '''
 
+# class Solution:
+#     def fib(self, n: int, memo ={}) -> int:
+
+#         if n == 0 : return 0
+#         if n == 1 : return 1
+#         if n in memo: return memo[n]
+
+#         memo[n]= self.fib(n-1)+ self.fib(n-2)
+
+#         return memo[n]
+#! Fastest solution
 class Solution:
-    def fib(self, n: int, memo ={}) -> int:
+    def fib(self, n: int, mono = {}) -> int:
+        if n==0: return 0
+        elif n==1 or n==2: return 1
 
-        if n == 0 : return 0
-        if n == 1 : return 1
-        if n in memo: return memo[n]
+        else:
+            x=[0,1]
+            o=2
+            while o<n:
+                x.append(x[o-1]+x[o-2])
+                o=o+1
 
-        memo[n]= self.fib(n-1)+ self.fib(n-2)
+            # print('X at the end == ',x)
+            return x[n-1]+x[n-2]
 
-        return memo[n]
 
 
 n = 10
