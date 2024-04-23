@@ -3843,31 +3843,109 @@ Constraints:
 #         if n == 1 : return 1
 #         if n in memo: return memo[n]
 
-#         memo[n]= self.fib(n-1)+ self.fib(n-2)
-
+#         memo[n]= self.fib(n-1,memo)+ self.fib(n-2, memo)
 #         return memo[n]
-#! Fastest solution
+
+# #! Fastest solution
+# class Solution:
+#     def fib(self, n: int, mono = {}) -> int:
+#         if n==0: return 0
+#         elif n==1 or n==2: return 1
+
+#         else:
+#             x=[0,1]
+#             o=2
+#             while o<n:
+#                 x.append(x[o-1]+x[o-2])
+#                 o=o+1
+
+#             # print('X at the end == ',x)
+#             return x[n-1]+x[n-2]
+
+
+
+# n = 10
+# solution = Solution()
+# output = solution.fib(n)
+# print(output)
+
+
+#! 45 - 62. Unique Paths (Algo Academy) (medium) (Tech: dynamic programming)  (time complexity O(n) )
+'''
+62. Unique Paths
+Medium
+Topics
+Companies
+There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]). The robot can only move either down or right at any point in time.
+
+Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.
+
+The test cases are generated so that the answer will be less than or equal to 2 * 109.
+
+
+
+Example 1:
+
+
+Input: m = 3, n = 7
+Output: 28
+Example 2:
+
+Input: m = 3, n = 2
+Output: 3
+Explanation: From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
+1. Right -> Down -> Down
+2. Down -> Down -> Right
+3. Down -> Right -> Down
+
+
+Constraints:
+
+1 <= m, n <= 100
+
+'''
+
 class Solution:
-    def fib(self, n: int, mono = {}) -> int:
-        if n==0: return 0
-        elif n==1 or n==2: return 1
-
-        else:
-            x=[0,1]
-            o=2
-            while o<n:
-                x.append(x[o-1]+x[o-2])
-                o=o+1
-
-            # print('X at the end == ',x)
-            return x[n-1]+x[n-2]
+    def uniquePaths(self, m: int, n: int) -> int:
+        memo = {}
+        def pathCount(m,n):
+            if n == 0 or m == 0: return 0
+            if n == 1 and m == 1: return 1
+            key = f'{m},{n}'
+            if key in memo: return memo[key]
+            memo[key]= pathCount(m-1,n)+ pathCount(m, n-1)
+            return memo[key]
+        return pathCount(m,n)
 
 
+    #! fastest solution 
+'''
+it starts finding the paths from the bottom because of the recursion and goes to  0,0 to find the paths
+it can be 0,0 and target be m-1 , n-1 or it can be 1,1 and m and n when you draw the grid.
+this solution didn't pass on leet code because it is too slow there is another dynamic programming solution that is better.
+'''
+m = 3
+n = 2
 
-n = 10
 solution = Solution()
-output = solution.fib(n)
+output = solution.uniquePaths(m,n)
 print(output)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
