@@ -4045,6 +4045,7 @@ Constraints:
 
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
+        ######################################
         def dfs(rem,memo):
             if rem == 0: return 0
             if rem in memo: return memo[rem]
@@ -4058,10 +4059,11 @@ class Solution:
                     memo[rem] = min (memo[rem], dfs(rem - coin, memo) +1)
                     print (memo)
             return memo[rem]
+        ######################################
 
 
         memo = defaultdict(int)
-        print (memo)
+        # print (memo)
         result = dfs(amount, memo)
         return result if result != float("inf") else -1
 
