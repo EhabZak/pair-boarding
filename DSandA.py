@@ -3948,7 +3948,7 @@ this solution didn't pass on leet code because it is too slow there is another d
 # output = solution.uniquePaths(m,n)
 # print(output)
 
-#! 45 - 70. Climbing Stairs (Algo Academy) (medium) (Tech: dynamic programming)  (time complexity O(n) )
+#! 46 - 70. Climbing Stairs (Algo Academy) (medium) (Tech: dynamic programming, dfs)  (time complexity O(n) )
 
 '''
 70. Climbing Stairs
@@ -3985,30 +3985,91 @@ Constraints:
 
 '''
 
+
+
+# class Solution:
+#     def climbStairs(self, n: int, memo ={}) -> int:
+#         if n ==1: return 1
+#         if n == 2: return 2
+#         if n in memo: return memo[n]
+
+#         memo[n] = self.climbStairs(n-1,memo)+ self.climbStairs(n-2,memo)
+#         return memo[n]
+
+
+
+
+
+# n = 3
+
+# solution = Solution()
+# output = solution.climbStairs(n)
+# print(output)
+
+#! 47 - 322. Coin Changes (Algo Academy) (medium) (Tech: dynamic programming)  (time complexity O(n) )
+
+'''
+322. Coin Change
+Medium
+Topics
+Companies Apple Bloomberg  Mathworks
+You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
+
+Return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
+
+You may assume that you have an infinite number of each kind of coin.
+
+
+
+Example 1:
+
+Input: coins = [1,2,5], amount = 11
+Output: 3
+Explanation: 11 = 5 + 5 + 1
+Example 2:
+
+Input: coins = [2], amount = 3
+Output: -1
+Example 3:
+
+Input: coins = [1], amount = 0
+Output: 0
+
+
+Constraints:
+
+1 <= coins.length <= 12
+1 <= coins[i] <= 231 - 1
+0 <= amount <= 104
+'''
+
 class Solution:
-    def climbStairs(self, n: int, memo ={}) -> int:
-        if n ==1: return 1
-        if n == 2: return 2
-        if n in memo: return memo[n]
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        def dfs(rem,memo):
+            if rem == 0: return 0
+            if rem in memo: return memo[rem]
 
-        memo[n] = self.climbStairs(n-1,memo)+ self.climbStairs(n-2,memo)
-        return memo[n]
+            memo[rem]= float("inf")
+
+            for coin in coins:
+                if rem - coin >= 0:
+                    memo[rem] = min (memo[rem], dfs(rem - coin, memo) +1)
+            return memo[rem]
+
+
+        memo = defaultdict(int)
+        result = dfs(amount, memo)
+        return result if result != float("inf") else -1
 
 
 
 
 
-n = 3
-
+coins = [1,2,5] #3
+amount = 11
 solution = Solution()
-output = solution.climbStairs(n)
+output = solution.coinChange(coins, amount)
 print(output)
-
-
-
-
-
-
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
 #! 12-554. Brick Wall -(Lecture) - (Medium)
