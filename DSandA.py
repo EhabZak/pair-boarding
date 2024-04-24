@@ -3837,7 +3837,7 @@ Constraints:
 '''
 
 # class Solution:
-#     def fib(self, n: int, memo ={}) -> int:
+#     def fib(self, n: int, memo ={}) -> int: # this is depth fist search
 
 #         if n == 0 : return 0
 #         if n == 1 : return 1
@@ -3870,7 +3870,7 @@ Constraints:
 # print(output)
 
 
-#! 45 - 62. Unique Paths (Algo Academy) (medium) (Tech: dynamic programming)  (time complexity O(n) )
+#! 45 - 62. Unique Paths (Algo Academy) (medium) (Tech: dynamic programming, dfs)  (time complexity O(n) )
 '''
 62. Unique Paths
 Medium
@@ -3905,42 +3905,104 @@ Constraints:
 
 '''
 
-class Solution:
-    def uniquePaths(self, m: int, n: int) -> int:
-        memo = {}
-        def pathCount(m,n):
-            if n == 0 or m == 0: return 0
-            if n == 1 and m == 1: return 1
-            key = f'{m},{n}'
-            if key in memo: return memo[key]
-            memo[key]= pathCount(m-1,n)+ pathCount(m, n-1)
-            return memo[key]
-        return pathCount(m,n)
+# class Solution:
+#     def uniquePaths(self, m: int, n: int) -> int:
+#         memo = {}
+#         def pathCount(m,n):
+#             if n == 0 or m == 0: return 0
+#             if n == 1 and m == 1: return 1
+#             key = f'{m},{n}'
+#             if key in memo: return memo[key]
+#             memo[key]= pathCount(m-1,n)+ pathCount(m, n-1)
+#             return memo[key]
+#         return pathCount(m,n)
 
 
-    #! fastest solution 
+    #! fastest solution
+# class Solution:
+#     def uniquePaths(self, m: int, n: int) -> int:
+#         table = [[1 for _ in range(n)] for _ in range(m)] # creates a 2D list (or matrix) # [[1, 1], [1, 1], [1, 1]] representing rows and cols
+#         # print (table) # [[1, 1], [1, 2], [1, 3]] # first row and the first column are already initialized
+#         for i in range(1,m): #stop value is excluded
+#             for j in range(1,n):
+#                 table[i][j] = table[i-1][j]+ table[i][j-1]
+#                 # replacing the value in the table with the values from going once right and once down or both this way we will find all the possible paths
+#                 # Each cell stores the number of unique paths to reach it by summing up the number of
+#                 #paths from the cell above and the cell to the left.
+#                 #This calculation is based on the fact that to reach cell (i, j),
+#                 #you can either come from above (i-1, j) or from the left (i, j-1)
+#                 print ('i is ===',i)
+#                 print ('j is ********',j)
+#                 print (table[i][j])
+#         print (table)
+#         return table[m-1][n-1]
 '''
 it starts finding the paths from the bottom because of the recursion and goes to  0,0 to find the paths
 it can be 0,0 and target be m-1 , n-1 or it can be 1,1 and m and n when you draw the grid.
 this solution didn't pass on leet code because it is too slow there is another dynamic programming solution that is better.
 '''
-m = 3
-n = 2
+# m = 3
+# n = 2
+
+# solution = Solution()
+# output = solution.uniquePaths(m,n)
+# print(output)
+
+#! 45 - 70. Climbing Stairs (Algo Academy) (medium) (Tech: dynamic programming)  (time complexity O(n) )
+
+'''
+70. Climbing Stairs
+Easy
+Topics
+Companies Amazon Apple Uber
+Hint
+You are climbing a staircase. It takes n steps to reach the top.
+
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+
+
+Example 1:
+
+Input: n = 2
+Output: 2
+Explanation: There are two ways to climb to the top.
+1. 1 step + 1 step
+2. 2 steps
+Example 2:
+
+Input: n = 3
+Output: 3
+Explanation: There are three ways to climb to the top.
+1. 1 step + 1 step + 1 step
+2. 1 step + 2 steps
+3. 2 steps + 1 step
+
+
+Constraints:
+
+1 <= n <= 45
+
+'''
+
+class Solution:
+    def climbStairs(self, n: int, memo ={}) -> int:
+        if n ==1: return 1
+        if n == 2: return 2
+        if n in memo: return memo[n]
+
+        memo[n] = self.climbStairs(n-1,memo)+ self.climbStairs(n-2,memo)
+        return memo[n]
+
+
+
+
+
+n = 3
 
 solution = Solution()
-output = solution.uniquePaths(m,n)
+output = solution.climbStairs(n)
 print(output)
-
-
-
-
-
-
-
-
-
-
-
 
 
 
