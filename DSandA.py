@@ -3918,7 +3918,7 @@ Constraints:
 #         return pathCount(m,n)
 
 
-    #! fastest solution
+    #! fastest solution (tabulation)
 # class Solution:
 #     def uniquePaths(self, m: int, n: int) -> int:
 #         table = [[1 for _ in range(n)] for _ in range(m)] # creates a 2D list (or matrix) # [[1, 1], [1, 1], [1, 1]] representing rows and cols
@@ -4066,24 +4066,49 @@ Constraints:
 #         return result if result != float("inf") else -1
 
     #! faster solution
-class Solution:
-    def coinChange(self, coins: List[int], amount: int) -> int:
-        dp = [amount+1] * (amount+1) # created one dimensional table # amount+1 to represent infinity
-        print (dp)
-        dp[0] = 0
-        for index in range(amount+1):
-            for coin in coins:
-                if coin <= index:
-                    dp[index] = min(dp[index] , dp[index-coin] + 1 )
-        print (dp)
-        return dp[amount] if dp[amount]!=amount+1 else -1
+# class Solution:
+#     def coinChange(self, coins: List[int], amount: int) -> int:
+#         dp = [amount+1] * (amount+1) # created one dimensional table # amount+1 to represent infinity
+#         print (dp)
+#         dp[0] = 0
+#         for index in range(amount+1):
+#             for coin in coins:
+#                 if coin <= index:
+#                     dp[index] = min(dp[index] , dp[index-coin] + 1 )
+#         print (dp)
+#         return dp[amount] if dp[amount]!=amount+1 else -1
 
-coins = [1,2,5] #3
-# amount = 11
-amount = 6
-solution = Solution()
-output = solution.coinChange(coins, amount)
-print(output)
+# coins = [1,2,5] #3
+# # amount = 11
+# amount = 6
+# solution = Solution()
+# output = solution.coinChange(coins, amount)
+# print(output)
+
+#! #! 44- 509. Fibonacci Number (Algo Academy) (easy) (Tech: Dynamic Programming- tabulation)  (Time Complexity O(n))
+# time complexity (O(n)) for both tabulation and memoization
+# def fib_memo(n,memo ={}):
+
+#     if n <= 1: return n
+#     if n in memo: return memo[n]
+
+#     memo[n]= fib_memo(n-1,memo)+ fib_memo(n-2, memo)
+#     return memo[n]
+
+# def fib_tab(n):
+#     if n <= 1: return n
+
+#     dp = [0] * (n+1)
+#     dp[1]= 1
+
+#     for index in range(2, n+1):
+#         dp[index] = dp[index-1]+dp[index-2]
+#     print (dp)
+#     return dp[n]
+
+n = 6
+# print(fib_memo(n))
+print(fib_tab(n))
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
 #! 12-554. Brick Wall -(Lecture) - (Medium)
