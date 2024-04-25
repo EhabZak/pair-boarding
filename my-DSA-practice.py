@@ -5,16 +5,16 @@ import heapq
 import math, random
 
 
-class Solution:
-    def coinChange(self, coins: List[int], amount: int) -> int:
+# class Solution:
+#     def coinChange(self, coins: List[int], amount: int) -> int:
 
-        dp = [0] + [amount + 1] * amount
+#         dp = [0] + [amount + 1] * amount
 
-        for coin in coins:
-            for i in range(coin, amount + 1):
-                dp[i] = min(dp[i], dp[i - coin] + 1)
+#         for coin in coins:
+#             for i in range(coin, amount + 1):
+#                 dp[i] = min(dp[i], dp[i - coin] + 1)
 
-        return -1 if dp[amount] == amount + 1 else dp[amount]
+#         return -1 if dp[amount] == amount + 1 else dp[amount]
         # def dfs ( rem, memo):
         #     if rem == 0: return 0
         #     if rem in memo: return memo[rem]
@@ -31,9 +31,16 @@ class Solution:
         # return result if result != float('inf') else -1
 
     #! faster solution
-
-
-
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        dp = [amount+1] * (amount+1) # amount+1 to represent infinity
+        # print (dp)
+        dp[0] = 0
+        for index in range(amount+1):
+            for coin in coins:
+                if coin <= index:
+                    dp[index] = min(dp[index] , dp[index-coin] + 1 )
+        return dp[amount] if dp[amount]!=amount+1 else -1
 
 
 
