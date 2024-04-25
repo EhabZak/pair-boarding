@@ -4004,12 +4004,31 @@ Constraints:
 
 #         memo[n] = self.climbStairs(n-1,memo)+ self.climbStairs(n-2,memo)
 #         return memo[n]
+#! tabulation
+        # if n <3 : return n
+        # dp = [None for _ in range(n+1)]
+        # dp[1],dp[2]= 1,2
+        # index = 3
+        # while index <= n:
+        #     dp[index]= dp[index-1]+ dp[index-2]
+        #     index += 1
+        # return dp[-1]
+    #! faster tabulation # this solution saves memory space
+        # if n <3 : return n
+        # dp = [1,2]
+        # index = 3
+
+        # while index <= n:
+        #     tmp = dp[1]
+        #     dp[1] =dp[0]+ dp[1]
+        #     dp[0]= tmp
+        #     index += 1
+        # return dp[-1]
 
 
 
 
-
-# n = 3
+# n = 3 #3
 
 # solution = Solution()
 # output = solution.climbStairs(n)
