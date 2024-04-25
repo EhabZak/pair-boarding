@@ -30,23 +30,4 @@ import math, random
         # result = dfs(amount,memo)
         # return result if result != float('inf') else -1
 
-    #! faster solution
-class Solution:
-    def coinChange(self, coins: List[int], amount: int) -> int:
-        dp = [amount+1] * (amount+1) # amount+1 to represent infinity
-        # print (dp)
-        dp[0] = 0
-        for index in range(amount+1):
-            for coin in coins:
-                if coin <= index:
-                    dp[index] = min(dp[index] , dp[index-coin] + 1 )
-        return dp[amount] if dp[amount]!=amount+1 else -1
 
-
-
-coins = [1,2,5] #3
-# amount = 11
-amount = 6
-solution = Solution()
-output = solution.coinChange(coins, amount)
-print(output)
