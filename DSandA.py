@@ -3921,21 +3921,30 @@ Constraints:
     #! fastest solution (tabulation)
 # class Solution:
 #     def uniquePaths(self, m: int, n: int) -> int:
-#         table = [[1 for _ in range(n)] for _ in range(m)] # creates a 2D list (or matrix) # [[1, 1], [1, 1], [1, 1]] representing rows and cols
-#         # print (table) # [[1, 1], [1, 2], [1, 3]] # first row and the first column are already initialized
-#         for i in range(1,m): #stop value is excluded
-#             for j in range(1,n):
-#                 table[i][j] = table[i-1][j]+ table[i][j-1]
-#                 # replacing the value in the table with the values from going once right and once down or both this way we will find all the possible paths
-#                 # Each cell stores the number of unique paths to reach it by summing up the number of
-#                 #paths from the cell above and the cell to the left.
-#                 #This calculation is based on the fact that to reach cell (i, j),
-#                 #you can either come from above (i-1, j) or from the left (i, j-1)
-#                 print ('i is ===',i)
-#                 print ('j is ********',j)
-#                 print (table[i][j])
-#         print (table)
-#         return table[m-1][n-1]
+#         class Solution:
+    # def uniquePaths(self, m: int, n: int, memo ={}) -> int: # brute force #memo # tab
+        #! 1-solution brute force
+        # if n == 0 or m == 0: return 0
+        # if n == 1 and m == 1: return 1
+        # return self.uniquePaths(m-1,n)+ self.uniquePaths(m,n-1)
+        #! 2-solution memoization
+        # if n == 0 or m == 0: return 0
+        # if n == 1 and m == 1: return 1
+        # key = f'{m},{n}'
+        # if key in memo: return memo[key]
+
+        # memo[key]= self.uniquePaths(m-1,n)+ self.uniquePaths(m,n-1)
+        # return memo[key]
+        #! 3- solution tabulation
+
+        # dp = [[1 for _ in range(n)] for _ in range(m)]
+        # dp = [[1] * n for _ in range(m)] # use this one it is faster
+        # # print (dp)
+
+        # for col in range(1,m):
+        #     for row in range(1,n):
+        #         dp[col][row]= dp[col-1][row]+ dp[col][row-1]
+        # return dp[-1][-1] # [m-1][n-1] and  [-1][-1] are the same
 '''
 it starts finding the paths from the bottom because of the recursion and goes to  0,0 to find the paths
 it can be 0,0 and target be m-1 , n-1 or it can be 1,1 and m and n when you draw the grid.
@@ -3948,7 +3957,7 @@ this solution didn't pass on leet code because it is too slow there is another d
 # output = solution.uniquePaths(m,n)
 # print(output)
 
-#! 46 - 70. Climbing Stairs (Algo Academy) (medium) (Tech: dynamic programming, dfs)  (time complexity O(n) )
+#! 46 - 70. Climbing Stairs (Algo Academy) (medium) (Tech: dynamic programming (memoization , tabulation), dfs)  (time complexity O(n) )
 
 '''
 70. Climbing Stairs
@@ -4006,7 +4015,7 @@ Constraints:
 # output = solution.climbStairs(n)
 # print(output)
 
-#! 47 - 322. Coin Changes (Algo Academy) (medium) (Tech: dynamic programming)  (time complexity O(n) )
+#! 47 - 322. Coin Changes (Algo Academy) (medium) (Tech: dynamic programming(memoization, tabulation))  (time complexity O(n) )
 
 '''
 322. Coin Change
@@ -4106,9 +4115,32 @@ Constraints:
 #     print (dp)
 #     return dp[n]
 
-n = 6
+# n = 6
 # print(fib_memo(n))
-print(fib_tab(n))
+# print(fib_tab(n))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #! 11-752. Open the Lock -(Lecture) - (Medium)
 #! 12-554. Brick Wall -(Lecture) - (Medium)
