@@ -4153,13 +4153,13 @@ class Solution:
 # print(fib_tab(n))
 
 
-#! 44- Implement Trie (Prefix Tree) (Algo Academy) (Medium) (Tech: Tries)  (Time Complexity ?))
+#! 45- Implement Trie (Prefix Tree) (Algo Academy) (Medium) (Tech: Tries)  (Time Complexity ?))
 
 '''
 208. Implement Trie (Prefix Tree)
 Medium
 Topics
-Companies
+Companies Amazon Google Twitter
 A trie (pronounced as "try") or prefix tree is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. There are various applications of this data structure, such as autocomplete and spellchecker.
 
 Implement the Trie class:
@@ -4194,89 +4194,194 @@ Constraints:
 word and prefix consist only of lowercase English letters.
 At most 3 * 104 calls in total will be made to insert, search, and startsWith.
 '''
-class Trie:
+# class Trie:
+
+#     def __init__(self):
+#         self.root = Node()
+
+
+#     def insert(self, word: str) -> None:
+#         current = self.root # pointer
+
+#         for char in word:
+#             # print (char)
+#             i = ord(char) - ord('a')
+#             # print ('i', i)
+#             if current.children[i] == None:
+#                 current.children[i] = Node()
+#             current = current.children[i]
+
+#         current.endOfWord = True
+
+
+#     def search(self, word: str) -> bool:
+#         current = self.root
+
+#         for char in word:
+#             i = ord(char)- ord('a')
+#             if current.children[i]== None:
+#                 return False
+#             current = current.children[i] # we have this if the char exists to go to next letter
+#         return current.endOfWord
+
+
+
+#     def startsWith(self, prefix: str) -> bool:
+#         current = self.root
+#         for char in prefix:
+#             i = ord(char)- ord('a')
+#             if current.children[i] ==None:
+#                 return False
+#             current = current.children[i]
+#         return True
+
+
+# class Node:
+#     def __init__(self) -> None:
+#         # self.value = value # we don't really need it
+#         self.children = [None]* 26
+#         self.endOfWord = False
+
+# # Your Trie object will be instantiated and called as such:
+# # obj = Trie()
+# # obj.insert(word)
+# # param_2 = obj.search(word)
+# # param_3 = obj.startsWith(prefix)
+# # Test the Trie implementation
+# def test_trie():
+#     trie = Trie()
+#     actions = ["Trie", "insert", "search", "search", "startsWith", "insert", "search"]
+#     values = [[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
+#     expected_output = [None, None, True, False, True, None, True]
+
+#     for action, value, expected in zip(actions, values, expected_output):
+#         if action == "Trie":
+#             trie = Trie()
+#             print("Trie initialized.")
+#         elif action == "insert":
+#             trie.insert(*value)
+#             print(f"Inserted '{value[0]}' into Trie.")
+#         elif action == "search":
+#             result = trie.search(*value)
+#             print(f"Search for '{value[0]}': {result}. Expected: {expected}")
+#         elif action == "startsWith":
+#             result = trie.startsWith(*value)
+#             print(f"StartsWith '{value[0]}': {result}. Expected: {expected}")
+
+# test_trie()
+
+
+
+#! 46- 211. Design Add and Search Words Data Structure (Algo Academy) (Medium) (Tech: Tries)  (Time Complexity ?))
+
+'''
+
+211. Design Add and Search Words Data Structure
+Medium
+Topics
+Companies Amazon Google Apple
+Hint
+Design a data structure that supports adding new words and finding if a string matches any previously added string.
+
+Implement the WordDictionary class:
+
+WordDictionary() Initializes the object.
+void addWord(word) Adds word to the data structure, it can be matched later.
+bool search(word) Returns true if there is any string in the data structure that matches word or false otherwise. word may contain dots '.' where dots can be matched with any letter.
+
+
+Example:
+
+Input
+["WordDictionary","addWord","addWord","addWord","search","search","search","search"]
+[[],["bad"],["dad"],["mad"],["pad"],["bad"],[".ad"],["b.."]]
+Output
+[null,null,null,null,false,true,true,true]
+
+Explanation
+WordDictionary wordDictionary = new WordDictionary();
+wordDictionary.addWord("bad");
+wordDictionary.addWord("dad");
+wordDictionary.addWord("mad");
+wordDictionary.search("pad"); // return False
+wordDictionary.search("bad"); // return True
+wordDictionary.search(".ad"); // return True
+wordDictionary.search("b.."); // return True
+
+
+Constraints:
+
+1 <= word.length <= 25
+word in addWord consists of lowercase English letters.
+word in search consist of '.' or lowercase English letters.
+There will be at most 2 dots in word for search queries.
+At most 104 calls will be made to addWord and search.
+'''
+
+class WordDictionary:
 
     def __init__(self):
         self.root = Node()
 
 
-    def insert(self, word: str) -> None:
-        current = self.root # pointer
+    def addWord(self, word: str) -> None:
+        current = self.root
 
         for char in word:
-            # print (char)
-            i = ord(char) - ord('a')
-            # print ('i', i)
-            if current.children[i] == None:
-                current.children[i] = Node()
-            current = current.children[i]
+            if char not in current.children:
+                current.children[char]= Node()
 
+            current = current.children[char]
         current.endOfWord = True
+
+
 
 
     def search(self, word: str) -> bool:
         current = self.root
 
-        for char in word:
-            i = ord(char)- ord('a')
-            if current.children[i]== None:
-                return False
-            current = current.children[i] # we have this if the char exists to go to next letter 
-        return current.endOfWord
+        def dfs(index,root):
+           current = root
+
+           for i in range(index, len(word)):
+               char = word[i]
+               if char == '.':
+                   for child in current.children.values():
+                       if dfs(i+1, child):
+                           return True
+                   return False
+               else:
+                   if char not in current.children:
+                       return False
+                   current = current.children[char]
+           return current.endOfWord
+
+        return dfs(0, self.root)
 
 
-
-    def startsWith(self, prefix: str) -> bool:
-        current = self.root
-        for char in prefix:
-            i = ord(char)- ord('a')
-            if current.children[i] ==None:
-                return False
-            current = current.children[i]
-        return True
 
 
 class Node:
     def __init__(self) -> None:
-        # self.value = value # we don't really need it
-        self.children = [None]* 26
+        self.children = {}
         self.endOfWord = False
 
-# Your Trie object will be instantiated and called as such:
-# obj = Trie()
-# obj.insert(word)
+
+# Your WordDictionary object will be instantiated and called as such:
+# obj = WordDictionary()
+# obj.addWord(word)
 # param_2 = obj.search(word)
-# param_3 = obj.startsWith(prefix)
-# Test the Trie implementation
-def test_trie():
-    trie = Trie()
-    actions = ["Trie", "insert", "search", "search", "startsWith", "insert", "search"]
-    values = [[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
-    expected_output = [None, None, True, False, True, None, True]
 
-    for action, value, expected in zip(actions, values, expected_output):
-        if action == "Trie":
-            trie = Trie()
-            print("Trie initialized.")
-        elif action == "insert":
-            trie.insert(*value)
-            print(f"Inserted '{value[0]}' into Trie.")
-        elif action == "search":
-            result = trie.search(*value)
-            print(f"Search for '{value[0]}': {result}. Expected: {expected}")
-        elif action == "startsWith":
-            result = trie.startsWith(*value)
-            print(f"StartsWith '{value[0]}': {result}. Expected: {expected}")
-
-test_trie()
-
-
-
-
-
-
-
-
+# Test the WordDictionary class
+if __name__ == "__main__":
+    wordDictionary = WordDictionary()
+    wordDictionary.addWord("bad")
+    wordDictionary.addWord("dad")
+    wordDictionary.addWord("mad")
+    print(wordDictionary.search("pad"))  # Expected output: False
+    print(wordDictionary.search("bad"))  # Expected output: True
+    print(wordDictionary.search(".ad"))  # Expected output: True
+    print(wordDictionary.search("b.."))  # Expected output: True
 
 
 
