@@ -4194,81 +4194,84 @@ Constraints:
 word and prefix consist only of lowercase English letters.
 At most 3 * 104 calls in total will be made to insert, search, and startsWith.
 '''
-# class Trie:
+class Trie:
 
-#     def __init__(self):
-#         self.root = Node()
-
-
-#     def insert(self, word: str) -> None:
-#         current = self.root # pointer
-
-#         for char in word:
-#             # print (char)
-#             i = ord(char) - ord('a')
-#             # print ('i', i)
-#             if current.children[i] == None:
-#                 current.children[i] = Node()
-#             current = current.children[i]
-
-#         current.endOfWord = True
+    def __init__(self):
+        self.root = Node()
 
 
-#     def search(self, word: str) -> bool:
-#         current = self.root
+    def insert(self, word: str) -> None:
+        current = self.root # pointer
 
-#         for char in word:
-#             i = ord(char)- ord('a')
-#             if current.children[i]== None:
-#                 return False
-#             current = current.children[i] # we have this if the char exists to go to next letter
-#         return current.endOfWord
+        for char in word:
+            # print (char)
+            i = ord(char) - ord('a')
+            print ('i', i)
+            if current.children[i] == None:
+                current.children[i] = Node()
+            current = current.children[i]
 
-
-
-#     def startsWith(self, prefix: str) -> bool:
-#         current = self.root
-#         for char in prefix:
-#             i = ord(char)- ord('a')
-#             if current.children[i] ==None:
-#                 return False
-#             current = current.children[i]
-#         return True
+        current.endOfWord = True
 
 
-# class Node:
-#     def __init__(self) -> None:
-#         # self.value = value # we don't really need it
-#         self.children = [None]* 26
-#         self.endOfWord = False
+    def search(self, word: str) -> bool:
+        current = self.root
 
-# # Your Trie object will be instantiated and called as such:
-# # obj = Trie()
-# # obj.insert(word)
-# # param_2 = obj.search(word)
-# # param_3 = obj.startsWith(prefix)
-# # Test the Trie implementation
-# def test_trie():
-#     trie = Trie()
-#     actions = ["Trie", "insert", "search", "search", "startsWith", "insert", "search"]
-#     values = [[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
-#     expected_output = [None, None, True, False, True, None, True]
+        for char in word:
+            i = ord(char)- ord('a')
+            if current.children[i]== None:
+                return False
+            current = current.children[i] # we have this if the char exists to go to next letter
+        # print (self.root.children)
+        return current.endOfWord
 
-#     for action, value, expected in zip(actions, values, expected_output):
-#         if action == "Trie":
-#             trie = Trie()
-#             print("Trie initialized.")
-#         elif action == "insert":
-#             trie.insert(*value)
-#             print(f"Inserted '{value[0]}' into Trie.")
-#         elif action == "search":
-#             result = trie.search(*value)
-#             print(f"Search for '{value[0]}': {result}. Expected: {expected}")
-#         elif action == "startsWith":
-#             result = trie.startsWith(*value)
-#             print(f"StartsWith '{value[0]}': {result}. Expected: {expected}")
 
-# test_trie()
+
+    def startsWith(self, prefix: str) -> bool:
+        current = self.root
+        for char in prefix:
+            i = ord(char)- ord('a')
+            if current.children[i] ==None:
+                return False
+            current = current.children[i]
+        return True
+
+
+class Node:
+    def __init__(self) -> None:
+        # self.value = value # we don't really need it
+        self.children = [None]* 26
+        self.endOfWord = False
+    def __repr__(self):
+       return f"Node(children={self.children}, endOfWord={self.endOfWord})"
+
+# Your Trie object will be instantiated and called as such:
+# obj = Trie()
+# obj.insert(word)
+# param_2 = obj.search(word)
+# param_3 = obj.startsWith(prefix)
+# Test the Trie implementation
+def test_trie():
+    trie = Trie()
+    actions = ["Trie", "insert", "search", "search", "startsWith", "insert", "search"]
+    values = [[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
+    expected_output = [None, None, True, False, True, None, True]
+
+    for action, value, expected in zip(actions, values, expected_output):
+        if action == "Trie":
+            trie = Trie()
+            print("Trie initialized.")
+        elif action == "insert":
+            trie.insert(*value)
+            print(f"Inserted '{value[0]}' into Trie.")
+        elif action == "search":
+            result = trie.search(*value)
+            print(f"Search for '{value[0]}': {result}. Expected: {expected}")
+        elif action == "startsWith":
+            result = trie.startsWith(*value)
+            print(f"StartsWith '{value[0]}': {result}. Expected: {expected}")
+
+test_trie()
 
 
 
@@ -4365,6 +4368,8 @@ class Node:
     def __init__(self) -> None:
         self.children = {}
         self.endOfWord = False
+    def __repr__(self):
+        return f"Node(children={self.children}, endOfWord={self.endOfWord})"
 
 
 # Your WordDictionary object will be instantiated and called as such:
