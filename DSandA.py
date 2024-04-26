@@ -4153,9 +4153,122 @@ class Solution:
 # print(fib_tab(n))
 
 
+#! 44- Implement Trie (Prefix Tree) (Algo Academy) (Medium) (Tech: Tries)  (Time Complexity ?))
+
+'''
+208. Implement Trie (Prefix Tree)
+Medium
+Topics
+Companies
+A trie (pronounced as "try") or prefix tree is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. There are various applications of this data structure, such as autocomplete and spellchecker.
+
+Implement the Trie class:
+
+Trie() Initializes the trie object.
+void insert(String word) Inserts the string word into the trie.
+boolean search(String word) Returns true if the string word is in the trie (i.e., was inserted before), and false otherwise.
+boolean startsWith(String prefix) Returns true if there is a previously inserted string word that has the prefix prefix, and false otherwise.
+
+
+Example 1:
+
+Input
+["Trie", "insert", "search", "search", "startsWith", "insert", "search"]
+[[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
+Output
+[null, null, true, false, true, null, true]
+
+Explanation
+Trie trie = new Trie();
+trie.insert("apple");
+trie.search("apple");   // return True
+trie.search("app");     // return False
+trie.startsWith("app"); // return True
+trie.insert("app");
+trie.search("app");     // return True
+
+
+Constraints:
+
+1 <= word.length, prefix.length <= 2000
+word and prefix consist only of lowercase English letters.
+At most 3 * 104 calls in total will be made to insert, search, and startsWith.
+'''
+class Trie:
+
+    def __init__(self):
+        self.root = Node()
+
+
+    def insert(self, word: str) -> None:
+        current = self.root # pointer
+
+        for char in word:
+            # print (char)
+            i = ord(char) - ord('a')
+            # print ('i', i)
+            if current.children[i] == None:
+                current.children[i] = Node()
+            current = current.children[i]
+
+        current.endOfWord = True
+
+
+    def search(self, word: str) -> bool:
+        current = self.root
+
+        for char in word:
+            i = ord(char)- ord('a')
+            if current.children[i]== None:
+                return False
+            current = current.children[i] # we have this if the char exists to go to next letter 
+        return current.endOfWord
 
 
 
+    def startsWith(self, prefix: str) -> bool:
+        current = self.root
+        for char in prefix:
+            i = ord(char)- ord('a')
+            if current.children[i] ==None:
+                return False
+            current = current.children[i]
+        return True
+
+
+class Node:
+    def __init__(self) -> None:
+        # self.value = value # we don't really need it
+        self.children = [None]* 26
+        self.endOfWord = False
+
+# Your Trie object will be instantiated and called as such:
+# obj = Trie()
+# obj.insert(word)
+# param_2 = obj.search(word)
+# param_3 = obj.startsWith(prefix)
+# Test the Trie implementation
+def test_trie():
+    trie = Trie()
+    actions = ["Trie", "insert", "search", "search", "startsWith", "insert", "search"]
+    values = [[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
+    expected_output = [None, None, True, False, True, None, True]
+
+    for action, value, expected in zip(actions, values, expected_output):
+        if action == "Trie":
+            trie = Trie()
+            print("Trie initialized.")
+        elif action == "insert":
+            trie.insert(*value)
+            print(f"Inserted '{value[0]}' into Trie.")
+        elif action == "search":
+            result = trie.search(*value)
+            print(f"Search for '{value[0]}': {result}. Expected: {expected}")
+        elif action == "startsWith":
+            result = trie.startsWith(*value)
+            print(f"StartsWith '{value[0]}': {result}. Expected: {expected}")
+
+test_trie()
 
 
 
