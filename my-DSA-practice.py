@@ -12,21 +12,19 @@ class WordDictionary:
 
     def addWord(self, word: str) -> None:
         current = self.root
-
         for char in word:
             if char not in current.children:
-                current.children[char]= Node()
-
+                current.children [char]= Node()
             current = current.children[char]
         current.endOfWord = True
+
 
 
     def search(self, word: str) -> bool:
         current = self.root
 
         def dfs(index,root):
-            current = root #! ????
-
+            current = root
             for i in range(index,len(word)):
                 char = word[i]
                 if char == '.':
