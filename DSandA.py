@@ -4160,7 +4160,8 @@ class Solution:
 Medium
 Topics
 Companies Amazon Google Twitter
-A trie (pronounced as "try") or prefix tree is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. There are various applications of this data structure, such as autocomplete and spellchecker.
+A trie (pronounced as "try") or prefix tree is a tree data structure used to efficiently store and retrieve keys in a dataset of strings.
+ There are various applications of this data structure, such as autocomplete and spellchecker.
 
 Implement the Trie class:
 
@@ -4231,7 +4232,7 @@ At most 3 * 104 calls in total will be made to insert, search, and startsWith.
 #         current = self.root
 #         for char in prefix:
 #             i = ord(char)- ord('a')
-#             if current.children[i] ==None:
+#             if current.children[i] == None:
 #                 return False
 #             current = current.children[i]
 #         return True
@@ -4240,7 +4241,7 @@ At most 3 * 104 calls in total will be made to insert, search, and startsWith.
 # class Node:
 #     def __init__(self) -> None:
 #         # self.value = value # we don't really need it
-#         self.children = [None]* 26
+#         self.children = [None]* 26 #! remember we used an array here
 #         self.endOfWord = False
 #     def __repr__(self):
 #        return f"Node(children={self.children}, endOfWord={self.endOfWord})"
@@ -4290,14 +4291,15 @@ Implement the WordDictionary class:
 
 WordDictionary() Initializes the object.
 void addWord(word) Adds word to the data structure, it can be matched later.
-bool search(word) Returns true if there is any string in the data structure that matches word or false otherwise. word may contain dots '.' where dots can be matched with any letter.
+bool search(word) Returns true if there is any string in the data structure that matches word or false otherwise.
+word may contain dots '.' where dots can be matched with any letter.
 
 
 Example:
 
 Input
 ["WordDictionary","addWord","addWord","addWord","search","search","search","search"]
-[[],["bad"],["dad"],["mad"],["pad"],["bad"],[".ad"],["b.."]]
+[     [],           ["bad"], ["dad"],  ["mad"],  ["pad"], ["bad"], [".ad"], ["b.."]]
 Output
 [null,null,null,null,false,true,true,true]
 
@@ -4341,14 +4343,17 @@ class WordDictionary:
 
 
     def search(self, word: str) -> bool:
-        current = self.root
-
+        # current = self.root
+####################################################
         def dfs(index,root):
            current = root
 
            for i in range(index, len(word)):
                char = word[i]
+            #    print ( 'char is ==>',char)
                if char == '.':
+                #    print ('current.children.values()', current.children.keys())
+                #    print ('current.children.values()', current.children.values())
                    for child in current.children.values():
                        if dfs(i+1, child):
                            return True
@@ -4356,9 +4361,9 @@ class WordDictionary:
                else:
                    if char not in current.children:
                        return False
-                   current = current.children[char]
+                   current = current.children[char] # we added the 'b' 'a' 'd' then we returned endofword = True
            return current.endOfWord
-
+####################################################
         return dfs(0, self.root)
 
 
@@ -4381,12 +4386,12 @@ class Node:
 if __name__ == "__main__":
     wordDictionary = WordDictionary()
     wordDictionary.addWord("bad")
-    wordDictionary.addWord("dad")
-    wordDictionary.addWord("mad")
-    print(wordDictionary.search("pad"))  # Expected output: False
-    print(wordDictionary.search("bad"))  # Expected output: True
+    # wordDictionary.addWord("dad")
+    # wordDictionary.addWord("mad")
+    # print(wordDictionary.search("pad"))  # Expected output: False
+    # print(wordDictionary.search("bad"))  # Expected output: True
     print(wordDictionary.search(".ad"))  # Expected output: True
-    print(wordDictionary.search("b.."))  # Expected output: True
+    # print(wordDictionary.search("b.."))  # Expected output: True
 
 
 

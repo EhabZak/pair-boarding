@@ -1,17 +1,21 @@
-let arr = [5,6,7,8,9]
+let num = [0, 1, 0, 3, 12]
 
-// let doubleArr = arr.forEach(function(element){
-//     console.log(element * 2)
-// })
+function check(numbers) {
 
-// console.log(doubleArr)
+    for (let i in numbers) {
 
+        number = numbers[i]
+        if (number == 0) {
 
-const multiply = (Array) => arr.map((element)=> element *5)
+            let num1 = numbers.splice(i, 1)
+            console.log(num1)
+            numbers.push(number)
+        }
 
-function multi(Array){
+    }
 
-    return arr.filter((element)=> element % 5 == 0 )
+    console.log(numbers)
+
 }
-console.log(multi(arr))
-// console.log(multiply(arr))
+
+check(num)

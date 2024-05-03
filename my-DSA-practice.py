@@ -17,15 +17,13 @@ class WordDictionary:
                 current.children [char]= Node()
             current = current.children[char]
         current.endOfWord = True
-
-
-
+###########################################################
     def search(self, word: str) -> bool:
-        current = self.root
 
-        def dfs(index,root):
+        def dfs(index, root): #(1,'')
             current = root
-            for i in range(index,len(word)):
+
+            for i in range(index, len(word)):
                 char = word[i]
                 if char == '.':
                     for child in current.children.values():
@@ -37,15 +35,17 @@ class WordDictionary:
                         return False
                     current = current.children[char]
             return current.endOfWord
+
         return dfs(0,self.root)
 
+##############################################################
 
 
 
 
 class Node:
     def __init__(self) -> None:
-        self.children = {}
+        self.children = {} #! remember we used a dic here
         self.endOfWord = False
     def __repr__(self):
         return f"Node(children={self.children}, endOfWord={self.endOfWord})"
@@ -60,9 +60,9 @@ class Node:
 if __name__ == "__main__":
     wordDictionary = WordDictionary()
     wordDictionary.addWord("bad")
-    wordDictionary.addWord("dad")
-    wordDictionary.addWord("mad")
-    print(wordDictionary.search("pad"))  # Expected output: False
-    print(wordDictionary.search("bad"))  # Expected output: True
+    # wordDictionary.addWord("dad")
+    # wordDictionary.addWord("mad")
+    # print(wordDictionary.search("pad"))  # Expected output: False
+    # print(wordDictionary.search("bad"))  # Expected output: True
     print(wordDictionary.search(".ad"))  # Expected output: True
-    print(wordDictionary.search("b.."))  # Expected output: True
+    # print(wordDictionary.search("b.."))  # Expected output: True
