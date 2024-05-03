@@ -55,21 +55,6 @@ class Node:
         return f"Node(children={self.children}, endOfWord={self.endOfWord})"
 
 
-# Your WordDictionary object will be instantiated and called as such:
-# obj = WordDictionary()
-# obj.addWord(word)
-# param_2 = obj.search(word)
-
-# Test the WordDictionary class
-if __name__ == "__main__":
-    wordDictionary = WordDictionary()
-    wordDictionary.addWord("bad")
-    # wordDictionary.addWord("dad")
-    # wordDictionary.addWord("mad")
-    # print(wordDictionary.search("pad"))  # Expected output: False
-    # print(wordDictionary.search("bad"))  # Expected output: True
-    print(wordDictionary.search(".ad"))  # Expected output: True
-    # print(wordDictionary.search("b.."))  # Expected output: True
 
 
 '''
