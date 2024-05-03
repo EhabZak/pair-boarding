@@ -66,3 +66,31 @@ if __name__ == "__main__":
     # print(wordDictionary.search("bad"))  # Expected output: True
     print(wordDictionary.search(".ad"))  # Expected output: True
     # print(wordDictionary.search("b.."))  # Expected output: True
+
+
+'''
+
+do this in python 
+let num = [0, 1, 0, 3, 12]
+
+function check(numbers) {
+
+    for (let i in numbers) {
+
+        number = numbers[i]
+        if (number == 0) {
+
+            let num1 = numbers.splice(i, 1)
+            console.log(num1)
+            numbers.push(number)
+        }
+
+    }
+
+    console.log(numbers)
+
+}
+
+check(num)
+
+'''
