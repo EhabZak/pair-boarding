@@ -4,21 +4,6 @@ from collections import defaultdict, Counter,deque
 import heapq
 import math, random
 
-class WordDictionary:
-
-    def __init__(self):
-        self.root = Node()
-
-
-    def addWord(self, word: str) -> None:
-        current = self.root
-
-        for char in word:
-            if char not in current.children:
-                current.children[char] = Node()
-            current = current.children[char]
-        current.endOfWord = True
-
 
 
 
