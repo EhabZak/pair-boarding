@@ -47,7 +47,7 @@ fizzBuzz= (nums) => {
 
     for ( i =0; i <=nums; i++){
 
-        {
+        if ( i % 3 ===0 && i % 5 !==0 || i % 3 !==0 && i % 5 ===0){
 
             console.log(i)
         }
