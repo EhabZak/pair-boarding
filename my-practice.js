@@ -43,9 +43,9 @@ either 3 or 5, but not both.
 */
 
 fizzBuzz= (nums) => {
-    console.log(nums)
 
-    for (let i in nums ){
+
+    for ( i =0; i <=nums; i++){
         console.log(i)
     }
 
