@@ -46,7 +46,11 @@ fizzBuzz= (nums) => {
 
 
     for ( i =0; i <=nums; i++){
-        console.log(i)
+
+        {
+
+            console.log(i)
+        }
     }
 
 }
