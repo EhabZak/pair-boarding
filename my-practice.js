@@ -42,4 +42,15 @@ every number from 0 to max (not inclusive) that is divisible by
 either 3 or 5, but not both.
 */
 
+fizzBuzz= (nums) => {
+    console.log(nums)
+
+    for (let i in nums ){
+        console.log(i)
+    }
+
+}
+
+
+
 fizzBuzz(20)
