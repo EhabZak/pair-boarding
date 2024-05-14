@@ -21,16 +21,16 @@
 // check(num) //[ 1, 3, 12, 0, 0 ]
 
 
-reverse = (Name) =>{
-    let Name2 =''
+// reverse = (Name) =>{
+//     let Name2 =''
 
-    for (let i = Name.length-1; i >= 0; i--) {
+//     for (let i = Name.length-1; i >= 0; i--) {
 
-        Name2 += Name[i]
+//         Name2 += Name[i]
 
-    }
-    return Name2
-}
+//     }
+//     return Name2
+// }
 
 // console.log(reverse('zak'))
 
@@ -42,19 +42,7 @@ every number from 0 to max (not inclusive) that is divisible by
 either 3 or 5, but not both.
 */
 
-fizzBuzz= (nums) => {
-
-
-    for ( i =0; i <=nums; i++){
-
-        if ( i % 3 ===0 && i % 5 !==0 || i % 3 !==0 && i % 5 ===0){
-
-            console.log(i)
-        }
-    }
-
-}
 
 
 
-fizzBuzz(20)
+let array = [["a", "b", "c"], ["d", "e"], ["f", "g", "h"]];
