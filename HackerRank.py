@@ -3,6 +3,11 @@ import os
 import random
 import re
 import sys
+from typing import List
+from typing import Optional, List
+from collections import defaultdict, Counter,deque
+import heapq
+import math, random
 
 #! 1- Plus Minus
 
@@ -189,8 +194,8 @@ Sample Output
 #
 # The function accepts INTEGER_ARRAY arr as parameter.
 #
-arr = [1,3,5,7,9]
-def miniMaxSum(arr):
+# arr = [1,3,5,7,9]
+# def miniMaxSum(arr):
     # nums = []
 
     # total = sum(arr)
@@ -206,14 +211,55 @@ def miniMaxSum(arr):
 
     #! another solution (GPT)
 
-    total_sum = sum(arr)
-    min_sum = total_sum - max(arr)
-    max_sum = total_sum - min(arr)
+#     total_sum = sum(arr)
+#     min_sum = total_sum - max(arr)
+#     max_sum = total_sum - min(arr)
 
-    print(min_sum, max_sum)
+#     print(min_sum, max_sum)
 
-# if __name__ == '__main__':
+# # if __name__ == '__main__':
 
-#     arr = list(map(int, input().rstrip().split()))
+# #     arr = list(map(int, input().rstrip().split()))
 
-miniMaxSum(arr)
+# miniMaxSum(arr)
+
+
+#!
+
+def matchingStrings(strings, queries):
+    #! O(n*2) solution
+    res1 = []
+
+
+    for query in queries:
+        counter = 0
+        for string in strings:
+            if string == query:
+                counter +=1
+        res1.append(counter)
+
+
+    return res1
+
+    # count = Counter(strings)
+
+    #! o(n) solution
+
+    # res = [count[query] for query in queries]
+
+    # return res
+
+
+
+
+strings = ["aba"
+    , "baba"
+    , "aba"
+    , "xzxb"]
+
+queries = [
+    "aba"
+    , "xzxb"
+    , "ab"
+]
+print (matchingStrings(strings,queries))
