@@ -120,6 +120,4 @@
 // for (let num of nestedArray) {}
 
 //     //    let res = nestedArray.concat(num)
-//     let res = [].push(...nestedArray)
-
 
