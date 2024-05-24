@@ -224,42 +224,56 @@ Sample Output
 # miniMaxSum(arr)
 
 
-#!
+#! Sparse Arrays
 
-def matchingStrings(strings, queries):
-    #! O(n*2) solution
-    res1 = []
-
-
-    for query in queries:
-        counter = 0
-        for string in strings:
-            if string == query:
-                counter +=1
-        res1.append(counter)
+# def matchingStrings(strings, queries):
+#     #! O(n*2) solution
+#     res1 = []
 
 
-    return res1
-
-    # count = Counter(strings)
-
-    #! o(n) solution
-
-    # res = [count[query] for query in queries]
-
-    # return res
+#     for query in queries:
+#         counter = 0
+#         for string in strings:
+#             if string == query:
+#                 counter +=1
+#         res1.append(counter)
 
 
+#     return res1
+
+#     # count = Counter(strings)
+
+#     #! o(n) solution
+
+#     # res = [count[query] for query in queries]
+
+#     # return res
 
 
-strings = ["aba"
-    , "baba"
-    , "aba"
-    , "xzxb"]
 
-queries = [
-    "aba"
-    , "xzxb"
-    , "ab"
-]
-print (matchingStrings(strings,queries))
+
+# strings = ["aba"
+#     , "baba"
+#     , "aba"
+#     , "xzxb"]
+
+# queries = [
+#     "aba"
+#     , "xzxb"
+#     , "ab"
+# ]
+# print (matchingStrings(strings,queries))
+
+
+def lonelyInteger(a):
+        count = Counter(a)
+
+        for number in count:
+            if count[number] == 1:
+                return number
+
+
+str = [1,2,3,4,3,2,1]
+
+
+print(lonelyInteger(str))
