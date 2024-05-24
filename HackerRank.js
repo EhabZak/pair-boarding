@@ -111,7 +111,7 @@
 
 // let str = [1, 2, 3, 4, 3, 2, 1] // output 2
 
-
+console.log(lonelyInteger(str))
 
 // console.log(lonelyInteger(str))
 
