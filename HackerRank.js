@@ -122,7 +122,4 @@
 //     //    let res = nestedArray.concat(num)
 //     let res = [].push(...nestedArray)
 
-//     console.log(res)
-
-
 
