@@ -90,7 +90,11 @@
 
 //!
 
-// function lonelyInteger(a) {
+function lonelyInteger(a) {
+// solution 1
+return a.reduce((unique, num) => unique ^ num, 0);
+
+// solution 2
 
 //     let b = {}
 
@@ -107,9 +111,9 @@
 //             return n
 //         }
 //     }
-// }
+}
 
-// let str = [1, 2, 3, 4, 3, 2, 1] // output 2
+let str = [1, 2, 3, 4, 3, 2, 1] // output 2
 
 console.log(lonelyInteger(str))
 

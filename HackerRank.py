@@ -266,11 +266,14 @@ Sample Output
 
 
 def lonelyInteger(a):
-        count = Counter(a)
 
-        for number in count:
-            if count[number] == 1:
-                return number
+    
+    # solution one
+        #count = Counter(a)
+        # for number in count:
+        #     if count[number] == 1:
+        #         return number
+    #solution two
 
 
 str = [1,2,3,4,3,2,1]
