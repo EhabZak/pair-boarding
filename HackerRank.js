@@ -129,4 +129,5 @@ console.log(lonelyInteger(str))
 /*
  Given an array of integers, where all elements but one occur twice, find
  the unique element.Example= [1,2,3,4,3,2,1]
+ a=The unique element is 4.Function DescriptionComplete the lonely integer function in the editor below.
  */
