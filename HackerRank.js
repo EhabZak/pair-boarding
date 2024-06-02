@@ -124,3 +124,9 @@ console.log(lonelyInteger(str))
 
 
 //     //    let res = nestedArray.concat(num)
+
+
+/*
+ Given an array of integers, where all elements but one occur twice, find
+ the unique element.Example= [1,2,3,4,3,2,1]
+ */
