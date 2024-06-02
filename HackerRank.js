@@ -131,4 +131,7 @@ console.log(lonelyInteger(str))
  the unique element.Example= [1,2,3,4,3,2,1]
  a=The unique element is 4.Function Description Complete the lonely integer function in the editor below.
  lonely integer has the following parameter(s):• int a[n]: an array of integers. Returns
+int: the element that occurs only once Input Format The first line contains a single integer, n, the 
+
+
  */
