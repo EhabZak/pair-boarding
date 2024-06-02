@@ -133,5 +133,5 @@ console.log(lonelyInteger(str))
  lonely integer has the following parameter(s):• int a[n]: an array of integers. Returns
 int: the element that occurs only once Input Format The first line contains a single integer, n, the
 number of integers in the array. The second line contains n space-separated integers that describe the
-
+value in a
  */
