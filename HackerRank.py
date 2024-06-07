@@ -278,3 +278,18 @@ def lonelyInteger(a):
 str = [1, 2, 3, 4, 3, 2, 1]  # output 2
 
 print(lonelyInteger(str))
+
+'''
+You will be given a list of 32 bit unsigned integers. Flip all the bits ( and ) and return the result as an unsigned integer.
+
+Example
+
+. We're working with 32 bits, so:
+
+
+
+Return .
+
+
+
+'''
