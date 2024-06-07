@@ -299,6 +299,12 @@ flippingBits has the following parameter(s):
 int n: an integer
 Returns
 
+int: the unsigned decimal integer result
+Input Format
+
+The first line of the input contains , the number of queries.
+Each of the next  lines contain an integer, , to process.
+
 
 
 '''
