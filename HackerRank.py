@@ -305,6 +305,18 @@ Input Format
 The first line of the input contains , the number of queries.
 Each of the next  lines contain an integer, , to process.
 
+Constraints
+
+
+
+Sample Input
+
+3
+2147483647
+1
+0
+Sample Output
+
 
 
 '''
