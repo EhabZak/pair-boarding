@@ -290,6 +290,15 @@ Example
 
 Return .
 
+Function Description
+
+Complete the flippingBits function in the editor below.
+
+flippingBits has the following parameter(s):
+
+int n: an integer
+Returns
+
 
 
 '''
