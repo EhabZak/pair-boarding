@@ -265,47 +265,16 @@ Sample Output
 # print (matchingStrings(strings,queries))
 
 
-#!def lonelyInteger(a):
+def lonelyInteger(a):
 
 
     # solution one
-        #count = Counter(a)
-        # for number in count:
-        #     if count[number] == 1:
-        #         return number
+        count = Counter(a)
+        for number in count:
+            if count[number] == 1:
+                return number
     #solution two
 
-class TreeNode:
-    def __init__(self,key) -> None:
-        self.key = key
-        self.right = None
-        self.left = None
+str = [1, 2, 3, 4, 3, 2, 1]  # output 2
 
-def insert_bst(root,key):
-    if root is None:
-         return TreeNode(key)
-    else:
-        if key < root.key:
-            root.left = insert_bst(root.left,key)
-        else:
-            root.right = insert_bst(root.right, key)
-    return root
-
-
-
-def print_bst_inorder(root):
-
-    if root:
-        print_bst_inorder(root.left)
-        print(root.key)
-        print_bst_inorder(root.right)
-
-# Creating a BST
-root = None
-keys = [5, 3, 8, 2, 4, 7, 9]
-for key in keys:
-    root = insert_bst(root, key)
-
-# Printing the BST in order
-print("Binary Search Tree:")
-print_bst_inorder(root)
+print(lonelyInteger(str))
