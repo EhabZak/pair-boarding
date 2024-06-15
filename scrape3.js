@@ -50,4 +50,12 @@ function timeConversion(s) {
             }
         }
 
-  
+    }
+
+    return ` ${hour}:${min}: ${sec}`
+
+}
+
+
+
+console.log(timeConversion(input))
