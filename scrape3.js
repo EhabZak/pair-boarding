@@ -42,4 +42,6 @@ function timeConversion(s) {
 
     if (time ==='PM'){
 
+        if (hour != '12'){
+            hour = String(Number(hour)+ 12)
      
