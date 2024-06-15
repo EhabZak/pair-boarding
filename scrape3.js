@@ -40,4 +40,6 @@ function timeConversion(s) {
     let [hour, min, sec]= s.slice(0,-2).split(':')
     console.log(hour)
 
-   
+    if (time ==='PM'){
+
+     
