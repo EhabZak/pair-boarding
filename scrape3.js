@@ -37,4 +37,7 @@ function timeConversion(s) {
 
     let time = input.slice(-2)
 
+    let [hour, min, sec]= s.slice(0,-2).split(':')
+    console.log(hour)
 
+   
