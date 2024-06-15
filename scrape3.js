@@ -46,4 +46,8 @@ function timeConversion(s) {
             hour = String(Number(hour)+ 12)
         }else{
             if (hour === '12'){
-    
+                hour = '00'
+            }
+        }
+
+  
