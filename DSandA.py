@@ -1701,32 +1701,32 @@ Follow up: Recursive solution is trivial, could you do it iteratively?
 
 '''
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-# class Solution:
-#     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-#         if root is None: return []
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if root is None: return []
 
-#         left = self.inorderTraversal(root.left)
-#         right = self.inorderTraversal(root.right)
-#         return left + [root.val] + right  #[[], 1, [ [ [], 3, [] ], 2, [] ]]
+        left = self.inorderTraversal(root.left)
+        right = self.inorderTraversal(root.right)
+        return left + [root.val] + right #[1, 3, 2]  #[[], 1, [ [ [], 3, [] ], 2, [] ]]
 
-# # root = [1,null,2,3]
+# root = [1,null,2,3]
 
-# # Create a binary tree
-# root = TreeNode(1)
-# root.right = TreeNode(2)
-# root.right.left = TreeNode(3)
+# Create a binary tree
+root = TreeNode(1)
+root.right = TreeNode(2)
+root.right.left = TreeNode(3)
 
-# # Instantiate the Solution class
-# sol = Solution()
+# Instantiate the Solution class
+sol = Solution()
 
-# # Test the inorderTraversal method
-# result = sol.inorderTraversal(root)
-# print(result)  # Output should be [1, 3, 2]
+# Test the inorderTraversal method
+result = sol.inorderTraversal(root)
+print(result)  # Output should be [1, 3, 2]
 
 #! 25-144. Binary Tree Preorder Traversal (Algo Academy) (easy) (algo: dfs)  (time complexity O(n))
 

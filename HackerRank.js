@@ -90,32 +90,32 @@
 
 //!
 
-function lonelyInteger(a) {
-// solution 1
-return a.reduce((unique, num) => unique ^ num, 0);
+// function lonelyInteger(a) {
+// // solution 1
+// return a.reduce((unique, num) => unique ^ num, 0);
 
-// solution 2
+// // solution 2
 
-//     let b = {}
+// //     let b = {}
 
-//     for (let num of a) {
-//         if (num in b) {
-//             b[num] += 1
-//         } else {
-//             b[num] = 1
-//         }
-//     }
+// //     for (let num of a) {
+// //         if (num in b) {
+// //             b[num] += 1
+// //         } else {
+// //             b[num] = 1
+// //         }
+// //     }
 
-//     for (let n in b) {
-//         if (b[n] === 1) {
-//             return n
-//         }
-//     }
-}
+// //     for (let n in b) {
+// //         if (b[n] === 1) {
+// //             return n
+// //         }
+// //     }
+// }
 
-let str = [1, 2, 3, 4, 3, 2, 1] // output 2
+// let str = [1, 2, 3, 4, 3, 2, 1] // output 2
 
-console.log(lonelyInteger(str))
+// console.log(lonelyInteger(str))
 
 // console.log(lonelyInteger(str))
 
@@ -135,3 +135,17 @@ int: the element that occurs only once Input Format The first line contains a si
 number of integers in the array. The second line contains n space-separated integers that describe the
 value in a
  */
+
+// function simpleHash(str) {
+//     let hashValue = 0;
+
+//     for (let i = 0; i < str.length; i++) {
+//         hashValue += str.charCodeAt(i);
+//     }
+
+//     return hashValue;
+// }
+
+// console.log(simpleHash('addd'))
+
+

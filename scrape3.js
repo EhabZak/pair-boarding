@@ -37,25 +37,4 @@ function timeConversion(s) {
 
     let time = input.slice(-2)
 
-    let [hour, min, sec]= s.slice(0,-2).split(':')
-    console.log(hour)
 
-    if (time ==='PM'){
-
-        if (hour != '12'){
-            hour = String(Number(hour)+ 12)
-        }else{
-            if (hour === '12'){
-                hour = '00'
-            }
-        }
-
-    }
-
-    return ` ${hour}:${min}: ${sec}`
-
-}
-
-
-
-console.log(timeConversion(input))

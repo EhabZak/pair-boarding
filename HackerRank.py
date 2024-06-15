@@ -265,19 +265,19 @@ Sample Output
 # print (matchingStrings(strings,queries))
 
 
-def lonelyInteger(a):
+# def lonelyInteger(a):
 
 
-    # solution one
-        count = Counter(a)
-        for number in count:
-            if count[number] == 1:
-                return number
-    #solution two
+#     # solution one
+#         count = Counter(a)
+#         for number in count:
+#             if count[number] == 1:
+#                 return number
+#     #solution two
 
-str = [1, 2, 3, 4, 3, 2, 1]  # output 2
+# str = [1, 2, 3, 4, 3, 2, 1]  # output 2
 
-print(lonelyInteger(str))
+# print(lonelyInteger(str))
 
 '''
 You will be given a list of 32 bit unsigned integers. Flip all the bits ( and ) and return the result as an unsigned integer.
@@ -326,3 +326,4 @@ Take 1 for example, as unsigned 32-bits is 00000000000000000000000000000001
 and doing the flipping we get 11111111111111111111111111111110 which in turn is 4294967294.
 
 '''
+
