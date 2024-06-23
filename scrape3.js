@@ -60,6 +60,5 @@ let input = "07:05:45PM"  // output 19:05:45
 const arr = [1,2,3,4]
 
 const initial_value = 0
-const sumWithInitial = array.reduce ((accumulator, currentValue)=>{
-
-})
+const sumWithInitial = arr.reduce ((accumulator, currentValue)=>{
+   
