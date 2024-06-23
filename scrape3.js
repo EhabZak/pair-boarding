@@ -64,4 +64,4 @@ const sumWithInitial = arr.reduce ((accumulator, currentValue)=>{
     return accumulator + currentValue} , initial_value
 )
 
-
+console.log(sumWithInitial);
