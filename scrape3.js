@@ -33,29 +33,33 @@ let input = "07:05:45PM"  // output 19:05:45
 
 
 //!
-function timeConversion(s) {
+// function timeConversion(s) {
 
-    let time = input.slice(-2)
+//     let time = input.slice(-2)
 
-    let [hour, min, sec]= s.slice(0,-2).split(':')
-    console.log(hour)
+//     let [hour, min, sec]= s.slice(0,-2).split(':')
+//     console.log(hour)
 
-    if (time ==='PM'){
+//     if (time ==='PM'){
 
-        if (hour != '12'){
-            hour = String(Number(hour)+ 12)
-        }else{
-            if (hour === '12'){
-                hour = '00'
-            }
-        }
+//         if (hour != '12'){
+//             hour = String(Number(hour)+ 12)
+//         }else{
+//             if (hour === '12'){
+//                 hour = '00'
+//             }
+//         }
 
-    }
+//     }
 
-    return ` ${hour}:${min}: ${sec}`
+//     return ` ${hour}:${min}: ${sec}`
 
-}
+// }
 
+// console.log(timeConversion(input))
+const arr = [1,2,3,4]
 
+const initial_value = 0
+const sumWithInitial = array.reduce ((accumulator, currentValue)=>{
 
-console.log(timeConversion(input))
+})
