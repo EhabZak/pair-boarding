@@ -59,9 +59,4 @@ let input = "07:05:45PM"  // output 19:05:45
 // console.log(timeConversion(input))
 const arr = [1,2,3,4]
 
-const initial_value = 0
-const sumWithInitial = arr.reduce ((accumulator, currentValue)=>{
-    return accumulator + currentValue} , initial_value
-)
 
-console.log(sumWithInitial);
