@@ -8,8 +8,13 @@ import math, random
 class Solution(object):
     def containsNearbyDuplicate(self, nums, k):
         window = set()
-        Left = 0
-        
+        left = 0
+        for right in range(len(nums)):
+            if left - right >k:
+                window.discard(nums[left])
+                left +=1
+            
+
 
 
 
