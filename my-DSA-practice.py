@@ -13,7 +13,8 @@ class Solution(object):
             if left - right >k:
                 window.discard(nums[left])
                 left +=1
-            
+            if nums[right] in window:
+                
 
 
 
