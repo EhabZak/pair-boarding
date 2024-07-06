@@ -14,7 +14,9 @@ class Solution(object):
                 window.discard(nums[left])
                 left +=1
             if nums[right] in window:
-                
+                return True
+            window.add(nums[right])
+        return False 
 
 
 
