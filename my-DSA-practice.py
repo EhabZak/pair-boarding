@@ -5,34 +5,31 @@ import heapq
 import math, random
 
 
-
 class Solution(object):
-    def calPoints(self, operations):
-        num = []
+    def containsNearbyDuplicate(self, nums, k):
+        window = set()
+        left = 0
 
-
-        for o in operations:
-            print(num)
-            if o == '+':
-                num.append((num[-1])+ num[-2])
-            elif o == "D":
-                num.append(num[-1] *2)
-            elif o =='C':
-                num.pop()
-            else:
-                num.append(int(o))
-
-        total_sum = sum(num)
-
-        return total_sum
+        for right in range(len(nums)):
+            if right - left > k:
+                window.discard(nums[left])
+                left +=1
+            if nums[right] in window:
+                return True
+            window.add(nums[right])
+        return False
 
 
 
+nums = [1,2,3,1] # True
+k = 3
 
+# nums = [11,0,11,11] # True
+# k = 1
 
+# nums = [1,2,3,1,2,3] # False
+# k = 2
 
-# ops = ["5","2","C","D","+"] #30
-ops = ["5","-2","4","C","D","9","+","+"] #27
 solution = Solution()
-output = solution.calPoints(ops)
+output = solution.containsNearbyDuplicate(nums, k)
 print(output)
