@@ -916,7 +916,7 @@ s consists of English letters, digits, symbols and spaces.
 #                 window.discard(s[left])
 #                 left += 1
 
-#             max_length = max(max_length, right-left+1)
+#             max_length = max(max_length, right-left+1) # the + 1 because left& right are indexes and we need length
 #             window.add(s[right])
 #             right +=1
 
