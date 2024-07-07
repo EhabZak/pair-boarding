@@ -35,43 +35,66 @@ Explanation: There is no way to partition the nodes into two independent sets su
 
 #! with full explanation
 
+# class Solution:
+#     def isBipartite(self, graph: List[List[int]]) -> bool:
+#        nodeColors = {}
+#        print ('nodeColors', nodeColors) #{}
+
+# ##########################################################################
+#        def colorNodes(node, currentColor): # recursive function
+#            print ('node ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^', node)
+#            if node in nodeColors: # Check if the node is already colored
+#                print ('node in nodeColors #####',node)
+#                print ('nodeColors[node] == currentColor =>$$$$$$$$$$',nodeColors[node] == currentColor)
+#                print (f'nodeColors[node]=, {nodeColors[node]} , currentColor is = {currentColor}')
+
+#                return nodeColors[node] == currentColor # Check if the color matches
+#            nodeColors[node] = currentColor # if node not in nodeColors then Color the current node with the given color
+#            print ('nodeColors after nodeColors[node] = currentColor!!!!!!', nodeColors)
+#            print ('nodeColors[node]==== ', nodeColors[node] )
+#            print('currentColor *****', currentColor  )
+
+#            for neighbor in graph[node]: #! second iteration through the node and neighboring nodes
+#                if not colorNodes(neighbor,not currentColor): # if colorNodes returns false it will be not False (True) then this condition will apply
+#                # if not (True) it means this condition is false thus not applicable
+#                    return False
+#            return True
+# ##########################################################################
+#        #! execution start
+#        for node in range(len(graph)): #! first iteration through all the nodes
+#            print ('===========================================>>>>>>>>>>>>>>>>>>START AGAIN')
+#            #Checks if the node is not already colored and colors it with True (considering it as part of set A).
+#            print(f'loop == {node}')
+#            if node not in nodeColors and not colorNodes(node,True): #! why does it have to be true and red is not working?
+#                return False
+#        print ('nodeColors at the end', nodeColors)
+#        return  True
+
+
+# graph = [[1,2,3],[0,2],[0,1,3],[0,2]] # False
+# # graph = [[1,3],[0,2],[1,3],[0,2]] #True
+# sol = Solution()
+# print(sol.isBipartite(graph))
+
 class Solution:
-    def isBipartite(self, graph: List[List[int]]) -> bool:
-       nodeColors = {}
-       print ('nodeColors', nodeColors) #{}
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+       left , right = 0 , len(numbers)-1
 
-##########################################################################
-       def colorNodes(node, currentColor): # recursive function
-           print ('node ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^', node)
-           if node in nodeColors: # Check if the node is already colored
-               print ('node in nodeColors #####',node)
-               print ('nodeColors[node] == currentColor =>$$$$$$$$$$',nodeColors[node] == currentColor)
-               print (f'nodeColors[node]=, {nodeColors[node]} , currentColor is = {currentColor}')
+       while right > left:
+           sum = numbers[left] + numbers[right]
+           if sum > target:
+               right -=1
+           elif sum < target:
+               left +=1
+           else:
+               return [left+1, right+1]
 
-               return nodeColors[node] == currentColor # Check if the color matches
-           nodeColors[node] = currentColor # if node not in nodeColors then Color the current node with the given color
-           print ('nodeColors after nodeColors[node] = currentColor!!!!!!', nodeColors)
-           print ('nodeColors[node]==== ', nodeColors[node] )
-           print('currentColor *****', currentColor  )
-
-           for neighbor in graph[node]: #! second iteration through the node and neighboring nodes
-               if not colorNodes(neighbor,not currentColor): # if colorNodes returns false it will be not False (True) then this condition will apply
-               # if not (True) it means this condition is false thus not applicable
-                   return False
-           return True
-##########################################################################
-       #! execution start
-       for node in range(len(graph)): #! first iteration through all the nodes
-           print ('===========================================>>>>>>>>>>>>>>>>>>START AGAIN')
-           #Checks if the node is not already colored and colors it with True (considering it as part of set A).
-           print(f'loop == {node}')
-           if node not in nodeColors and not colorNodes(node,True): #! why does it have to be true and red is not working?
-               return False
-       print ('nodeColors at the end', nodeColors)
-       return  True
-
-
-graph = [[1,2,3],[0,2],[0,1,3],[0,2]] # False
-# graph = [[1,3],[0,2],[1,3],[0,2]] #True
-sol = Solution()
-print(sol.isBipartite(graph))
+numbers = [2,7,11,15] # [1,2]
+target = 9
+# numbers = [2,3,4] # [1,3]
+# target = 6
+# numbers = [5,25,75] # [2,3]
+# target = 100
+solution = Solution()
+output = solution.twoSum(numbers, target)
+print(output)
