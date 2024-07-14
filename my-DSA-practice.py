@@ -97,4 +97,9 @@ class Solution:
                 x.append(x[o-1]+x[o-2])
                 o=o+1
 
-          
+            # print('X at the end == ',x)
+            return x[n-1]+x[n-2]
+
+
+
+
