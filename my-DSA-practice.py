@@ -104,3 +104,5 @@ class Solution:
 
 n = 10
 solution = Solution()
+output = solution.fib(n)
+print(output)
