@@ -83,3 +83,8 @@ my_list = [1, 2, 3, 4, 5]
 a,b,_,_,_ = my_list
 
 print (_)
+
+# #! Fastest solution
+class Solution:
+    def fib(self, n: int, mono = {}) -> int:
+  
