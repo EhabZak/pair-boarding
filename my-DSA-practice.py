@@ -76,25 +76,10 @@ Explanation: There is no way to partition the nodes into two independent sets su
 # sol = Solution()
 # print(sol.isBipartite(graph))
 
-class Solution:
-    def twoSum(self, numbers: List[int], target: int) -> List[int]:
-       left , right = 0 , len(numbers)-1
 
-       while right > left:
-           sum = numbers[left] + numbers[right]
-           if sum > target:
-               right -=1
-           elif sum < target:
-               left +=1
-           else:
-               return [left+1, right+1]
 
-numbers = [2,7,11,15] # [1,2]
-target = 9
-# numbers = [2,3,4] # [1,3]
-# target = 6
-# numbers = [5,25,75] # [2,3]
-# target = 100
-solution = Solution()
-output = solution.twoSum(numbers, target)
-print(output)
+my_list = [1, 2, 3, 4, 5]
+
+a,b,_,_,_ = my_list
+
+print (_)
