@@ -87,4 +87,14 @@ print (_)
 # #! Fastest solution
 class Solution:
     def fib(self, n: int, mono = {}) -> int:
-  
+        if n==0: return 0
+        elif n==1 or n==2: return 1
+
+        else:
+            x=[0,1]
+            o=2
+            while o<n:
+                x.append(x[o-1]+x[o-2])
+                o=o+1
+
+          
