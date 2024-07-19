@@ -3859,7 +3859,7 @@ Explanation: There is no way to partition the nodes into two independent sets su
 # sol = Solution()
 # print(sol.isBipartite(graph))
 
-#! 44- 509. Fibonacci Number (Algo Academy) (easy) (Tech: Dynamic Programming)  (Time Complexity O(n))
+#! 44- 509. Fibonacci Number (Algo Academy) (easy) (Tech: Dynamic Programming-memoization)  (Time Complexity O(n))
 
 
 '''

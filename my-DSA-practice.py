@@ -78,27 +78,39 @@ Explanation: There is no way to partition the nodes into two independent sets su
 
 
 
-my_list = [1, 2, 3, 4, 5]
 
-a,b,_,_,_ = my_list
 
-print (_)
+class Solution:
+    def fib(self, n: int, memo ={}) -> int: # this is depth fist search
+
+        # if n == 0 : return 0
+        # if n == 1 : return 1
+        # if n in memo: return memo[n]
+
+        # memo[n]= self.fib(n-1,memo)+ self.fib(n-2, memo)
+        # return memo[n]
+        if n == 0: return 0
+        if n == 1 : return 1
+        if n in memo: return 0
+
+        return self.fib(n-1,memo)+self.fib(n-2,memo)
+
 
 # #! Fastest solution
-class Solution:
-    def fib(self, n: int, mono = {}) -> int:
-        if n==0: return 0
-        elif n==1 or n==2: return 1
+# class Solution:
+#     def fib(self, n: int, mono = {}) -> int:
+#         if n==0: return 0
+#         elif n==1 or n==2: return 1
 
-        else:
-            x=[0,1]
-            o=2
-            while o<n:
-                x.append(x[o-1]+x[o-2])
-                o=o+1
+#         else:
+#             x=[0,1]
+#             o=2
+#             while o<n:
+#                 x.append(x[o-1]+x[o-2])
+#                 o=o+1
 
-            # print('X at the end == ',x)
-            return x[n-1]+x[n-2]
+#             # print('X at the end == ',x)
+#             return x[n-1]+x[n-2]
 
 
 
