@@ -139,4 +139,6 @@ def fib_tab(n):
     print (dp)
     return dp[n]
 
-
+n = 6
+print(fib_memo(n))
+print(fib_tab(n))
