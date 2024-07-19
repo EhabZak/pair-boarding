@@ -136,4 +136,7 @@ def fib_tab(n):
 
     for index in range(2, n+1):
         dp[index] = dp[index-1]+dp[index-2]
-    
+    print (dp)
+    return dp[n]
+
+
