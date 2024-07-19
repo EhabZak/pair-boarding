@@ -114,7 +114,18 @@ class Solution:
 
 
 
-n = 10
-solution = Solution()
-output = solution.fib(n)
-print(output)
+# n = 10
+# solution = Solution()
+# output = solution.fib(n)
+# print(output)
+
+
+def fib_memo(n,memo ={}):
+
+    if n <= 1: return n
+    if n in memo: return memo[n]
+
+    memo[n]= fib_memo(n-1,memo)+ fib_memo(n-2, memo)
+    return memo[n]
+
+
