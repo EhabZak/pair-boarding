@@ -131,20 +131,17 @@ Explanation: There is no way to partition the nodes into two independent sets su
 #     return dp[n]
 
 def fib_tab(n):
-    if n < 2: return n
+    if n <2: return n
     dp = [0,1]
-    i = 2
+    i =2
 
-    while i <= n:
+    while i <=n:
         tmp = dp[1]
-        dp[1]= dp[0]+dp[1]
-        dp[0] = tmp
-        i +=1
+        dp[1] = dp[0]+ dp[1]
 
-    return dp[1]
 
 
 
 n = 10
-# print(fib_memo(n))
+
 print(fib_tab(n))

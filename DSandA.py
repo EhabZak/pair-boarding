@@ -4191,8 +4191,8 @@ class Solution:
 
 #! #! 44- 509. Fibonacci Number (Algo Academy) (easy) (Tech: Dynamic Programming- tabulation)  (Time Complexity O(n))
 # time complexity (O(n)) for both tabulation and memoization
-# def fib_memo(n,memo ={}):
 
+# def fib_memo(n,memo ={}):
 #     if n <= 1: return n
 #     if n in memo: return memo[n]
 
@@ -4201,14 +4201,25 @@ class Solution:
 
 # def fib_tab(n):
 #     if n <= 1: return n
-
 #     dp = [0] * (n+1)
 #     dp[1]= 1
-
 #     for index in range(2, n+1):
 #         dp[index] = dp[index-1]+dp[index-2]
 #     print (dp)
 #     return dp[n]
+#! another solution (app academy one)
+# def fib_tab(n):
+#     if n < 2: return n
+#     dp = [0,1]
+#     i = 2
+
+#     while i <= n:
+#         tmp = dp[1]
+#         dp[1]= dp[0]+dp[1]
+#         dp[0] = tmp
+#         i +=1
+
+#     return dp[1]
 
 # n = 6
 # print(fib_memo(n))
