@@ -80,20 +80,16 @@ Explanation: There is no way to partition the nodes into two independent sets su
 
 
 
-class Solution:
-    def fib(self, n: int, memo ={}) -> int: # this is depth fist search
+# class Solution:
+#     def fib(self, n: int, memo ={}) -> int: # this is depth first search
 
-        # if n == 0 : return 0
-        # if n == 1 : return 1
-        # if n in memo: return memo[n]
+#         # if n == 0 : return 0
+#         # if n == 1 : return 1
+#         # if n in memo: return memo[n]
 
-        # memo[n]= self.fib(n-1,memo)+ self.fib(n-2, memo)
-        # return memo[n]
-        if n == 0: return 0
-        if n == 1 : return 1
-        if n in memo: return 0
-
-        return self.fib(n-1,memo)+self.fib(n-2,memo)
+#         # memo[n]= self.fib(n-1,memo)+ self.fib(n-2, memo)
+#         # return memo[n]
+#
 
 
 # #! Fastest solution
@@ -120,25 +116,39 @@ class Solution:
 # print(output)
 
 
-def fib_memo(n,memo ={}):
+# def fib_memo(n,memo ={}):
 
-    if n <= 1: return n
-    if n in memo: return memo[n]
+#     if n <= 1: return n
+#     if n in memo: return memo[n]
 
-    memo[n]= fib_memo(n-1,memo)+ fib_memo(n-2, memo)
-    return memo[n]
+#     memo[n]= fib_memo(n-1,memo)+ fib_memo(n-2, memo)
+#     return memo[n]
 
-def fib_tab(n):
-    if n <= 1: return n
+# def fib_tab(n):
+#     if n <= 1: return n
 
-    dp = [0] * (n+1)
-    dp[1]= 1
+#     dp = [0] * (n+1)
+#     dp[1]= 1
 
-    for index in range(2, n+1):
-        dp[index] = dp[index-1]+dp[index-2]
-    print (dp)
-    return dp[n]
+#     for index in range(2, n+1):
+#         dp[index] = dp[index-1]+dp[index-2]
+#     print (dp)
+#     return dp[n]
 
-n = 6
-print(fib_memo(n))
-print(fib_tab(n))
+# n = 6
+# print(fib_memo(n))
+# print(fib_tab(n))
+
+class Solution:
+    def fib(self, n: int, momo = {}) -> int:
+       if n <=2: return 1
+       if n in momo: return momo[n]
+
+       momo[n] = self.fib(n-1, momo)+ self.fib(n-2, momo)
+
+       return momo[n]
+
+n = 10
+solution = Solution()
+output = solution.fib(n)
+print(output)
