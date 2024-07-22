@@ -118,17 +118,33 @@ Explanation: There is no way to partition the nodes into two independent sets su
 
 
 
+# def fib_tab(n):
+#     if n <= 2: return n
+
+#     dp = [0] * (n+1)
+#     print (dp)
+#     dp[1]= 1
+
+#     for index in range(2, n+1):
+#         dp[index] = dp[index-1]+dp[index-2]
+#     print (dp)
+#     return dp[n]
+
 def fib_tab(n):
-    if n <= 1: return n
+    if n < 2: return n
+    dp = [0,1]
+    i = 2
 
-    dp = [0] * (n+1)
-    dp[1]= 1
+    while i <= n:
+        tmp = dp[1]
+        dp[1]= dp[0]+dp[1]
+        dp[0] = tmp
+        i +=1
 
-    for index in range(2, n+1):
-        dp[index] = dp[index-1]+dp[index-2]
-    print (dp)
-    return dp[n]
+    return dp[1]
 
-n = 6
+
+
+n = 10
 # print(fib_memo(n))
 print(fib_tab(n))
