@@ -114,6 +114,3 @@ Explanation: There is no way to partition the nodes into two independent sets su
 # solution = Solution()
 # output = solution.fib(n)
 # print(output)
-
-
-

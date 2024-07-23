@@ -49,3 +49,8 @@ either 3 or 5, but not both.
 
 
 
+const sha256 = require('js-sha256');
+
+const hash = sha256('message to hash');
+console.log(hash);
+
