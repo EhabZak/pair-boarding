@@ -45,4 +45,7 @@ either 3 or 5, but not both.
 
 
 
-let array = [["a", "b", "c"], ["d", "e"], ["f", "g", "h"]];
+// let array = [["a", "b", "c"], ["d", "e"], ["f", "g", "h"]];
+
+
+

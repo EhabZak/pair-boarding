@@ -121,13 +121,20 @@ Explanation: There is no way to partition the nodes into two independent sets su
 
 
 def fib_tab(n):
-    if n <2 : return n
-    dp = [0] *(n+1)
-    dp[1] =1
-    for index in range (2, n+1):
-        dp[index]= dp[index-1]+dp[index-2]
 
-    return dp[n]
+    if n < 2: return n
+
+    dp = [0,1]
+    i = 2
+
+    while i <= n:
+        tmp = dp[1]
+        dp[1] = dp[0]+ dp[1]
+        dp[0]= tmp
+        i +=1
+    return dp[1]
+
+
 
 
 
