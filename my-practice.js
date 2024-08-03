@@ -73,4 +73,7 @@ function flippingBits(n) {
     for (let int of binaryZero){
         // console.log(int)
 
-      
+        if (int === '0'){
+            int = "1"
+            res +=int
+        
