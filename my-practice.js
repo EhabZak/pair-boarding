@@ -76,4 +76,11 @@ function flippingBits(n) {
         if (int === '0'){
             int = "1"
             res +=int
-        
+        }else{
+            int ="0"
+            res +=int
+
+        }
+    }
+
+  
