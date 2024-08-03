@@ -63,3 +63,11 @@ function flippingBits(n) {
 
     // Convert to binary string
 
+    let binaryStr = int32.toString(2)
+
+    // Pad with leading zeros to ensure 32 bits
+    let binaryZero = binaryStr.padStart(32,'0')
+
+    let res = ''
+
+
