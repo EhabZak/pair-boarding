@@ -47,10 +47,19 @@ either 3 or 5, but not both.
 
 // let array = [["a", "b", "c"], ["d", "e"], ["f", "g", "h"]];
 
+/*
+input = 1
+1-convert to 32 ok
+Binary representation: 00000000000000000000000000000001 ok
+2-Flipping the bits: 11111111111111111111111111111110 ok
+3-Decimal value of the flipped bits: 4294967294
+*/
 
 
-const sha256 = require('js-sha256');
 
-const hash = sha256('message to hash');
-console.log(hash);
+function flippingBits(n) {
+    // Convert number to a 32-bit integer using bitwise OR
+    let int32 = n | 0
+
+    // Convert to binary string
 
