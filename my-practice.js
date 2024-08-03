@@ -83,4 +83,11 @@ function flippingBits(n) {
         }
     }
 
-  
+    // console.log(res)
+    let DecResult = parseInt(res,2)
+    return DecResult
+
+
+    }
+
+    console.log(flippingBits(3))
