@@ -38,9 +38,6 @@
 
 
 
-
-
-
 //! #! 2-Sparse Arrays
 
 // function matchingStrings(strings, queries) {
@@ -88,7 +85,7 @@
 
 // console.log(matchingStrings(strings, queries))
 
-//!
+//! 3
 
 // function lonelyInteger(a) {
 // // solution 1
@@ -148,4 +145,201 @@ value in a
 
 // console.log(simpleHash('addd'))
 
+//! 4-Flipping bits
 
+/*
+input = 1
+1-convert to 32 ok
+Binary representation: 00000000000000000000000000000001 ok
+2-Flipping the bits: 11111111111111111111111111111110 ok
+3-Decimal value of the flipped bits: 4294967294
+*/
+/*
+You will be given a list of 32 bit unsigned integers. Flip all the bits ( and ) and return the result as an unsigned integer.
+
+Example
+
+. We're working with 32 bits, so:
+
+
+
+Return .
+
+Function Description
+
+Complete the flippingBits function in the editor below.
+
+flippingBits has the following parameter(s):
+
+int n: an integer
+Returns
+
+int: the unsigned decimal integer result
+Input Format
+
+The first line of the input contains , the number of queries.
+Each of the next  lines contain an integer, , to process.
+
+Constraints
+
+
+
+Sample Input
+
+3
+2147483647
+1
+0
+Sample Output
+
+2147483648
+4294967294
+4294967295
+Explanation
+
+Take 1 for example, as unsigned 32-bits is
+00000000000000000000000000000001 and doing the
+flipping we get 11111111111111111111111111111110
+which in turn is 4294967294.
+
+*/
+
+
+
+    // function flippingBits(n) {
+    //     // Convert the number to a binary string
+    //     let binaryStr = n.toString(2);
+
+    //     // Pad the binary string with leading zeros to ensure it's 32 bits
+    //     let paddedBinaryStr = binaryStr.padStart(32, '0');
+
+    //     // Initialize an empty string to store the flipped bits
+    //     let flippedBinaryStr = '';
+
+    //     // Iterate over each bit in the padded binary string
+    //     for (let bit of paddedBinaryStr) {
+    //         // Flip the bit: if '0' then '1', if '1' then '0'
+    //         flippedBinaryStr += bit === '0' ? '1' : '0';
+    //     }
+
+    //     // Convert the flipped binary string back to a decimal number
+    //     let result = parseInt(flippedBinaryStr, 2);
+
+    //     return result;
+    // }
+
+    // // OR a better solution
+    // function flippingBits(n) {
+    //     // Flip the bits using the bitwise NOT operator (~)
+    //     // and convert the result to an unsigned 32-bit integer using >>> 0
+    //     return (~n) >>> 0;
+    // }
+
+    // // Example usage with sample input
+
+    // Example usage with sample input
+    // console.log(flippingBits(2147483647)); // Output: 2147483648
+    // console.log(flippingBits(1));          // Output: 4294967294
+    // console.log(flippingBits(0));          // Output: 4294967295
+
+    //!  5-diagonal differences
+
+    /*
+    Given a square matrix, calculate the absolute difference between the sums of its diagonals.
+
+For example, the square matrix  is shown below:
+
+1 2 3
+4 5 6
+9 8 9
+The left-to-right diagonal = . The right to left diagonal = . Their absolute difference is .
+
+Function description
+
+Complete the  function in the editor below.
+
+diagonalDifference takes the following parameter:
+
+int arr[n][m]: an array of integers
+Return
+
+int: the absolute diagonal difference
+Input Format
+
+The first line contains a single integer, , the number of rows and columns in the square matrix .
+Each of the next  lines describes a row, , and consists of  space-separated integers .
+
+Constraints
+
+Output Format
+
+Return the absolute difference between the sums of the matrix's two diagonals as a single integer.
+
+Sample Input
+
+3
+11 2 4
+4 5 6
+10 8 -12
+Sample Output
+
+15
+Explanation
+
+The primary diagonal is:
+
+11
+   5
+     -12
+Sum across the primary diagonal: 11 + 5 - 12 = 4
+
+The secondary diagonal is:
+
+     4
+   5
+10
+Sum across the secondary diagonal: 4 + 5 + 10 = 19
+Difference: |4 - 19| = 15
+
+Note: |x| is the absolute value of x
+    */
+
+// function diagonalDifference(arr) {
+//   let sum1 = 0
+//   let sum2 = 0
+
+//   // Solution 1
+//    arr.forEach((list,i)=> {
+//       sum1 += list[i]
+//       sum2 += list[arr.length -1 -i]
+
+//   } )
+
+// let result1 = Math.abs(sum1-sum2)
+//   return result1
+
+//   // Solution 2
+
+//   // for (let i = 0 ; i < arr.length ; i++){
+
+
+//   //     sum1 += arr[i][i]
+//   //     sum2 += arr[i][arr.length -1 -i]
+//   // }
+
+//   // let result1 = Math.abs(sum1-sum2)
+//   // return result1
+
+// }
+
+
+// let arr1 = [
+//   // [3],
+//   [11, 2, 4],
+//   [4 ,5 ,6],
+//   [10, 8, -12]
+// ]
+// console.log(diagonalDifference(arr1))
+
+
+//! 6- 
