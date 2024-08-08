@@ -12,3 +12,9 @@ function diagonalDifference(arr) {
         sum1 += list[i]
         sum2 += list[arr.length -1 -i]
 
+    } )
+
+    let result1 = Math.abs(sum1-sum2)
+        return result1
+
+ 
