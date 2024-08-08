@@ -17,4 +17,10 @@ function diagonalDifference(arr) {
     let result1 = Math.abs(sum1-sum2)
         return result1
 
- 
+        //Solution 2
+
+        // for (let i = 0 ; i < arr.length ; i++){
+
+
+        //     sum1 += arr[i][i]
+
