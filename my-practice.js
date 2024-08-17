@@ -17,3 +17,7 @@ return result1
 // for (let i = 0 ; i < arr.length ; i++){
 
 
+//     sum1 += arr[i][i]
+//     sum2 += arr[i][arr.length -1 -i]
+// }
+
