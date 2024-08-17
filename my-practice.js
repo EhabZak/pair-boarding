@@ -21,3 +21,9 @@ return result1
 //     sum2 += arr[i][arr.length -1 -i]
 // }
 
+// let result1 = Math.abs(sum1-sum2)
+// return result1
+
+}
+
+
