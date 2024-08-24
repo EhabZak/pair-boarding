@@ -368,5 +368,8 @@ i	arr[i]	result
 4	1	[0, 3, 1, 1]
 The frequency array is . These values can be used to create the sorted array as well: .
 
+Note
+For this exercise, always return a frequency array with 100 elements. The example above shows only the first 4 elements, the remainder being zeros.
+
 
 */
