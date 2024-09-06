@@ -25,4 +25,5 @@ quickSort = (arr) =>{
 
 }
 
-    
+let arr1 = [5,6,2,4,7,8,9,3]
+console.log(quickSort(arr1))
