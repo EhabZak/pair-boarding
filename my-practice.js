@@ -17,4 +17,12 @@ quickSort = (arr) =>{
         }
     }
 
-   
+    let leftSort = quickSort(left)
+
+    let rightSort = quickSort(right)
+
+    return [...leftSort,pivot, ...rightSort]
+
+}
+
+    
