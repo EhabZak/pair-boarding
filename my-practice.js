@@ -1,29 +1,67 @@
 
-quickSort = (arr) =>{
+// quickSort = (arr) =>{
 
-    if (arr.length <= 1) return arr
-    let pivot = arr[0]
+//     if (arr.length <= 1) return arr
+//     let pivot = arr[0]
+
+//     let left = []
+//     let right = []
+
+//     for (let i = 1; i< arr.length; i++){
+
+//         if (arr[i]< pivot){
+//             left.push(arr[i])
+//         }
+//         else{
+//             right.push(arr[i])
+//         }
+//     }
+
+//     let leftSort = quickSort(left)
+
+//     let rightSort = quickSort(right)
+
+//     return [...leftSort,pivot, ...rightSort]
+
+// }
+
+// let arr1 = [5,6,2,4,7,8,9,3]
+// console.log(quickSort(arr1))
+
+quickSort = (arr) => {
+
+    if (arr.length <=1) return arr
+
+    let chosenOne = arr[0]
 
     let left = []
     let right = []
 
-    for (let i = 1; i< arr.length; i++){
-
-        if (arr[i]< pivot){
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] < chosenOne) {
             left.push(arr[i])
-        }
-        else{
+        } else {
             right.push(arr[i])
+
         }
     }
 
-    let leftSort = quickSort(left)
+    let leftSide = quickSort(left)
+    let rightSide = quickSort(right)
 
-    let rightSort = quickSort(right)
-
-    return [...leftSort,pivot, ...rightSort]
+    return [...leftSide, chosenOne, ...rightSide]
 
 }
 
-let arr1 = [5,6,2,4,7,8,9,3]
+let arr1 = [5, 6, 2, 4, 7, 8, 9, 3]
 console.log(quickSort(arr1))
+
+/*
+
+Comparison Sorting
+Quicksort usually has a running time of , but is there an algorithm that can sort even faster? In general, this is not possible. Most sorting algorithms are comparison sorts, i.e. they sort a list just by comparing the elements to one another. A comparison sort algorithm cannot beat  (worst-case) running time, since  represents the minimum number of comparisons needed to know where to place each element. For more details, you can see these notes (PDF).
+
+
+
+
+*/
