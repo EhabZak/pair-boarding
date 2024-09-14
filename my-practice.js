@@ -94,6 +94,12 @@ Returns
 int[100]: a frequency array
 Input Format
 
+The first line contains an integer , the number of items in .
+Each of the next  lines contains an integer  where .
+
+Constraints
+
+
 
 
 
