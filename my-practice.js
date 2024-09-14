@@ -88,6 +88,12 @@ Complete the countingSort function in the editor below.
 
 countingSort has the following parameter(s):
 
+arr[n]: an array of integers
+Returns
+
+int[100]: a frequency array
+Input Format
+
 
 
 
