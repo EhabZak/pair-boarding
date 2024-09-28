@@ -125,11 +125,4 @@ if (arr.length <=1) return arr //! you keep fuckeeeeeeeeeeeeeeeeeeen forgetting 
     let left = []
     let right = []
     let num = arr[0]
-    for (let i = 1; i < arr.length; i++) {
-        if (arr[i] > num) {
-            right.push(arr[i])
-        } else { left.push(arr[i]) }
-
-    }
-
    
