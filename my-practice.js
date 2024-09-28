@@ -114,10 +114,4 @@ Explanation
 
 Each of the resulting values  represents the number of times  appeared in .
 
-
 */
-quickSort = (arr) => {
-    // create a variable for left and right create a new array
-    //! you keep forgetting the BASECASE over and over
-    // chose the first number then sort the numbers higher or lower
-    // then recursion to sort the numbers then add all the arrays together
