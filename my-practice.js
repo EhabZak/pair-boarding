@@ -121,7 +121,7 @@ quickSort = (arr) => {
     //! you keep forgetting the BASECASE over and over
     // chose the first number then sort the numbers higher or lower
     // then recursion to sort the numbers then add all the arrays together
-if (arr.length <=1) return arr //! you keep fuckeeeeeeeeeeeeeeeeeeen forgetting this line 
+if (arr.length <=1) return arr //! you keep fuckeeeeeeeeeeeeeeeeeeen forgetting this line
     let left = []
     let right = []
     let num = arr[0]
@@ -139,6 +139,3 @@ if (arr.length <=1) return arr //! you keep fuckeeeeeeeeeeeeeeeeeeen forgetting 
     return total
 }
 
-
-let arr2 = [5, 6, 2, 4, 7, 8, 9, 3]
-console.log(quickSort(arr2))
