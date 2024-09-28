@@ -132,7 +132,4 @@ if (arr.length <=1) return arr //! you keep fuckeeeeeeeeeeeeeeeeeeen forgetting 
 
     }
 
-    let leftSide1 = quickSort(left)
-    let rightSide1 = quickSort(right)
-
    
