@@ -91,4 +91,14 @@ Complete the countingSort function in the editor below.
 countingSort has the following parameter(s):
 
 
+arr[n]: an array of integers
+Returns
+
+int[100]: a frequency array
+Input Format
+
+
+The first line contains an integer , the number of items in .
+Each of the next  lines contains an integer  where .
+
 
