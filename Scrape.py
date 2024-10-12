@@ -29,4 +29,15 @@ def bucketSort(x):
         arr[index_b].append(j)
         print(arr)
 
-    
+    # Sort individual buckets using insertion sort
+    for i in range(slot_num):
+        arr[i]= insertionSort(arr[i])
+
+    # Concatenate sorted buckets into the original array
+    k = 0
+    for i in range (slot_num):
+        for j in range(len(arr[i])):
+            x[k] = arr[i][j]
+            k +=1
+    return x
+
