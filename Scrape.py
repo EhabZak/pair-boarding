@@ -22,4 +22,11 @@ def bucketSort(x):
         arr.append([])
         # print(arr)
 
-   
+    # Put array elements into different buckets
+    for j in x:
+        print( '==jj=', j)
+        index_b = int(slot_num*j) # Index of the bucket
+        arr[index_b].append(j)
+        print(arr)
+
+    
