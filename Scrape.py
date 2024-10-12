@@ -14,4 +14,12 @@ def insertionSort(b):
             j -= 1 # j = j-1 => j = -1 exit the while loop since j < 0
             b[j+1] = up # b[0] = 0.1234
     return b
+######################################
+def bucketSort(x):
+    arr = []
+    slot_num = 10 # Number of buckets
+    for i in range(slot_num):
+        arr.append([])
+        # print(arr)
 
+   
