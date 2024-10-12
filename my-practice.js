@@ -27,33 +27,33 @@
 
 // let arr1 = [5,6,2,4,7,8,9,3]
 // console.log(quickSort(arr1))
+//! quick sort 
+// quickSort = (arr) => {
 
-quickSort = (arr) => {
+//     if (arr.length <= 1) return arr
 
-    if (arr.length <= 1) return arr
+//     let chosenOne = arr[0]
 
-    let chosenOne = arr[0]
+//     let left = []
+//     let right = []
 
-    let left = []
-    let right = []
+//     for (let i = 1; i < arr.length; i++) {
+//         if (arr[i] < chosenOne) {
+//             left.push(arr[i])
+//         } else {
+//             right.push(arr[i])
 
-    for (let i = 1; i < arr.length; i++) {
-        if (arr[i] < chosenOne) {
-            left.push(arr[i])
-        } else {
-            right.push(arr[i])
+//         }
+//     }
 
-        }
-    }
+//     let leftSide = quickSort(left)
+//     let rightSide = quickSort(right)
 
-    let leftSide = quickSort(left)
-    let rightSide = quickSort(right)
+//     return [...leftSide, chosenOne, ...rightSide]
 
-    return [...leftSide, chosenOne, ...rightSide]
+// }
 
-}
-
-let arr1 = [5, 6, 2, 4, 7, 8, 9, 3]
+// let arr1 = [5, 6, 2, 4, 7, 8, 9, 3]
 // console.log(quickSort(arr1))
 
 /*
