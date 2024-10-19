@@ -48,4 +48,16 @@ x = [0.897, 0.565, 0.656,
 # print(bucketSort(x))
 
 
+def insertionSort2(bb):
+    for i in range (1, len(bb)):
+        up = bb[i]
+        j = i-1
+        while j >= 0 and bb[j]> up:
+            bb[j+1] = bb[j]
+            j = j-1
+            bb[j+1]= up
+    return bb
+
+
+
 
