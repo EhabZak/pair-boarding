@@ -33,4 +33,12 @@ def bucketSort(x):
     for i in range(slot_num):
         arr[i]= insertionSort(arr[i])
 
-   
+    # Concatenate sorted buckets into the original array
+    k = 0
+    for i in range (slot_num):
+        for j in range(len(arr[i])):
+            x[k] = arr[i][j]
+            k +=1
+    return x
+
+
