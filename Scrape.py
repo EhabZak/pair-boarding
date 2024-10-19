@@ -17,4 +17,8 @@ def insertionSort(b):
 ######################################
 def bucketSort(x):
     arr = []
+    slot_num = 10 # Number of buckets
+    for i in range(slot_num):
+        arr.append([])
+        # print(arr)
 
