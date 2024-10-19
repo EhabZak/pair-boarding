@@ -29,4 +29,8 @@ def bucketSort(x):
         arr[index_b].append(j)
         print(arr)
 
+    # Sort individual buckets using insertion sort
+    for i in range(slot_num):
+        arr[i]= insertionSort(arr[i])
+
    
