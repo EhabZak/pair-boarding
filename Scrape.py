@@ -60,4 +60,5 @@ def insertionSort2(bb):
 
 
 
-
+b2= [0.3434, 0.1234, 0.565, 0.665, 0.656]
+print(insertionSort2(b2))
