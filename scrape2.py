@@ -12,5 +12,6 @@ def insertionSort(arr):
         #     arr[j] = ele
             arr[i] ,[j] = arr[j], [i]
             j-=1
+return arr
 
-    
+
