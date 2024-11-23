@@ -29,4 +29,17 @@ print (insertionSort(x))
 #     for i in range(slot_num):
 #         array[i]= insertionSort(array[i])
 
+#     k = 0
+#     for i in range (slot_num):
+#         for j in range (len(array[i])):
+#             x[k]= array[i][j]
+#             k +=1
+#     return x
 
+
+
+# x = [0.897, 0.565, 0.656,
+# 	0.1234, 0.665, 0.3434]
+
+# print("Sorted Array is")
+# print(bucketSort(x))
