@@ -22,5 +22,11 @@ print (insertionSort(x))
 #     slot_num = 10
 #     for i in range (slot_num):
 #         array.append([])
+#     for j in x:
+#         index_b = int(slot_num*j)
+#         array[index_b].append(j)
+
+#     for i in range(slot_num):
+#         array[i]= insertionSort(array[i])
 
 
