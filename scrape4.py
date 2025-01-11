@@ -5,4 +5,9 @@ def InsertionSort(arr):
             arr[j+1] = arr[i]
             j = j-1
             arr[j+1] = arr[i]
-        
+
+    return arr
+
+x = [0.897, 0.565, 0.656,0.1234, 0.665, 0.3434]
+print (insertionSort(x))
+
