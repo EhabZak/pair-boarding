@@ -26,3 +26,9 @@ print (insertionSort(x))
 #     k = 0
 #     for i in range (slot_num):
 #         for j in range (len(array[i])):
+#             x[k]= array[i][j]
+#             k +=1
+#     return x
+
+
+
