@@ -23,3 +23,6 @@ print (insertionSort(x))
 #     for i in range(slot_num):
 #         array[i]= insertionSort(array[i])
 
+#     k = 0
+#     for i in range (slot_num):
+#         for j in range (len(array[i])):
