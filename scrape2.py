@@ -8,4 +8,9 @@ def insertionSort(arr):
             j = j -1
             arr[j+1]= arr[i]
         # ele = arr[i]
- 
+        # while j >= 0 and arr[j]> ele:
+        #     arr[i] = arr[j]
+        #     arr[j] = ele
+        #     arr[i] ,[j] = arr[j], [i]
+        #     j-=1
+   
